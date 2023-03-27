@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <title>Registration Form</title>
+  <style>
+    body {
+      height: 50%;
+     
+    }
+    .card-registration {
+      border-radius: 25px;
+   
+    }
+    .gradient-custom-2 {
+      background: linear-gradient(45deg, #9ccef0, #F5F5F5);
+    }
+  </style>
+</head>
+<body>
+  <section class="h-100 h-custom gradient-custom-2">
+    <div class="container py-5 h-50">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-8 col-xl-7">
+          <div class="card card-registration shadow-2-strong">
+            <div class="card-body p-4 p-md-5">
+              <h1 class="fw-normal mb-4" style="color: #010103; text-align: center;"><B>MEMBER REGISTRATION</B></h1>
+              <form [formGroup]="registrationForm">
+                <div class="row">
+                  <div class="col-md-6 mb-4 pb-2">
+                    <div class="form-outline">
+                      <label class="form-label" for="form3Examplev2">First name</label>
+                      <input type="text" id="form3Examplev2" class="form-control form-control-lg" required formControlName="firstName"/>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-4 pb-2">
+                    <div class="form-outline">
+                      <label class="form-label" for="form3Examplev3">Last name</label>
+                      <input type="text" id="form3Examplev3" class="form-control form-control-lg" required formControlName="lastName"/>
+                    </div>
+                  </div>
+                  <div class="col-md-12 mb-4 pb-2">
+                    <div class="form-outline">
+                      <label class="form-label" for="form3Examplev4">Date of Birth</label>
+                      <input type="date" id="form3Examplev4" class="form-control form-control-lg" required formControlName="dateOfBirth" />
+                    </div>
+                  </div>
+                  <div class="col-md-12 mb-4 pb-2">
+                    <div class="form-outline">
+                      <label class="form-label">Gender</label><br>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="gender-male" name="gender" value="male" formControlName="gender">
+                        <label class="form-check-label" for="gender-male">Male</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="gender-female" name="gender" value="female" formControlName="gender">
+                        <label class="form-check-label" for="gender-female">Female</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class ="form-check-input" type="radio" id="gender-other" name="gender" value="other" formControlName="gender">
+<label class="form-check-label" for="gender-other">Other</label>
+</div>
+</div>
+</div>
+
+<div class="col-md-12 mb-4 pb-2">
+  <div class="form-outline">
+  <!-- <label class="form-label" for="form3Examplev5">Medical History</label>
+
+  <div>
+    <input type="checkbox" id="disease1" name="disease" value="diabetes"/>&nbsp;
+    <label for="disease1"> Diabetes</label>
+</div> -->
+<label class="form-label" for="form3Example7"><strong>Medical History:</strong></label>
+
+<div style="color: black; display: flex; flex-wrap: wrap;">
+  <div style="display: flex; align-items: center;">
+    <input type="checkbox" id="disease1" name="disease" value="diabetes" style="margin-right: 10px;" />
+    <label for="disease1" style="margin-right: 10px;  margin-top: auto;"> Diabetes</label>
+  </div>
+  <div style="display: flex; align-items: center;">
+    <input type="checkbox" id="disease2" name="disease" value="blood pressure" style="margin-right: 10px;" />
+    <label for="disease2" style="margin-right: 10px;  margin-top: auto;">Blood Pressure</label>
+  </div>
+   
+
+  <div>
+    <input type="checkbox" id="other" name="disease" style="margin-right: 10px;" (click)="checked()">
+    <label for="disease3" style="margin-right: 10px; margin-top: auto;">Other</label>
+  </div>
+  
+  <textarea class="form-control" rows="5" id="otherText" [hidden]="!showOther"></textarea>
+  
+  
+
+
+  <!-- <input type="text" id="other" class="form-control form-control" /> -->
+  
+</div> 
+  <!-- end -->
+
+
+
+  </div></div>
+
+
+    <div class="col-md-12 mb-4 pb-2">
+      <div class="form-outline d-flex align-items-center">
+        <label class="form-label me-3">Smoking : &nbsp; &nbsp;</label>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" id="yes" name="gender" value=1 formControlName="gender">
+          <label class="form-check-label" for="gender-male">Yes&nbsp; &nbsp;</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" id="no" name="gender" value=0 formControlName="gender">
+          <label class="form-check-label" for="gender-female">No</label>
+        </div>
+      </div>
+    </div>
+    
+
+
+<div class="col-md-12 mb-4 pb-2">
+<div class="form-outline">
+<label class="form-label" for="form3Examplev5">Email</label>
+<input type="email" id="form3Examplev5" class="form-control form-control-lg" required formControlName="email"/>
+</div>
+</div>
+<div class="col-md-12 mb-4 pb-2">
+<div class="form-outline">
+<label class="form-label" for="form3Examplev6">Password</label>
+<input type="password" id="form3Examplev6" class="form-control form-control-lg" required formControlName="password"/>
+</div>
+</div>
+<div class="col-md-12 mb-4 pb-2">
+<div class="form-outline">
+<label class="form-label" for="form3Examplev7">Confirm Password</label>
+<input type="password" id="form3Examplev7" class="form-control form-control-lg" required formControlName="confirmPassword"/>
+</div>
+</div>
+<div class="col-md-12">
+<div class="form-outline">
+<button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="registrationForm.invalid">Submit</button>
+</div>
+</div>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+  </section>
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
