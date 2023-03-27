@@ -25,10 +25,10 @@
   <section class="h-100 h-custom gradient-custom-2">
     <div class="container py-5 h-50">
       <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-lg-8 col-xl-7">
+        <div class="col-lg-8 col-xl-8">
           <div class="card card-registration shadow-2-strong">
-            <div class="card-body p-4 p-md-5">
-              <h1 class="fw-normal mb-4" style="color: #010103; text-align: center;"><B>MEMBER REGISTRATION</B></h1>
+            <div class="card-body p-4 p-md-4">
+              <h2 class="fw-normal mb-2" style="color: #4d4d51; text-align: center;"><B>MEMBER REGISTRATION</B></h2>
               <form [formGroup]="registrationForm">
                 <div class="row">
                   <div class="col-md-6 mb-4 pb-2">
@@ -43,15 +43,22 @@
                       <input type="text" id="form3Examplev3" class="form-control form-control-lg" required formControlName="lastName"/>
                     </div>
                   </div>
-                  <div class="col-md-12 mb-4 pb-2">
+                  <div class="col-md-6 mb-4 pb-2">
                     <div class="form-outline">
                       <label class="form-label" for="form3Examplev4">Date of Birth</label>
                       <input type="date" id="form3Examplev4" class="form-control form-control-lg" required formControlName="dateOfBirth" />
                     </div>
                   </div>
-                  <div class="col-md-12 mb-4 pb-2">
+                  <div class="col-md-6 mb-4 pb-2">
                     <div class="form-outline">
-                      <label class="form-label">Gender</label><br>
+                      <label for="phone">Phone number</label>
+                      <input type="number" id="phone" name="phone" placeholder="" class="form-control form-control-lg" required
+                                         formControlName="phoneNumber">
+                    </div>
+                  </div>
+                  <!-- <div class="col-md-6 mb-6 pb-2" style="padding-top: 5%;">
+                    <div class="form-outline">
+                      <label class="form-label">Gender : &nbsp;&nbsp;</label>
                       <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" id="gender-male" name="gender" value="male" formControlName="gender">
                         <label class="form-check-label" for="gender-male">Male</label>
@@ -62,97 +69,182 @@
                       </div>
                       <div class="form-check form-check-inline">
                         <input class ="form-check-input" type="radio" id="gender-other" name="gender" value="other" formControlName="gender">
-<label class="form-check-label" for="gender-other">Other</label>
-</div>
-</div>
-</div>
+                          <label class="form-check-label" for="gender-other">Other</label>
+                          </div> -->
+                          <!-- </div>
+                          </div> -->
 
-<div class="col-md-12 mb-4 pb-2">
+<div class="col-md-6 mb-4 pb-2">
   <div class="form-outline">
-  <!-- <label class="form-label" for="form3Examplev5">Medical History</label>
-
-  <div>
-    <input type="checkbox" id="disease1" name="disease" value="diabetes"/>&nbsp;
-    <label for="disease1"> Diabetes</label>
-</div> -->
-<label class="form-label" for="form3Example7"><strong>Medical History:</strong></label>
-
-<div style="color: black; display: flex; flex-wrap: wrap;">
-  <div style="display: flex; align-items: center;">
-    <input type="checkbox" id="disease1" name="disease" value="diabetes" style="margin-right: 10px;" />
-    <label for="disease1" style="margin-right: 10px;  margin-top: auto;"> Diabetes</label>
+    <label class="form-label" for="form3Examplev9">Address Line1</label>
+    <input type="text" id="form3Examplev9" class="form-control form-control-lg" required formControlName="addressLine"/>
   </div>
-  <div style="display: flex; align-items: center;">
-    <input type="checkbox" id="disease2" name="disease" value="blood pressure" style="margin-right: 10px;" />
-    <label for="disease2" style="margin-right: 10px;  margin-top: auto;">Blood Pressure</label>
+</div>
+   
+<div class="col-md-6 mb-4 pb-2">
+  <div class="form-outline">
+    <label class="form-label" for="form3Examplev0">City</label>
+    <input type="text" id="form3Examplev0" class="form-control form-control-lg" required formControlName="city"/>
+  </div>
+</div>
+
+
+ 
+<div class="col-md-6 mb-4 pb-2">
+  <div class="form-outline">
+<label for="gid">Governement ID
+</label>
+  
+  <select class="form-control form-control-lg" formControlName="governmentId" >
+   
+  <option value="1">Aadhaar Card</option>
+  <option value="2">Pan Card</option>
+  <option value="3">Election ID</option>
+ 
+</select>
+  </div>
   </div>
    
+<div class="col-md-6 mb-4 pb-2">
+  <div class="form-outline">
+  <label for="Customization">ID Number</label>
+                      <input type="text" id="form3Examplev6" class="form-control form-control-lg" formControlName="idNumber" />
+</div>
+</div>
 
-  <div>
-    <input type="checkbox" id="other" name="disease" style="margin-right: 10px;" (click)="checked()">
-    <label for="disease3" style="margin-right: 10px; margin-top: auto;">Other</label>
-  </div>
-  
-  <textarea class="form-control" rows="5" id="otherText" [hidden]="!showOther"></textarea>
-  
-  
+                    <!-- <div class="col-md-6 mb-6 pb-2" style="padding-top: 5%;">
+                    <div class="form-outline">
+                      <label class="form-label">Gender : &nbsp;&nbsp;</label>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="gender-male" name="gender" value="male" formControlName="gender">
+                        <label class="form-check-label" for="gender-male">Male</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" id="gender-female" name="gender" value="female" formControlName="gender">
+                        <label class="form-check-label" for="gender-female">Female</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class ="form-check-input" type="radio" id="gender-other" name="gender" value="other" formControlName="gender">
+                          <label class="form-check-label" for="gender-other">Other</label>
+                          </div> -->
+                          <!-- </div>
+                          </div> -->
+
+                          <!-- start -->
+                          <div class="container shadow p-3 mb-5 bg-body rounded custom-container">
+                            <div class="row">
+                              <div class="col-md-6 mb-4 pb-2">
+                                <div class="form-outline">
+                                  <label class="form-label" for="form3Example7"><strong>Medical History</strong></label>
+                                  <div style="color: black; display: flex; flex-wrap: wrap;">
+                                    <div style="display: flex; align-items: center;">
+                                      <input type="checkbox" id="disease1" name="disease" value="diabetes" style="margin-right: 10px;" />
+                                      <label for="disease1" style="margin-right: 10px;  margin-top: auto;"> Diabetes</label>
+                                    </div>
+                                    <div style="display: flex; align-items: center;">
+                                      <input type="checkbox" id="disease2" name="disease" value="blood pressure" style="margin-right: 10px;" />
+                                      <label for="disease2" style="margin-right: 10px;  margin-top: auto;">Blood Pressure</label>
+                                    </div>
+                                    <div>
+                                      <input type="checkbox" id="other" name="disease" style="margin-right: 10px;" (click)="checked()">
+                                      <label for="disease3" style="margin-right: 10px; margin-top: auto;">Other</label>
+                                    </div>
+                                    <textarea class="form-control" rows="5" id="otherText" [hidden]="!showOther"></textarea>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 mb-4 pb-2" style="margin-top: auto;">
+                                
+                                  <label class="form-label me-3">Smoking : &nbsp; &nbsp;</label>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="yes" value=1 formControlName="smoke">
+                                    <label class="form-check-label">Yes&nbsp; &nbsp;</label>
+                                  </div>
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" id="no" value=0 formControlName="smoke">
+                                    <label class="form-check-label">No</label>
+                                  
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- end -->
+                        
+                            <div class="row">
+                              <div class="col-md-12 mb-4 pb-4">
+                                <label for="gender" style="font-size: 15px; font-family: sans-serif; ">&nbsp; &nbsp;&nbsp;Select your gender :&nbsp; &nbsp;</label>
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" id="male" name="gender" value="male" formControlName="gender">
+                                  <label class="form-check-label" for="male" style="font-size: 12px; font-family: sans-serif; ">Male&nbsp; &nbsp;</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" id="female" name="gender" value="female" formControlName="gender">
+                                  <label class="form-check-label" for="female" style="font-size: 12px; font-family: sans-serif; ">Female&nbsp; &nbsp;</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" id="other" name="gender" value="other" formControlName="gender">
+                                  <label class="form-check-label" for="other" style="font-size: 12px; font-family: sans-serif; ">Other</label>
+                                </div>
+                              </div>
+                            </div>
+                       
+                          
 
 
-  <!-- <input type="text" id="other" class="form-control form-control" /> -->
-  
-</div> 
-  <!-- end -->
-
-
-
-  </div></div>
-
-
-    <div class="col-md-12 mb-4 pb-2">
-      <div class="form-outline d-flex align-items-center">
-        <label class="form-label me-3">Smoking : &nbsp; &nbsp;</label>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" id="yes" name="gender" value=1 formControlName="gender">
-          <label class="form-check-label" for="gender-male">Yes&nbsp; &nbsp;</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <input class="form-check-input" type="radio" id="no" name="gender" value=0 formControlName="gender">
-          <label class="form-check-label" for="gender-female">No</label>
-        </div>
-      </div>
-    </div>
     
 
 
-<div class="col-md-12 mb-4 pb-2">
+<div class="col-md-12 mb-2 pb-2">
 <div class="form-outline">
-<label class="form-label" for="form3Examplev5">Email</label>
+<label class="form-label" for="form3Examplev5">Email ID</label>
 <input type="email" id="form3Examplev5" class="form-control form-control-lg" required formControlName="email"/>
 </div>
 </div>
-<div class="col-md-12 mb-4 pb-2">
+<div class="col-md-6 mb-4 pb-2">
 <div class="form-outline">
 <label class="form-label" for="form3Examplev6">Password</label>
 <input type="password" id="form3Examplev6" class="form-control form-control-lg" required formControlName="password"/>
 </div>
 </div>
-<div class="col-md-12 mb-4 pb-2">
+<div class="col-md-6 mb-4 pb-2">
 <div class="form-outline">
 <label class="form-label" for="form3Examplev7">Confirm Password</label>
 <input type="password" id="form3Examplev7" class="form-control form-control-lg" required formControlName="confirmPassword"/>
 </div>
+<div class="alert alert-danger" *ngIf="confirmPasswordControl?.hasError('passwordMismatch')">
+  Passwords do not match
 </div>
-<div class="col-md-12">
-<div class="form-outline">
-<button type="submit" class="btn btn-primary btn-lg btn-block" [disabled]="registrationForm.invalid">Submit</button>
 </div>
+<div class="col-md-5 mb-5 pb-2 mx-auto">
+
+<button type="submit" class="btn btn-primary  btn-block"  [disabled]="registrationForm.invalid" (click)="onSubmit()">Submit</button>
+
 </div>
 </div>
 </form>
+
+
+</div>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="message">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlert()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <h3>{{message}}</h3>
+  <div *ngIf="show">
+  <h3> <a routerLink="/login">Login</a> to continue..</h3>  
+  </div>
+    <br>
+  </div>
+
 </div>
 </div>
 </div>
-</div>
+
+
+
+ 
+
 </div>
 
   </section>
@@ -161,5 +253,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
+
 
 </html>
