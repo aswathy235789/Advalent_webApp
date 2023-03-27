@@ -17,8 +17,8 @@
 <body>    
 	<div class="center">
         <br>
-         <h1>Login Page</h1>
-        <form method="post">
+         <h1>Login</h1>
+        <!-- <form method="post">
             <div class="txt_field">
                 <input type="text" required>
                 <span></span>
@@ -31,11 +31,31 @@
             </div>
 				
             <div class="button">
-                <input type="submit"value="Login"></div>
+                <input type="submit" value="Login" (click)="onSubmit()"></div>
                 <div class= "signup_link">
                     Not a member? <a routerLink="/register">Register Now</a>
                 </div>
-		</form>
+		</form> -->
+
+		<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+			<div class="txt_field">
+			  <input type="text" formControlName="email">
+			  <span></span>
+			  <label>Email</label>
+			</div>
+			<div class="txt_field">
+			  <input type="password" formControlName="password">
+			  <span></span>
+			  <label>Password</label>
+			</div>
+			<div class="button" style="display: flex; justify-content: center;">
+			  <button class="btn btn-primary" style="align-items: center; text-align: center;" type="submit" [disabled]="loginForm.invalid">Login</button>
+			</div>
+			<div class="signup_link">
+			  Not a member? <a routerLink="/register">Register Now</a>
+			</div>
+		  </form>
+		  
 	</div>
 	<script>
 		const togglePassword = document
