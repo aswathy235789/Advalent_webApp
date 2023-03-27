@@ -1,0 +1,17 @@
+body {
+    background-color: #eee;
+    padding-bottom: 170px;
+    
+    
+}
+
+.container{
+    max-width: 412px;
+}
+body{
+    margin: 16px;
+    margin-top: 16px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    margin-left: 16px;
+}
