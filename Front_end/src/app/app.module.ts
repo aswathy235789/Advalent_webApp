@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { ClaimsComponent } from './claims/claims.component';
+import { AlertComponent } from './alert/alert.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { ClaimsComponent } from './claims/claims.component';
     FooterComponent,
     HeaderComponent,
     HomeComponent,
-    ClaimsComponent
+    ClaimsComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

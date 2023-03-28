@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-register',
@@ -9,11 +10,13 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
 
+ 
 
   registrationForm!: FormGroup;
   message!: any; 
   showOther = false;
   show: boolean=false;
+  showAlert!: boolean;
   // medicalHistoryOptions = [
   //   { label: 'Diabetes', value: 'diabetes' },
   //   { label: 'Blood Pressure', value: 'blood pressure' },
@@ -76,8 +79,14 @@ export class RegisterComponent {
        if (this.passwordsMatch()) {
         console.log('Passwords match');
         console.log('Registration form submitted:-success ', this.registrationForm.value);
-        this.show=true;
-        this.message = `Successfully Registered!`;
+        // this.show=true;
+        // this.message = `Successfully Registered!`;
+        this.showAlert = true;
+         // alert("Registration success!");
+         setTimeout(() => {
+          this.route.navigate(['/login']);
+        }, 2000);
+          //this.route.navigateByUrl('/login');
 
       
       } else {
