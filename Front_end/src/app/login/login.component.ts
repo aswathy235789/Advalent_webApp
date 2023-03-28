@@ -9,12 +9,14 @@ import { Router, RouterModule, Routes } from '@angular/router';
 })
 export class LoginComponent {
   loginForm!: FormGroup;
+  showAlert!: boolean;
   
 
 
   constructor(private formBuilder: FormBuilder,private router: Router) { }
 
-  ngOnInit(): void {
+  
+  ngOnInit() {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -22,17 +24,26 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
-    if (this.loginForm.valid) {
-        alert("login success!");
-        this.router.navigateByUrl('/home');
-    }
-    else{
-      alert("login Failed!");
-    }
+    if (this.loginForm.controls['email'].invalid) {
+      // Handle invalid email here
+      // Handle invalid email here
+      this.loginForm.controls['email'].setErrors({ 'invalid-email': true });
 
+    } else if (this.loginForm.controls['password'].invalid) {
+      // Handle invalid password here
+      
+      this.loginForm.controls['password'].setErrors({ 'invalid-password - password must be minimum of length 6': true });
 
-    // Call the login service to authenticate the user
-    // ...
+    } else {
+      
+      this.showAlert=true;
+      setTimeout(() => {
+        this.router.navigate(['/home']);
+      }, 2000);
+    }
   }
 
+
+
 }
+

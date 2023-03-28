@@ -12,6 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { ClaimsComponent } from './claims/claims.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,6 +22,7 @@ import { ClaimsComponent } from './claims/claims.component';
     HeaderComponent,
     HomeComponent,
     ClaimsComponent
+    
   ],
   imports: [
     BrowserModule,
