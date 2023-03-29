@@ -10,6 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { ClaimsComponent } from './claims/claims.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -27,7 +28,7 @@ import { ClaimsComponent } from './claims/claims.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    
+    HttpClientModule,
     ReactiveFormsModule,
     
   ],

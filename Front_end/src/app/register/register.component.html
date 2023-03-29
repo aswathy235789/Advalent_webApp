@@ -64,22 +64,6 @@
   </div>
 </div>
 
-   
-<div class="col-md-6 mb-4 pb-2">
-  <div class="form-outline">
-    <label class="form-label" for="state">State</label>
-    <input type="text" id="state" class="form-control form-control-lg" required formControlName="state"/>
-  </div>
-</div>
-   
-<div class="col-md-6 mb-4 pb-2">
-  <div class="form-outline">
-    <label class="form-label" for="form3Examplev0">City</label>
-    <input type="text" id="form3Examplev0" class="form-control form-control-lg" required formControlName="city"/>
-  </div>
-</div>
-
-
 <div class="col-md-6 mb-4 pb-2">
   <div class="form-outline">
 <label for="gid">Gender
@@ -94,6 +78,44 @@
 </select>
   </div>
   </div>
+  
+<!-- <div class="col-md-6 mb-4 pb-2">
+  <div class="form-outline">
+    <label class="form-label" for="state">State</label>
+    <input type="text" id="state" class="form-control form-control-lg" required formControlName="state"/>
+  </div>
+</div>
+   
+<div class="col-md-6 mb-4 pb-2">
+  <div class="form-outline">
+    <label class="form-label" for="form3Examplev0">City</label>
+    <input type="text" id="form3Examplev0" class="form-control form-control-lg" required formControlName="city"/>
+  </div>
+</div> -->
+<!-- <form [formGroup]="form"> -->
+  <div class="col-md-6 mb-4 pb-2">
+    <div class="form-outline">
+      <label>State</label>
+      <select formControlName="state" (change)="onStateChange()" class="form-select" required>
+        <option value="">--Select State--</option>
+        <option *ngFor="let state of states" [value]="state.id">{{ state.name }}</option>
+      </select>
+    </div>
+  </div> <!-- added closing div tag here -->
+  
+  <div class="col-md-6 mb-4 pb-2">
+    <div class="form-outline">
+      <label>City</label>
+      <select formControlName="city" class="form-select" required>
+        <option value="">--Select City--</option>
+        <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
+      </select>
+    </div>
+  </div>
+<!-- </form> -->
+
+
+
 
 
  

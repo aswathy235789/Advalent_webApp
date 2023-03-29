@@ -1,6 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CityserviceService } from '../cityservice.service';
+
 
 
 @Component({
@@ -10,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent {
 
+
+
  
 
   registrationForm!: FormGroup;
@@ -17,6 +21,9 @@ export class RegisterComponent {
   showOther = false;
   show: boolean=false;
   showAlert!: boolean;
+  // form!: FormGroup;
+  states!: any[];
+  cities!: any[];
   // medicalHistoryOptions = [
   //   { label: 'Diabetes', value: 'diabetes' },
   //   { label: 'Blood Pressure', value: 'blood pressure' },
@@ -26,7 +33,7 @@ export class RegisterComponent {
    this.showOther=!this.showOther;
   }
 
-  constructor(private formBuilder: FormBuilder,private route:Router) { }
+  constructor(private formBuilder: FormBuilder,private route:Router,private cityService: CityserviceService) { }
 
   ngOnInit() {
     this.registrationForm = this.formBuilder.group({
@@ -42,13 +49,19 @@ export class RegisterComponent {
       smoke:['', Validators.required],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\+?\d{10,}$/)]],
        idNumber: ['', Validators.required],
-       governmentId: ['', Validators.required]
+       governmentId: ['', Validators.required],
+       state: ['', Validators.required]
+     
       // medicalHistory: new FormControl([], Validators.compose([Validators.required, this.checkMedicalHistory]))
       // addressLine: [''],
       // city: [''],
       // phoneNumber: ['', Validators.required],
     
      
+    });
+  
+    this.cityService.getAllStates().subscribe(states => {
+      this.states = states;
     });
   }
   get confirmPasswordControl() {
@@ -65,14 +78,10 @@ export class RegisterComponent {
     this.message = null; // or this.message = "";
   }
 
-  // checkMedicalHistory(control: FormControl) {
-  //   const selected = control.value;
-  //   if (selected && selected.length > 0) {
-  //     return null;
-  //   }
-  //   return { 'invalidSelection': true };
-  // }
-  //this.registrationForm.valid && 
+
+
+
+
   onSubmit() {
     console.log("inside");
     if (!this.registrationForm.invalid&& Object.values(this.registrationForm.value).every(val => val !== null)) {
@@ -104,13 +113,32 @@ export class RegisterComponent {
       this.message = "Registration form is invalid!"
       // add code to show error message to user
     }
-   
   }
+
+    // onStateChange() {
+    
+    //   const stateId = this.form.get('state')?.value;
+  
+      
+    //   this.cityService.getCitiesByState(stateId).subscribe(cities => {
+    //     this.cities = cities;
+    //   });
+    // }
+   
+    onStateChange() {
+      const stateId = this.registrationForm.get('state')?.value;
+      
+          
+      this.cityService.getCitiesByState(stateId).subscribe(cities => {
+        this.cities = cities;
+      });
+    
+    }
   
  
   
+
+
 }
-
-
   
   
