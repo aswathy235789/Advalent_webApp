@@ -96,7 +96,7 @@
   <div class="col-md-6 mb-4 pb-2">
     <div class="form-outline">
       <label>State</label>
-      <select formControlName="state" (change)="onStateChange()" class="form-select" required>
+      <select formControlName="state" (change)="onStateChange()" class="form-control form-control-lg" required>
         <option value="">--Select State--</option>
         <option *ngFor="let state of states" [value]="state.id">{{ state.name }}</option>
       </select>
@@ -104,9 +104,10 @@
   </div> <!-- added closing div tag here -->
   
   <div class="col-md-6 mb-4 pb-2">
-    <div class="form-outline">
+    
       <label>City</label>
-      <select formControlName="city" class="form-select" required>
+      <div class="form-outline">
+      <select formControlName="city" class="form-control form-control-lg" required>
         <option value="">--Select City--</option>
         <option *ngFor="let city of cities" [value]="city.id">{{ city.name }}</option>
       </select>
