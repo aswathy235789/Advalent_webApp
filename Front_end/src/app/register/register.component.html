@@ -62,7 +62,7 @@
                                          formControlName="phoneNumber">
                       <div *ngIf="registrationForm.get('phoneNumber')?.invalid && (registrationForm.get('phoneNumber')?.dirty || registrationForm.get('phoneNumber')?.touched)" class="alert alert-danger">
                      <div *ngIf="registrationForm.get('phoneNumber')?.errors?.['required']">Phone number is required</div>
-                      <div *ngIf="registrationForm.get('phoneNumber')?.errors?.['pattern']">Phone number should be in the format +[country code][number] e.g. +91 1010101010</div>
+                      <div *ngIf="registrationForm.get('phoneNumber')?.errors?.['pattern']">Phone number must have 10 digits</div>
                       </div>
                     </div>
                   </div>
@@ -180,7 +180,7 @@
                                       <label for="disease2" style="margin-right: 10px;  margin-top: auto;">Blood Pressure</label>
                                     </div>
                                     <div>
-                                      <input type="checkbox" id="other" name="disease" value="other" style="margin-right: 10px;" (click)="checked()">
+                                      <input type="checkbox" id="other"  value="other" style="margin-right: 10px;" (click)="checked()">
                                       <label for="disease3" style="margin-right: 10px; margin-top: auto;">Other</label>
                                     </div>
                                     <textarea class="form-control" rows="5" id="otherText" [hidden]="!showOther" #otherText></textarea>
