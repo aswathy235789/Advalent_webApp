@@ -76,7 +76,7 @@ export class RegisterComponent {
       smoking:['', Validators.required],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
 
-       governmentId: ['', Validators.required],
+      //  governmentId: ['', Validators.required],
        idNumber: ['', Validators.required, this.governmentIdValidator('governmentId')],
        state: ['', Validators.required],
    

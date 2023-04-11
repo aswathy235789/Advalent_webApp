@@ -17,30 +17,14 @@
 <body>    
 	<div class="center">
         <br>
+		
          <h1>Login</h1>
-        <!-- <form method="post">
-            <div class="txt_field">
-                <input type="text" required>
-                <span></span>
-                <label>Email</label>
-            </div>	
-            <div class="txt_field">
-                <input type="password" required name="password" id="password">
-                <span></span>
-                <label>Password</label>
-            </div>
-				
-            <div class="button">
-                <input type="submit" value="Login" (click)="onSubmit()"></div>
-                <div class= "signup_link">
-                    Not a member? <a routerLink="/register">Register Now</a>
-                </div>
-		</form> -->
+		 <div *ngIf="errorMessage" class="alert alert-danger"><span [innerHTML]="errorMessage"></span></div>
 	
 
 		<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 			
-
+			
 			<div class="txt_field">
 
 			  <input type="text" formControlName="email">
@@ -80,6 +64,7 @@
 			  Not a member? <a routerLink="/register">Register Now</a>
 			</div>
 			<div *ngIf="showAlert" class="alert alert-success">Logging in...</div>
+
 		  </form>
 
 
