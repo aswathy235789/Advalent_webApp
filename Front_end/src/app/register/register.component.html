@@ -152,11 +152,15 @@
   <div class="form-outline">
     <label for="idNumber">Govt ID (Aadhaar)</label>
     <input type="text" id="idNumber" class="form-control form-control-lg" formControlName="idNumber" placeholder="Enter your Aadhaar card number" />
-    <div *ngIf="registrationForm.get('idNumber')?.invalid && (registrationForm.get('idNumber')?.dirty || registrationForm.get('idNumber')?.touched)">
-      <div *ngIf="registrationForm.get('idNumber')?.errors?.['required']" class="alert alert-danger" >Type your ID Number</div>
-      <div *ngIf="registrationForm.get('idNumber')?.errors?.['invalidAadhaarCardNumber']" class="alert alert-danger" value="1">Invalid Aadhaar Card Number</div>
-      <!-- <div *ngIf="registrationForm.get('idNumber')?.errors?.['invalidPanCardNumber']" class="alert alert-danger" value="2">Invalid PAN Card Number</div>
-      <div *ngIf="registrationForm.get('idNumber')?.errors?.['invalidElectionIdNumber']" class="alert alert-danger" value="3">Invalid Election ID Number</div> -->
+    <div *ngIf="registrationForm.get('idNumber')?.invalid && (registrationForm.get('idNumber')?.dirty || registrationForm.get('idNumber')?.touched)" class="alert alert-danger">
+      <div *ngIf="registrationForm.get('idNumber')?.errors?.['required']">ID number is required</div>
+       <div *ngIf="registrationForm.get('idNumber')?.errors?.['pattern']">Invalid Aadhaar number</div>
+
+
+    <!-- <div *ngIf="registrationForm.get('idNumber')?.invalid && (registrationForm.get('idNumber')?.dirty || registrationForm.get('idNumber')?.touched)">
+      <div *ngIf="registrationForm.get('idNumber')?.errors?.['required']">Type your ID Number</div>
+      <div *ngIf="registrationForm.get('idNumber')?.errors?.['pattern']">Invalid Aadhaar Card Number</div> -->
+
     </div>
 </div>
 </div>
@@ -165,7 +169,7 @@
 <div class="col-md-6 mb-4 pb-2">
   <div class="form-outline">
     <label class="form-label" for="form3Examplev5">Email ID</label>
-    <input type="email" id="form3Examplev5" class="form-control form-control-lg" required formControlName="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
+    <input type="email" id="form3Examples" class="form-control form-control-lg" required formControlName="email"/>
   </div>
   
   <div *ngIf="registrationForm.get('email')?.invalid && (registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched)">
@@ -214,7 +218,7 @@
                                       <input type="checkbox" id="other"  value="other" style="margin-right: 10px;" (click)="checked()">
                                       <label for="disease3" style="margin-right: 10px; margin-top: auto;">Other</label>
                                     </div>
-                                    <input type="text" class="form-control"  id="otherText" [hidden]="!showOther" #otherText>
+                                    <input type="text" class="form-control"  id="otherText" [hidden]="!showOther" #otherText placeholder="Enter other diseases you have">
                                   </div>
                                   
 
@@ -253,6 +257,7 @@
 <input type="password" id="form3Examplev6" class="form-control form-control-lg" required formControlName="password"/>
 <div *ngIf="registrationForm.get('password')?.invalid && (registrationForm.get('password')?.dirty || registrationForm.get('password')?.touched)">
   <div *ngIf="registrationForm.get('password')?.errors?.['required']"  class="alert alert-danger">Type your password</div>
+  <div *ngIf="registrationForm.get('password')?.errors?.['invalidPassword']" class="alert alert-danger">Password must be at least 6 characters long</div>
 </div>
 </div>
 </div>
