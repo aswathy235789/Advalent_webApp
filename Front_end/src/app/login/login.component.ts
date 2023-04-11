@@ -63,14 +63,32 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/home']);
           }, 2000);
         },
-        () => {
+        (error) => {
 
          
-          this.errorMessage = '<strong>Login Failed!! </strong><br> Invalid email or password';
+          // this.errorMessage = '<strong>Login Failed!! </strong><br> Invalid email or password';
 
+          // setTimeout(() => {
+          //   this.errorMessage = '';
+          // }, 2000); // show the error message for 1.5 seconds
+
+
+
+          if (error.status === 400) {
+            //this.loginForm.controls['email'].setErrors({ 'invalid-email': true });
+            //this.loginForm.controls['password'].setErrors({ 'invalid-password': true });
+            this.errorMessage = 'Invalid email or password.';
+          } else if (error.status === 500) {
+            this.errorMessage = 'Internal Server Error! Try again';
+          } if (error.status === 401) {
+            this.errorMessage = 'Invalid Password!';
+          }
+          else {
+            this.errorMessage = '<strong>Login Failed!! </strong><br> Invalid email or password';
+          }
           setTimeout(() => {
             this.errorMessage = '';
-          }, 2000); // show the error message for 1.5 seconds
+          }, 2000);
         }
         
       );

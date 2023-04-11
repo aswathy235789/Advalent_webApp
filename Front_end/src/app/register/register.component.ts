@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormGroupDirective, AbstractControl, ValidatorFn, FormControl, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CityserviceService } from '../cityservice.service';
+import { DiseaseService } from '../disease.service';
 import { RegisterServiceService } from '../register-service.service';
 
 
@@ -42,6 +43,8 @@ export class RegisterComponent {
   maxDate: string;
   minDate: string;
   Aerror!: object;
+  diseases!: any[];
+
 
  
  
@@ -52,7 +55,7 @@ export class RegisterComponent {
    this.showOther=!this.showOther;
   }
 
-  constructor(private formBuilder: FormBuilder,private route:Router,private cityService: CityserviceService,private registerService:RegisterServiceService) {
+  constructor(private formBuilder: FormBuilder,private route:Router,private cityService: CityserviceService,private registerService:RegisterServiceService,private diseaseService: DiseaseService) {
     const currentYear = new Date().getFullYear();
     this.maxDate = `${currentYear - 0}-12-31`;
     this.minDate = `${currentYear - 100}-01-01`; 
@@ -71,13 +74,13 @@ export class RegisterComponent {
       address: ['',Validators.required],
       city: ['',Validators.required],
       email: ['', Validators.required, Validators.email,Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}') ],
-      password: ['',Validators.required],
+      password: ['',[Validators.required, this.passwordLengthValidator]],
       confirmPassword: ['', Validators.required],
       smoking:['', Validators.required],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
 
       //  governmentId: ['', Validators.required],
-       idNumber: ['', Validators.required, this.governmentIdValidator('governmentId')],
+       idNumber: ['', [Validators.required, Validators.pattern( /^(\d{4}\s?){2}\d{4}$/)]],
        state: ['', Validators.required],
    
     
@@ -88,6 +91,10 @@ export class RegisterComponent {
       this.states = states;
     });
 
+    this.diseaseService.getAllDiseases().subscribe(diseases => {
+      this.diseases = diseases;
+    });
+    
     
     
   }
@@ -216,22 +223,21 @@ export class RegisterComponent {
       return birthDate > restrictedDate ? { 'restrictedYear': true } : null;
     }
 
-     governmentIdValidator(governmentIdControl: string): ValidatorFn {
-      return (control: AbstractControl): {[key: string]: any} | null => {
-        const governmentId = control.parent?.get(governmentIdControl)?.value;
-        
-        if (governmentId == 'Aadhar Card' && !/^\d{4}\s\d{4}\s\d{4}$/.test(control.value)) {
-          return {'invalidAadhaarCardNumber': true};
-        } else if (governmentId == 'Pan Card' && !/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(control.value)) {
-          return {'invalidPanCardNumber': true};
-        } else if (governmentId =='Election ID' && !/^[A-Z]{3}\d{7}$/.test(control.value)) {
-          return {'invalidElectionIdNumber': true};
-        }
-    
-        return null;
-      };
+    passwordLengthValidator(control: { value: any; }) {
+      const password = control.value;
+      if (password && password.length < 6) {
+        return { invalidPassword: true };
+      }
+      return null;
     }
-  
- 
+    
+    
 
 }
+
+
+
+
+
+
+
