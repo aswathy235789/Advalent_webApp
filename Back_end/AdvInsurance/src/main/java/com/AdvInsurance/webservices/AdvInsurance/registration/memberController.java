@@ -3,6 +3,7 @@ package com.AdvInsurance.webservices.AdvInsurance.registration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Member;
@@ -21,6 +22,9 @@ public class memberController {
     @Autowired
     private JwtUtil jwtUtil;
 
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     private memberRepository memberRepository;
 
@@ -37,7 +41,10 @@ public class memberController {
     @PostMapping("/register")
     public ResponseEntity<member> register(@RequestBody member newMember) {
         try {
+           //
             member savedMember = memberService.saveRegistration(newMember);
+
+
             return new ResponseEntity<>(savedMember, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -111,6 +118,7 @@ public class memberController {
         String password = authenticationRequest.getPassword();
 
         // Verify email and password
+        //System.out.println("password= "+password);
         if (isValidUser(email, password)) {
             // Generate JWT token
             String token = JwtUtil.generateToken(email);
@@ -121,8 +129,19 @@ public class memberController {
     }
 
     private boolean isValidUser(String email, String password) {
-        member member = memberRepository.findByEmailAndPassword(email, password);
-        return member != null;
+        BCryptPasswordEncoder bcrypt=new BCryptPasswordEncoder();
+       // String encrypt_psd=bcrypt.encode(password);
+        //encrypt the passed psd
+        member member = memberRepository.findByEmail(email);//check if email present or not
+
+         if(member != null)
+         {
+             if(bcrypt.matches(password,member.getPassword()))
+             {
+                 return true;
+             }
+         }
+          return false;
     }
 
 

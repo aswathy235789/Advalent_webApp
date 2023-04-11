@@ -1,6 +1,7 @@
 package com.AdvInsurance.webservices.AdvInsurance.registration;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.lang.reflect.Member;
@@ -17,6 +18,9 @@ public class memberService {
 //    }
 
     public member saveRegistration(member registration) {
+        BCryptPasswordEncoder bcrypt=new BCryptPasswordEncoder();
+        String encrypt_psd=bcrypt.encode(registration.getPassword());
+        registration.setPassword(encrypt_psd);
 
         return memberRepository.save(registration);
     }
