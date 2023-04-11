@@ -1,5 +1,7 @@
 package com.AdvInsurance.webservices.AdvInsurance.registration;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 public class LoginRequest {
 
 
@@ -16,12 +18,14 @@ public class LoginRequest {
         }
 
         public String getPassword() {
+
+
             return password;
         }
 
-        public void setPassword(String password) {
-            this.password = password;
-        }
+        //public void setPassword(String password) {
+            //this.password = password;
+        //}
     }
 
 
