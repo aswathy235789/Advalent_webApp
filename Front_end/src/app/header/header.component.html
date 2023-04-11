@@ -1,0 +1,38 @@
+<header class="header">
+    <div class="header__logo">
+      <h2><div class="waviy">
+        <span style="--i:1">A</span>
+        <span style="--i:2">D</span>
+        <span style="--i:3">V</span>
+        <span style="--i:4">-</span>
+        <span style="--i:5">I</span>
+        <span style="--i:6">N</span>
+        <span style="--i:7">S</span>
+        <span style="--i:8">U</span>
+        <span style="--i:8">R</span>
+        <span style="--i:8">A</span>
+        <span style="--i:8">N</span>
+        <span style="--i:8">C</span>
+        <span style="--i:8">E</span>
+       </div></h2>
+    </div>
+    <nav class="header__nav">
+      <ul class="header__menu">
+        <li class="header__menu-item"><b><a href="#" [routerLink]="['/home']">Home</a></b></li>
+        <!-- <li class="header__menu-item"><a href="#" [routerLink]="['/claims']">Claim</a></li> -->
+        <li><div class="dropdown">
+           <b><a>&nbsp;&nbsp;&nbsp;Claim&nbsp;&nbsp;&nbsp; </a></b>
+            <div class="dropdown-content">
+            <a [routerLink]="['/claims']">Claim Status</a>
+            <a>Claim Submission</a>
+            <a>Claim History</a>
+            </div>
+          </div>
+          &nbsp;&nbsp;
+        </li>
+        <li class="header__menu-item"><a href="#">Contact Us</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </ul>
+    </nav>
+  </header>
+
+  
