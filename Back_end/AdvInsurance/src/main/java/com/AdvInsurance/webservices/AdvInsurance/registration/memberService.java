@@ -3,6 +3,7 @@ package com.AdvInsurance.webservices.AdvInsurance.registration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 @Service
@@ -16,15 +17,16 @@ public class memberService {
 //    }
 
     public member saveRegistration(member registration) {
+
         return memberRepository.save(registration);
     }
 
     public List<member> findByFirstName(String firstName) {
         return memberRepository.findByFirstName(firstName);
     }
-    public List<member> findByEmail(String email) {
-        return memberRepository.findByEmail(email);
-    }
+//    public List<Member> findByEmail(String email) {
+//        return memberRepository.findByEmail(email);
+//    }
 
 
 
