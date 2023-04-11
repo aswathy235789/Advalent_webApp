@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormGroupDirective, AbstractControl, ValidatorFn, FormControl, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CityserviceService } from '../cityservice.service';
+import { DiseaseService } from '../disease.service';
 import { RegisterServiceService } from '../register-service.service';
 
 
@@ -42,6 +43,8 @@ export class RegisterComponent {
   maxDate: string;
   minDate: string;
   Aerror!: object;
+  diseases!: any[];
+
 
  
  
@@ -52,7 +55,7 @@ export class RegisterComponent {
    this.showOther=!this.showOther;
   }
 
-  constructor(private formBuilder: FormBuilder,private route:Router,private cityService: CityserviceService,private registerService:RegisterServiceService) {
+  constructor(private formBuilder: FormBuilder,private route:Router,private cityService: CityserviceService,private registerService:RegisterServiceService,private diseaseService: DiseaseService) {
     const currentYear = new Date().getFullYear();
     this.maxDate = `${currentYear - 0}-12-31`;
     this.minDate = `${currentYear - 100}-01-01`; 
@@ -88,6 +91,10 @@ export class RegisterComponent {
       this.states = states;
     });
 
+    this.diseaseService.getAllDiseases().subscribe(diseases => {
+      this.diseases = diseases;
+    });
+    
     
     
   }

@@ -190,23 +190,31 @@
                                 <div class="form-outline">
                                   <label class="form-label" for="form3Example7"><strong>Medical History</strong></label>
                                   <div style="color: black; display: flex; flex-wrap: wrap;">
-                                    <div style="display: flex; align-items: center;">
+                                    <!-- <div style="display: flex; align-items: center;">
                                       <input type="checkbox" id="disease0" name="disease"   value="none" style="margin-right: 10px;" />
                                       <label for="disease0" style="margin-right: 10px;  margin-top: auto;"> None</label>
-                                    </div>
-                                    <div style="display: flex; align-items: center;">
+                                    </div> -->
+                                    <!-- <div style="display: flex; align-items: center;">
                                       <input type="checkbox" id="disease1" name="disease" value="diabetes"  style="margin-right: 10px;" />
                                       <label for="disease1" style="margin-right: 10px;  margin-top: auto;"> Diabetes</label>
                                     </div>
                                     <div style="display: flex; align-items: center;">
                                       <input type="checkbox" id="disease2" name="disease" value="BloodPressure"  style="margin-right: 10px;" />
                                       <label for="disease2" style="margin-right: 10px;  margin-top: auto;">Blood Pressure</label>
+                                    </div>-->
+                                    <div *ngFor="let disease of diseases">
+                                      <div style=" align-items: center;">
+                                        <input type="checkbox" value={{disease.name}} name="disease" style="margin-right: 10px;" >
+                                        <label for="disease2" style="margin-right: 10px;  margin-top: auto;">{{ disease.name }}</label>
+                                 
+                                      
+                                      </div>
                                     </div>
-                                    <div>
+                                    <div> 
                                       <input type="checkbox" id="other"  value="other" style="margin-right: 10px;" (click)="checked()">
                                       <label for="disease3" style="margin-right: 10px; margin-top: auto;">Other</label>
                                     </div>
-                                    <textarea class="form-control" rows="5" id="otherText" [hidden]="!showOther" #otherText></textarea>
+                                    <input type="text" class="form-control"  id="otherText" [hidden]="!showOther" #otherText>
                                   </div>
                                   
 
