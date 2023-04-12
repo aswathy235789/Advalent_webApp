@@ -13,7 +13,7 @@
 	<title>Login</title>
 </head>
 <body>
-	<div *ngIf="errorMessage" class="alert alert-danger"><span [innerHTML]="errorMessage"></span></div>
+	<!-- <div *ngIf="errorMessage" class="alert alert-danger"><span [innerHTML]="errorMessage"></span></div> -->
 	<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 		<div class="wrapper">
 			<div class="container main">
