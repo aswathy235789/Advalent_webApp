@@ -53,7 +53,8 @@
                   <div class="col-md-6 mb-4 pb-2">
                     <div class="form-outline">
                       <label class="form-label" for="form3Examplev4">Date Of Birth</label>
-                      <input type="date" [max]="maxDate" [min]="minDate" id="form3Examplev4" class="form-control form-control-lg"  required formControlName="dateOfBirth"  />
+                      <input type="date" [min]="minDate" [max]="maxDate" id="form3Examplev4" class="form-control form-control-lg"  required formControlName="dateOfBirth"  />
+                     
                     </div>
                   </div>
                   <div class="col-md-6 mb-4 pb-2">
@@ -169,7 +170,7 @@
 <div class="col-md-6 mb-4 pb-2">
   <div class="form-outline">
     <label class="form-label" for="form3Examplev5">Email ID</label>
-    <input type="email" id="form3Examples" class="form-control form-control-lg" required formControlName="email"/>
+    <input type="email" id="email" class="form-control form-control-lg" required formControlName="email"/>
   </div>
   
   <div *ngIf="registrationForm.get('email')?.invalid && (registrationForm.get('email')?.dirty || registrationForm.get('email')?.touched)">
@@ -282,10 +283,11 @@
         <div  *ngIf="showAlert" class="alert alert-success" >
           Registration Success!! 
         </div>
-        <div  *ngIf="errorAlert" class="alert alert-danger" >
-          Registration Failed. Try again!!
-          <!-- &nbsp;&nbsp;Error - <h6>{{Aerror}}</h6> -->
-                </div>
+        <!-- <div  *ngIf="errorAlert" class="alert alert-danger" >
+          {{errorMessage}}
+           &nbsp;&nbsp;Error - <h6>{{Aerror}}</h6>
+                </div> -->
+                <div *ngIf="errorMessage" class="alert alert-danger"><span [innerHTML]="errorMessage"></span></div>
 
 </form>
    

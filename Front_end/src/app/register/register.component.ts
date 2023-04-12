@@ -13,10 +13,12 @@ import { RegisterServiceService } from '../register-service.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+  [x: string]: any;
 
   @ViewChild('otherText')
   otherText!: ElementRef;
   errorAlert!: boolean;
+  
 
   getMedicalHistory(): string {
     const checkboxes = document.querySelectorAll('input[name=disease]:checked');
@@ -44,6 +46,7 @@ export class RegisterComponent {
   minDate: string;
   Aerror!: object;
   diseases!: any[];
+  errorMessage!: string;
 
 
  
@@ -56,9 +59,23 @@ export class RegisterComponent {
   }
 
   constructor(private formBuilder: FormBuilder,private route:Router,private cityService: CityserviceService,private registerService:RegisterServiceService,private diseaseService: DiseaseService) {
-    const currentYear = new Date().getFullYear();
-    this.maxDate = `${currentYear - 0}-12-31`;
-    this.minDate = `${currentYear - 100}-01-01`; 
+    // const currentYear = new Date().getFullYear();
+    // this.maxDate = `${currentYear - 0}-12-31`;
+    // this.minDate = `${currentYear - 100}-01-01`; 
+   
+
+    const earliestDate = new Date('1900-01-01'); // Set the earliest date you want to allow
+    const year = earliestDate.getFullYear();
+    const month = ('0' + (earliestDate.getMonth() + 1)).slice(-2);
+    const day = ('0' + earliestDate.getDate()).slice(-2);
+    this.minDate = `${year}-${month}-${day}`;
+
+    const today = new Date(); // Set today's date
+    const todayYear = today.getFullYear();
+    const todayMonth = ('0' + (today.getMonth() + 1)).slice(-2);
+    const todayDay = ('0' + today.getDate()).slice(-2);
+    this.maxDate = `${todayYear}-${todayMonth}-${todayDay}`;
+
   }
     
   
@@ -69,11 +86,18 @@ export class RegisterComponent {
     this.registrationForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      dateOfBirth: ['', Validators.required,this.restrictYear],
+      dateOfBirth: ['', 
+        Validators.required
+      
+      ],
       gender: ['', Validators.required],
       address: ['',Validators.required],
       city: ['',Validators.required],
-      email: ['', Validators.required, Validators.email,Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}') ],
+      email:['', [
+        Validators.required,
+        // Validators.email,
+        Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
+      ]],
       password: ['',[Validators.required, this.passwordLengthValidator]],
       confirmPassword: ['', Validators.required],
       smoking:['', Validators.required],
@@ -99,7 +123,17 @@ export class RegisterComponent {
     
   }
   
- 
+  // validateDate(control: FormControl) {
+  //   const selectedDate = new Date(control.value);
+  //   const currentDate = new Date();
+  //   if (selectedDate > currentDate) {
+  //     return { futureDate: true };
+  //   }
+  //   return null;
+  // }
+
+
+
 
 
   get email() {
@@ -162,6 +196,7 @@ export class RegisterComponent {
                       .subscribe(
                         response => {
                           console.log('Registration successful', response);
+                          
                           this.showAlert = true;
 
                           setTimeout(() => {
@@ -169,10 +204,16 @@ export class RegisterComponent {
                           }, 2000);
                         },
                         error => {
-                          console.error('Registration failed', error);
-                            //this.Aerror=error;
-                          this.errorAlert = true;
-                        }
+                          if (error.status === 500) {
+                              this.errorMessage = `<Strong>Registration Failed ! </strong><br>Email is already registered. Please use a different email`;
+                          } else {
+                              this.errorMessage = '<Strong>Registration Failed! Try again';
+                          }
+                          setTimeout(() => {
+                              this.errorMessage = '';
+                          }, 2000);
+                      }
+                      
                       );
   
 
@@ -214,14 +255,14 @@ export class RegisterComponent {
     
     }
     
-      restrictYear(control: AbstractControl): { [key: string]: any } | null {
-      const birthDate = new Date(control.value);
-      const currentYear = new Date().getFullYear();
-      const restrictedYear = currentYear - 18;
-      const restrictedDate = new Date(restrictedYear, birthDate.getMonth(), birthDate.getDate());
+    //   restrictYear(control: AbstractControl): { [key: string]: any } | null {
+    //   const birthDate = new Date(control.value);
+    //   const currentYear = new Date().getFullYear();
+    //   const restrictedYear = currentYear - 18;
+    //   const restrictedDate = new Date(restrictedYear, birthDate.getMonth(), birthDate.getDate());
       
-      return birthDate > restrictedDate ? { 'restrictedYear': true } : null;
-    }
+    //   return birthDate > restrictedDate ? { 'restrictedYear': true } : null;
+    // }
 
     passwordLengthValidator(control: { value: any; }) {
       const password = control.value;
