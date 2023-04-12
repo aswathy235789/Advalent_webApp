@@ -1,39 +1,4 @@
-body{
-    margin: 0;
-    padding: 0;
-    font-family: 'Times New Roman', Times, serif;
-    height: 100vh;
-    overflow: hidden;
-   
-        background: linear-gradient(45deg, #9ccef0, #F5F5F5);
-      
-}
-.center{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    background: #fff;
-    border-radius: 10px;
-    border-left: 3px solid  rgb(77, 101, 121);
-    border-right: 3px solid rgb(77, 101, 121);
-    border-top: 3px solid  rgb(77, 101, 121);
-    border-bottom: 3px solid rgb(77, 101, 121);
-}
 
-.center h1{
-    text-align: center;
-    padding: 0 0 20px 0;
-    border-bottom: 1px solid silver;
-    text-shadow: 2px 2px 2px #CCCCCC; 
-    font-family:'Times New Roman', Times, serif;
-    font: bold;
-}
-.center form{
-    padding: 0 40px;
-    box-sizing: border-box;
-}
 form .txt_field{
     position: relative;
     border-bottom: 2px solid #adadad;
@@ -80,23 +45,6 @@ form .txt_field{
     width: 100%;
 }
 
-
-
-form .button input{
-    width: 100%;
-    height: 50px;
-    outline: none;
-    color: #fff;
-    border: none;
-    font-size: 15px;
-    border-radius: 25px;
-    font-weight: 600;
-    cursor: pointer;
-    background: linear-gradient(135deg, #71b7e6, #9b59b6);
-}
-form .button input:hover{
-    background: linear-gradient(-135deg, #71b7e6, #9b59b6);
-}
 .signup_link{
     margin: 30px 0;
     text-align: center;
@@ -118,9 +66,57 @@ form .button input:hover{
     font-size: 16px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     transform: translateY(5px);
+    height: 45px;
+    width: 150px;
+  }
+  h2{
+      font-size: 26px;
+      padding: 20px 60px;
+      font-weight: bold;
+      font-family: 'Times New Roman', Times, serif
   }
   
+ @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
 
-  
+*{
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+.wrapper{
+       background: linear-gradient(89.5deg, rgb(4, 29, 55) -0.1%, rgb(2, 67, 135) 25.1%, rgb(28, 133, 243) 49.6%, rgb(115, 181, 250) 74.5%, rgb(214, 239, 253) 99.3%);
+    padding: 0 20px 0 20px;
+}
+.main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.row{
+    width: 900px;
+    height: 550px;
+    border-radius: 10px;
+    background: #fff; 
+    box-shadow: 5px 5px 10px 1px rgba(0,0,0,0.2);
+}
+.side-image{
+    background-image: url("/../assets/img1.svg");
+    background-position: center;
+    background-size: 120%;
+    background-repeat: no-repeat;
+    position: relative;
+    border-radius: 10px 0 0 10px;
+}
 
 
+.right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.input-box{
+    width: 330px;
+    box-sizing: border-box;
+}
