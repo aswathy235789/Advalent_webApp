@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
           } else if (error.status === 500) {
             this.errorMessage = 'Internal Server Error! Try again';
           } if (error.status === 401) {
-            this.errorMessage = 'Invalid Password!';
+            this.errorMessage = 'Incorrect  Password!';
           }
           else {
             this.errorMessage = '<strong>Login Failed!! </strong><br> Invalid email and password';
