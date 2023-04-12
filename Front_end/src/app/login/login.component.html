@@ -1,86 +1,76 @@
-
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="login.component.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	<title>Login</title>
-    <link rel="stylesheet" href="login.component.css">
-	<link rel="stylesheet" href=
-"https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
-	<link rel="stylesheet" href=
-"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity=
-"sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-		crossorigin="anonymous">
 </head>
+<body>
+	<div *ngIf="errorMessage" class="alert alert-danger"><span [innerHTML]="errorMessage"></span></div>
+	<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+		<div class="wrapper">
+			<div class="container main">
+				<div class="row">
+					<div class="col-md-6 side-image">
+					</div>
+					<div class="col-md-6 right">
+						<div class="input-box">
+						
+							<div *ngIf="errorMessage" class="alert alert-danger"><span
+									[innerHTML]="errorMessage"></span></div>
 
-<body>    
-	<div class="center">
-        <br>
-		
-         <h1>Login</h1>
-		 <div *ngIf="errorMessage" class="alert alert-danger"><span [innerHTML]="errorMessage"></span></div>
+							<form [formGroup]="loginForm" (ngSubmit)="onSubmit()"></form>
+							<h2>ADV Insurance</h2>
+								<div class="txt_field">
+									<input type="text" formControlName="email">
+									<label>Email</label>
+								</div>
+								<div *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
+									<div *ngIf="loginForm.controls['email'].errors?.['required']"
+										class="alert alert-danger">Email is required.</div>
+									<div *ngIf="loginForm.get('email')?.errors?.['pattern']" class="alert alert-danger">
+										Invalid email</div>
+									<div *ngIf="loginForm.controls['email'].errors?.['email']"
+										class="alert alert-danger">Email is invalid.</div>
+									<div *ngIf="loginForm.controls['email'].errors?.['invalid-email']"
+										class="alert alert-danger">Email is invalid.</div>
+								</div>
+
+
+
+								<div class="txt_field">
+									<input type="password" formControlName="password" maxlength="20">
+									<label>Password</label>
+								</div>
+								<div
+									*ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
+									<div *ngIf="loginForm.controls['password'].errors?.['required']"
+										class="alert alert-danger">Password is required.</div>
+									<div *ngIf="loginForm.controls['password'].errors?.['minlength']" c
+										class="alert alert-danger">Password must be at least 6 characters long.</div>
+									<div *ngIf="loginForm.controls['password'].errors?.['invalid-password']"
+										class="error" class="alert alert-danger">Password is invalid.</div>
+								</div>
+								<button class="btn btn-primary" type="submit"
+									[disabled]="loginForm.invalid">Login</button>
+								<div class="signup_link">
+									Not a member? <a routerLink="/register">Register Now</a>
+								</div>
+								<div *ngIf="showAlert" class="alert alert-success">Logging in...</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</form>
 	
-
-		<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-			
-			
-			<div class="txt_field">
-
-			  <input type="text" formControlName="email">
-		
-			  <label>Email</label>
-
-			</div>
-			<div *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
-				<div *ngIf="loginForm.controls['email'].errors?.['required']" class="alert alert-danger">Email is required.</div>
-				<div *ngIf="loginForm.get('email')?.errors?.['pattern']" class="alert alert-danger" >Invalid email</div>
-				<!-- <div *ngIf="loginForm.controls['email'].errors?.['email']" class="alert alert-danger">Email is invalid.</div> -->
-				<!-- <div *ngIf="loginForm.controls['email'].errors?.['invalid-email']" class="alert alert-danger">Email is invalid.</div> -->
-			  </div>
-			  
-
-
-			<div class="txt_field">
-
-				  
-			  <input type="password" formControlName="password" maxlength="20">
-			
-			  <label>Password</label>
-			</div>
-			<div *ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
-				<div *ngIf="loginForm.controls['password'].errors?.['required']"  class="alert alert-danger">Password is required.</div>
-
-				<div *ngIf="loginForm.controls['password'].errors?.['minlength']"  c class="alert alert-danger">Password must be at least 6 characters long.</div>
-				<div *ngIf="loginForm.controls['password'].errors?.['invalid-password']"  class="error" class="alert alert-danger">Password is invalid.</div>
-			  </div>
-
-
-
-
-			  <button  class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">Submit</button>
-			
-			  
-			<div class="signup_link">
-			  Not a member? <a routerLink="/register">Register Now</a>
-			</div>
-			<div *ngIf="showAlert" class="alert alert-success">Logging in...</div>
-
-			
-		
-
-
-
-		  </form>
-
-
-		  
-
-
-
-
-		  
-	</div>
 	<script>
 		const togglePassword = document
 			.querySelector('#togglePassword');
@@ -94,14 +84,15 @@
 			const type = password
 				.getAttribute('type') === 'password' ?
 				'text' : 'password';
-				
+
 			password.setAttribute('type', type);
 
 			// Toggle the eye and bi-eye icon
 			this.classList.toggle('bi-eye');
 		});
+
+
+
 	</script>
 </body>
-
 </html>
-
