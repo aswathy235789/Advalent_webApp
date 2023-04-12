@@ -5,10 +5,10 @@
     padding: 1rem;
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-    right: 0;
+    right: -35px;
     z-index: 100;
   }
   
@@ -121,3 +121,21 @@
     background-color: #00A4BD;
   }
   
+  @media screen and (max-width: 768px) {
+    /* Styles for screens smaller than 768px */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: -142px;
+      z-index: 100;
+    }
+    
+  }
+
