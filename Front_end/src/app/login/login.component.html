@@ -5,7 +5,10 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap">
 	<link rel="stylesheet" href="login.component.css">
+
+
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -16,22 +19,38 @@
 	<!-- <div *ngIf="errorMessage" class="alert alert-danger"><span [innerHTML]="errorMessage"></span></div> -->
 	<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
 		<div class="wrapper">
+			
 			<div class="container main">
+			
 				<div class="row">
+					<h2>ADV-INSURANCE</h2>
 					<div class="col-md-6 side-image">
-					</div>
-					<div class="col-md-6 right">
-						<div class="input-box">
 						
-							<div *ngIf="errorMessage" class="alert alert-danger"><span
-									[innerHTML]="errorMessage"></span></div>
-
+						</div>
+					
+					<div class="col-md-6 right">
+					
+						<div class="input-box">
+							
+							
+							<div class="container py-4 shadow" style="width:350px;">
+								
+							 
+							  
 							<form [formGroup]="loginForm" (ngSubmit)="onSubmit()"></form>
-							<h2>ADV Insurance</h2>
-								<div class="txt_field">
+							<!-- <h2>ADV Insurance</h2> -->
+								<!-- <div class="txt_field">
 									<input type="text" formControlName="email">
 									<label>Email</label>
-								</div>
+								</div> -->
+								<div class="md-form input-with-pre-icon">
+									<i class="bi bi-envelope text-primary prefix"></i>
+									<input type="text" id="prefixInside2" class="form-control form-control-lg" placeholder="Email" formControlName="email">
+								  </div>
+								
+
+  
+  
 								<div *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
 									<div *ngIf="loginForm.controls['email'].errors?.['required']"
 										class="alert alert-danger">Email is required.</div>
@@ -45,10 +64,18 @@
 
 
 
-								<div class="txt_field">
+								<!-- <div class="txt_field">
 									<input type="password" formControlName="password" maxlength="20">
 									<label>Password</label>
-								</div>
+								</div> --><br>
+								<div class="md-form input-with-pre-icon">
+									<i class="bi bi-lock-fill text-primary prefix"></i>
+                                          
+
+									<input type="password" id="password" class="form-control form-control-lg form-control-rounded" placeholder="Password" formControlName="password">
+								  </div>
+								  
+
 								<div
 									*ngIf="loginForm.controls['password'].invalid && loginForm.controls['password'].touched">
 									<div *ngIf="loginForm.controls['password'].errors?.['required']"
@@ -58,12 +85,25 @@
 									<div *ngIf="loginForm.controls['password'].errors?.['invalid-password']"
 										class="error" class="alert alert-danger">Password is invalid.</div>
 								</div>
-								<button class="btn btn-primary" type="submit"
-									[disabled]="loginForm.invalid">Login</button>
+
+								<div *ngIf="errorMessage" class="alert alert-danger"><span
+									[innerHTML]="errorMessage"></span></div>
+                                  <br>
+								<!-- <button class="btn btn-primary" type="submit"
+									[disabled]="loginForm.invalid">Login</button> -->
+									
+									<button class="btn btn-primary  rounded-pill shadow" type="submit"
+										[disabled]="loginForm.invalid">
+								<i class="bi bi-box-arrow-in-right me-2"></i>Login
+								</button>
+
+								<div *ngIf="showAlert" class="alert alert-success">Logging in...</div>
+							</div>
+
 								<div class="signup_link">
 									Not a member? <a routerLink="/register">Register Now</a>
 								</div>
-								<div *ngIf="showAlert" class="alert alert-success">Logging in...</div>
+								
 					</div>
 				</div>
 			</div>
@@ -71,28 +111,6 @@
 		</div>
 	</form>
 	
-	<script>
-		const togglePassword = document
-			.querySelector('#togglePassword');
-
-		const password = document.querySelector('#password');
-
-		togglePassword.addEventListener('click', () => {
-
-			// Toggle the type attribute using
-			// getAttribure() method
-			const type = password
-				.getAttribute('type') === 'password' ?
-				'text' : 'password';
-
-			password.setAttribute('type', type);
-
-			// Toggle the eye and bi-eye icon
-			this.classList.toggle('bi-eye');
-		});
-
-
-
-	</script>
+	<!--  -->
 </body>
 </html>

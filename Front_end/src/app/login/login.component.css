@@ -71,12 +71,22 @@ form .txt_field{
   }
   h2{
       font-size: 26px;
-      padding: 20px 60px;
+      padding: 10px 20px;
+      color: rgba(2, 26, 115, 0.833);
+      margin-top: 0%;
+      margin-bottom: auto;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      /* background-color: #f0f9ff; */
+      background: linear-gradient(89.5deg, rgb(211, 230, 249) -0.1%, rgb(130, 187, 247));
+      text-align: left;
+      
       font-weight: bold;
       font-family: 'Times New Roman', Times, serif
+      
   }
   
- @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap');
+ /* @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap'); */
 
 *{
     font-family: 'Poppins', sans-serif;
@@ -106,7 +116,7 @@ form .txt_field{
     background-size: 120%;
     background-repeat: no-repeat;
     position: relative;
-    border-radius: 10px 0 0 10px;
+    border-radius: 5px 0 0 5px;
 }
 
 
