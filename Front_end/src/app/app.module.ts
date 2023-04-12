@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { ClaimsComponent } from './claims/claims.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AlertBoxComponent } from './alert-box/alert-box.component';
 
 
 
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     HeaderComponent,
     HomeComponent,
-    ClaimsComponent
+    ClaimsComponent,
+    AlertBoxComponent
     
   ],
   imports: [

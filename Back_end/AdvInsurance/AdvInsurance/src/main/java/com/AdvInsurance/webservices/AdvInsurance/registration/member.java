@@ -1,6 +1,7 @@
 package com.AdvInsurance.webservices.AdvInsurance.registration;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.ColumnTransformer;
 
 import java.time.LocalDate;
 
@@ -63,6 +64,7 @@ public class member {
     private String email;
 
     @Column(name = "password")
+
     private String password;
 
 

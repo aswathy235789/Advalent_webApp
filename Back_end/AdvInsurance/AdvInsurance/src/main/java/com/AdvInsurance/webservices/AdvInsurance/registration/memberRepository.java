@@ -33,5 +33,6 @@ public interface memberRepository  extends JpaRepository<member, Long> {
        member save(member member);
 
 
+    member findByEmail(String email);
 }
 

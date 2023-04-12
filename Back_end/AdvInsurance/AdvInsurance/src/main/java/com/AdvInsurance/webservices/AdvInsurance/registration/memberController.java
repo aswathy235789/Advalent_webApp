@@ -3,6 +3,7 @@ package com.AdvInsurance.webservices.AdvInsurance.registration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.Member;
@@ -19,7 +20,12 @@ public class memberController {
     private final StateRepository stateRepository;
     private final CityRepository cityRepository;
     @Autowired
+    private DiseasesRepository diseaseRepository;
+    @Autowired
     private JwtUtil jwtUtil;
+
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private memberRepository memberRepository;
@@ -37,7 +43,10 @@ public class memberController {
     @PostMapping("/register")
     public ResponseEntity<member> register(@RequestBody member newMember) {
         try {
+           //
             member savedMember = memberService.saveRegistration(newMember);
+
+
             return new ResponseEntity<>(savedMember, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -89,7 +98,11 @@ public class memberController {
         return cityRepository.findByStateId(stateId);
     }
 
+    @GetMapping("/diseases")
+    public List<Diseases> getDiseases() {
+        return diseaseRepository.findAll();
 
+    }
 
 
 
@@ -105,6 +118,39 @@ public class memberController {
 //        }
 //    }
 
+//    @PostMapping("/login")
+//    public ResponseEntity<?> login(@RequestBody LoginRequest authenticationRequest) {
+//        String email = authenticationRequest.getEmail();
+//        String password = authenticationRequest.getPassword();
+//
+//        // Verify email and password
+//        //System.out.println("password= "+password);
+//        if (isValidUser(email, password)) {
+//            // Generate JWT token
+//            String token = JwtUtil.generateToken(email);
+//            return ResponseEntity.ok(token);
+//        } else {
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+//        }
+//    }
+
+//    private boolean isValidUser(String email, String password) {
+//        BCryptPasswordEncoder bcrypt=new BCryptPasswordEncoder();
+//       // String encrypt_psd=bcrypt.encode(password);
+//        //encrypt the passed psd
+//        member member = memberRepository.findByEmail(email);//check if email present or not
+//
+//         if(member != null)
+//         {
+//             if(bcrypt.matches(password,member.getPassword()))
+//             {
+//                 return true;
+//             }
+//         }
+//          return false;
+//    }
+
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest authenticationRequest) {
         String email = authenticationRequest.getEmail();
@@ -116,14 +162,45 @@ public class memberController {
             String token = JwtUtil.generateToken(email);
             return ResponseEntity.ok(token);
         } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            if (!isValidEmail(email)) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid email");
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid password");
+            }
         }
     }
+    private boolean isValidEmail(String email) {
+        // Check if email contains '@' and '.'
+        //if (email != null && email.contains("@") && email.contains(".")) {
+            member member = memberRepository.findByEmail(email);
+            if (member != null) {
+                return true; // Email exists in database
+            }
+       // }
+        return false; // Email does not exist in database or is not valid
+    }
+
+
+
 
     private boolean isValidUser(String email, String password) {
-        member member = memberRepository.findByEmailAndPassword(email, password);
-        return member != null;
+        boolean isEmailValid = false;
+        boolean isPasswordValid = false;
+        BCryptPasswordEncoder bcrypt=new BCryptPasswordEncoder();
+        member member = memberRepository.findByEmail(email);
+        if(member != null)
+        {
+            if(bcrypt.matches(password,member.getPassword()))
+            {
+                isEmailValid = true;
+                isPasswordValid = true;
+            } else {
+                isEmailValid = true;
+            }
+        }
+        return (isEmailValid && isPasswordValid);
     }
+
 
 
 }

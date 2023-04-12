@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmailValidator, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, RouterModule, Routes } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule, Routes } from '@angular/router';
 import { AuthServiceService } from '../auth-service.service';
 import { LoginRequest } from '../login-request';
 
@@ -10,6 +10,7 @@ import { LoginRequest } from '../login-request';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  showLogoutMessage = false;
   loginForm!: FormGroup;
   showAlert!: boolean;
   loginRequest: LoginRequest = new LoginRequest();
@@ -22,12 +23,19 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor(private formBuilder: FormBuilder,private router: Router,private authService: AuthServiceService) { }
+  constructor(private formBuilder: FormBuilder,private router: Router,private authService: AuthServiceService,private route: ActivatedRoute) { }
 
   
   ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+    if(params['logout'] == 'true')
+    {
+      console.log("logout Successfully!")
+    } // Check if the logout query parameter is present
+    });
+
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
     this.loginRequest.email = this.loginForm.controls['email'].value;
@@ -63,14 +71,32 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/home']);
           }, 2000);
         },
-        () => {
+        (error) => {
 
          
-          this.errorMessage = '<strong>Login Failed!! </strong><br> Invalid email or password';
+          // this.errorMessage = '<strong>Login Failed!! </strong><br> Invalid email or password';
 
+          // setTimeout(() => {
+          //   this.errorMessage = '';
+          // }, 2000); // show the error message for 1.5 seconds
+
+
+
+          if (error.status === 400) {
+            //this.loginForm.controls['email'].setErrors({ 'invalid-email': true });
+            //this.loginForm.controls['password'].setErrors({ 'invalid-password': true });
+            this.errorMessage = 'Invalid email or password.';
+          } else if (error.status === 500) {
+            this.errorMessage = 'Internal Server Error! Try again';
+          } if (error.status === 401) {
+            this.errorMessage = 'Invalid Password!';
+          }
+          else {
+            this.errorMessage = '<strong>Login Failed!! </strong><br> Invalid email and password';
+          }
           setTimeout(() => {
             this.errorMessage = '';
-          }, 2000); // show the error message for 1.5 seconds
+          }, 2000);
         }
         
       );

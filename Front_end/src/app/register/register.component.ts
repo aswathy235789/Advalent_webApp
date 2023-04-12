@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormGroupDirective, AbstractControl, ValidatorFn, FormControl, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CityserviceService } from '../cityservice.service';
+import { DiseaseService } from '../disease.service';
 import { RegisterServiceService } from '../register-service.service';
 
 
@@ -12,10 +13,12 @@ import { RegisterServiceService } from '../register-service.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+  [x: string]: any;
 
   @ViewChild('otherText')
   otherText!: ElementRef;
   errorAlert!: boolean;
+  
 
   getMedicalHistory(): string {
     const checkboxes = document.querySelectorAll('input[name=disease]:checked');
@@ -42,6 +45,9 @@ export class RegisterComponent {
   maxDate: string;
   minDate: string;
   Aerror!: object;
+  diseases!: any[];
+  errorMessage!: string;
+
 
  
  
@@ -52,10 +58,24 @@ export class RegisterComponent {
    this.showOther=!this.showOther;
   }
 
-  constructor(private formBuilder: FormBuilder,private route:Router,private cityService: CityserviceService,private registerService:RegisterServiceService) {
-    const currentYear = new Date().getFullYear();
-    this.maxDate = `${currentYear - 0}-12-31`;
-    this.minDate = `${currentYear - 100}-01-01`; 
+  constructor(private formBuilder: FormBuilder,private route:Router,private cityService: CityserviceService,private registerService:RegisterServiceService,private diseaseService: DiseaseService) {
+    // const currentYear = new Date().getFullYear();
+    // this.maxDate = `${currentYear - 0}-12-31`;
+    // this.minDate = `${currentYear - 100}-01-01`; 
+   
+
+    const earliestDate = new Date('1900-01-01'); // Set the earliest date you want to allow
+    const year = earliestDate.getFullYear();
+    const month = ('0' + (earliestDate.getMonth() + 1)).slice(-2);
+    const day = ('0' + earliestDate.getDate()).slice(-2);
+    this.minDate = `${year}-${month}-${day}`;
+
+    const today = new Date(); // Set today's date
+    const todayYear = today.getFullYear();
+    const todayMonth = ('0' + (today.getMonth() + 1)).slice(-2);
+    const todayDay = ('0' + today.getDate()).slice(-2);
+    this.maxDate = `${todayYear}-${todayMonth}-${todayDay}`;
+
   }
     
   
@@ -66,18 +86,25 @@ export class RegisterComponent {
     this.registrationForm = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      dateOfBirth: ['', Validators.required,this.restrictYear],
+      dateOfBirth: ['', 
+        Validators.required
+      
+      ],
       gender: ['', Validators.required],
       address: ['',Validators.required],
       city: ['',Validators.required],
-      email: ['', Validators.required, Validators.email,Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}') ],
-      password: ['',Validators.required],
+      email:['', [
+        Validators.required,
+        // Validators.email,
+        Validators.pattern(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
+      ]],
+      password: ['',[Validators.required, this.passwordLengthValidator]],
       confirmPassword: ['', Validators.required],
       smoking:['', Validators.required],
       phoneNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
 
       //  governmentId: ['', Validators.required],
-       idNumber: ['', Validators.required, this.governmentIdValidator('governmentId')],
+       idNumber: ['', [Validators.required, Validators.pattern( /^(\d{4}\s?){2}\d{4}$/)]],
        state: ['', Validators.required],
    
     
@@ -88,11 +115,25 @@ export class RegisterComponent {
       this.states = states;
     });
 
+    this.diseaseService.getAllDiseases().subscribe(diseases => {
+      this.diseases = diseases;
+    });
+    
     
     
   }
   
- 
+  // validateDate(control: FormControl) {
+  //   const selectedDate = new Date(control.value);
+  //   const currentDate = new Date();
+  //   if (selectedDate > currentDate) {
+  //     return { futureDate: true };
+  //   }
+  //   return null;
+  // }
+
+
+
 
 
   get email() {
@@ -155,6 +196,7 @@ export class RegisterComponent {
                       .subscribe(
                         response => {
                           console.log('Registration successful', response);
+                          
                           this.showAlert = true;
 
                           setTimeout(() => {
@@ -162,10 +204,16 @@ export class RegisterComponent {
                           }, 2000);
                         },
                         error => {
-                          console.error('Registration failed', error);
-                            //this.Aerror=error;
-                          this.errorAlert = true;
-                        }
+                          if (error.status === 500) {
+                              this.errorMessage = `<Strong>Registration Failed ! </strong><br>Email is already registered. Please use a different email`;
+                          } else {
+                              this.errorMessage = '<Strong>Registration Failed! Try again';
+                          }
+                          setTimeout(() => {
+                              this.errorMessage = '';
+                          }, 2000);
+                      }
+                      
                       );
   
 
@@ -207,31 +255,30 @@ export class RegisterComponent {
     
     }
     
-      restrictYear(control: AbstractControl): { [key: string]: any } | null {
-      const birthDate = new Date(control.value);
-      const currentYear = new Date().getFullYear();
-      const restrictedYear = currentYear - 18;
-      const restrictedDate = new Date(restrictedYear, birthDate.getMonth(), birthDate.getDate());
+    //   restrictYear(control: AbstractControl): { [key: string]: any } | null {
+    //   const birthDate = new Date(control.value);
+    //   const currentYear = new Date().getFullYear();
+    //   const restrictedYear = currentYear - 18;
+    //   const restrictedDate = new Date(restrictedYear, birthDate.getMonth(), birthDate.getDate());
       
-      return birthDate > restrictedDate ? { 'restrictedYear': true } : null;
-    }
+    //   return birthDate > restrictedDate ? { 'restrictedYear': true } : null;
+    // }
 
-     governmentIdValidator(governmentIdControl: string): ValidatorFn {
-      return (control: AbstractControl): {[key: string]: any} | null => {
-        const governmentId = control.parent?.get(governmentIdControl)?.value;
-        
-        if (governmentId == 'Aadhar Card' && !/^\d{4}\s\d{4}\s\d{4}$/.test(control.value)) {
-          return {'invalidAadhaarCardNumber': true};
-        } else if (governmentId == 'Pan Card' && !/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(control.value)) {
-          return {'invalidPanCardNumber': true};
-        } else if (governmentId =='Election ID' && !/^[A-Z]{3}\d{7}$/.test(control.value)) {
-          return {'invalidElectionIdNumber': true};
-        }
-    
-        return null;
-      };
+    passwordLengthValidator(control: { value: any; }) {
+      const password = control.value;
+      if (password && password.length < 6) {
+        return { invalidPassword: true };
+      }
+      return null;
     }
-  
- 
+    
+    
 
 }
+
+
+
+
+
+
+

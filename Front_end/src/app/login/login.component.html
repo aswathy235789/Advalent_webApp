@@ -34,8 +34,9 @@
 			</div>
 			<div *ngIf="loginForm.controls['email'].invalid && loginForm.controls['email'].touched">
 				<div *ngIf="loginForm.controls['email'].errors?.['required']" class="alert alert-danger">Email is required.</div>
-				<div *ngIf="loginForm.controls['email'].errors?.['email']" class="alert alert-danger">Email is invalid.</div>
-				<div *ngIf="loginForm.controls['email'].errors?.['invalid-email']" class="alert alert-danger">Email is invalid.</div>
+				<div *ngIf="loginForm.get('email')?.errors?.['pattern']" class="alert alert-danger" >Invalid email</div>
+				<!-- <div *ngIf="loginForm.controls['email'].errors?.['email']" class="alert alert-danger">Email is invalid.</div> -->
+				<!-- <div *ngIf="loginForm.controls['email'].errors?.['invalid-email']" class="alert alert-danger">Email is invalid.</div> -->
 			  </div>
 			  
 
@@ -64,6 +65,11 @@
 			  Not a member? <a routerLink="/register">Register Now</a>
 			</div>
 			<div *ngIf="showAlert" class="alert alert-success">Logging in...</div>
+
+			
+		
+
+
 
 		  </form>
 
