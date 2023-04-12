@@ -30,9 +30,16 @@
           </div>
           &nbsp;&nbsp;
         </li>
-        <li class="header__menu-item"><a href="#">Contact Us</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <li class="header__menu-item"><a (click)="logout()">Logout</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </ul>
     </nav>
+    <div *ngIf="showAlertBoX" class="alert">
+      <app-alert-box message="You have been logged out successfully !" (closeAlert)="closeAlertBox()"></app-alert-box>
+    </div>
+    
   </header>
+
+ 
+  
 
   
