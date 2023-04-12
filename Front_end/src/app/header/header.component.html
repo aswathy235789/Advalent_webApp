@@ -1,34 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="header.component.css">
-    <title>Header</title>
-</head>
-<body>
-    <header>
-        <div class="logo">ADV Insurance</div>
-        <input type="checkbox" id="nav_check" hidden>
-        <nav>
-            <ul>
-                <li>
-                    <a href="#"class="active">Home</a>
-                </li>
-                <li>
-                    <a href="#">Claim</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </nav>
-        <label for="nav_check" class="navbar">
-            <div></div>
-            <div></div>
-            <div></div>
-        </label>
-    </header>
-</body>
-</html>
+
+<header class="header">
+    <div class="header__logo">
+      <h2><div class="waviy">
+        <span style="--i:1">A</span>
+        <span style="--i:2">D</span>
+        <span style="--i:3">V</span>
+        <span style="--i:4">-</span>
+        <span style="--i:5">I</span>
+        <span style="--i:6">N</span>
+        <span style="--i:7">S</span>
+        <span style="--i:8">U</span>
+        <span style="--i:8">R</span>
+        <span style="--i:8">A</span>
+        <span style="--i:8">N</span>
+        <span style="--i:8">C</span>
+        <span style="--i:8">E</span>
+       </div></h2>
+    </div>
+    <nav class="header__nav">
+      <ul class="header__menu">
+        <li class="header__menu-item"><b><a href="#" [routerLink]="['/home']">Home</a></b></li>
+        <!-- <li class="header__menu-item"><a href="#" [routerLink]="['/claims']">Claim</a></li> -->
+        <li><div class="dropdown">
+           <b><a>&nbsp;&nbsp;&nbsp;Claim&nbsp;&nbsp;&nbsp; </a></b>
+            <div class="dropdown-content">
+            <a [routerLink]="['/claims']">Claim Status</a>
+            <a>Claim Submission</a>
+            <a>Claim History</a>
+            </div>
+          </div>
+          &nbsp;&nbsp;
+        </li>
+        <li class="header__menu-item"><a (click)="logout()">Logout</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </ul>
+    </nav>
+    <div *ngIf="showAlertBoX" class="alert">
+      <app-alert-box message="You have been logged out successfully !" (closeAlert)="closeAlertBox()"></app-alert-box>
+    </div>
+    
+  </header>
+
+ 
+

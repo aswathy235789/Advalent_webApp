@@ -8,6 +8,7 @@
     line-height: 2.15;
     padding-left: .95em;
     padding-right: .95em;
+    
     }
     .card-registration .select-arrow {
     top: 15px;
@@ -49,7 +50,14 @@
         /* or any other value you want */
       }
       
-      
+      .btn-primary {
+        display: block;
+        margin: 10px auto;
+        padding: 5px 20px;
+        font-size: 16px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        transform: translateY(5px);
+      }
   
        
 
