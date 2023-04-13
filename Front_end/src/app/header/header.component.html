@@ -1,44 +1,51 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 
-<header class="header">
-    <div class="header__logo">
-      <h2><div class="waviy">
-        <span style="--i:1">A</span>
-        <span style="--i:2">D</span>
-        <span style="--i:3">V</span>
-        <span style="--i:4">-</span>
-        <span style="--i:5">I</span>
-        <span style="--i:6">N</span>
-        <span style="--i:7">S</span>
-        <span style="--i:8">U</span>
-        <span style="--i:8">R</span>
-        <span style="--i:8">A</span>
-        <span style="--i:8">N</span>
-        <span style="--i:8">C</span>
-        <span style="--i:8">E</span>
-       </div></h2>
-    </div>
-    <nav class="header__nav">
-      <ul class="header__menu">
-        <li class="header__menu-item"><b><a href="#" [routerLink]="['/home']">Home</a></b></li>
-        <!-- <li class="header__menu-item"><a href="#" [routerLink]="['/claims']">Claim</a></li> -->
-        <li><div class="dropdown">
-           <b><a>&nbsp;&nbsp;&nbsp;Claim&nbsp;&nbsp;&nbsp; </a></b>
-            <div class="dropdown-content">
-            <a [routerLink]="['/claims']">Claim Status</a>
-            <a>Claim Submission</a>
-            <a>Claim History</a>
-            </div>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- Navigation -->
+<div class="fixed-top">
+  <header class="topbar">
+      <div class="container">
+        <div class="row">
+          <!-- social icon-->
+          <div class="col-sm-12">
+            <ul class="social-network">
+              <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
           </div>
-          &nbsp;&nbsp;
-        </li>
-        <li class="header__menu-item"><a (click)="logout()">Logout</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      </ul>
-    </nav>
-    <div *ngIf="showAlertBoX" class="alert">
-      <app-alert-box message="You have been logged out successfully !" (closeAlert)="closeAlertBox()"></app-alert-box>
-    </div>
-    
+
+        </div>
+      </div>
   </header>
+  <nav class="navbar navbar-expand-lg navbar-dark mx-background-top-linear">
+    <div class="container">
+      <a class="navbar-brand" rel="nofollow" target="_blank" href="http://scadonsak.com/7bF" style="text-transform: uppercase;"><b> ADV-INSURANCE</b></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
 
- 
+        <ul class="navbar-nav ml-auto">
 
+          <li class="nav-item active">
+            <a class="nav-link" href="https://nusasatu.com">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Claims</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
