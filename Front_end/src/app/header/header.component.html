@@ -6,21 +6,7 @@
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <!-- Navigation -->
 <div class="fixed-top">
-  <header class="topbar">
-      <div class="container">
-        <div class="row">
-          <!-- social icon-->
-          <div class="col-sm-12">
-            <ul class="social-network">
-              <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a class="waves-effect waves-dark" href="#"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-  </header>
+  
   <nav class="navbar navbar-expand-lg navbar-dark mx-background-top-linear">
     <div class="container">
       <a class="navbar-brand" rel="nofollow" target="_blank" href="http://scadonsak.com/7bF" style="text-transform: uppercase;"><h1><b> ADV-INSURANCE</b></h1></a>
@@ -42,10 +28,15 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
-          </li>
+            <a class="nav-link"(click)="logout()">Logout</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </ul>
       </div>
+      <div *ngIf="showAlertBoX" class="alert">
+        <app-alert-box message="You have been logged out successfully !" (closeAlert)="closeAlertBox()"></app-alert-box>
+      </div>
+      
     </div>
+    
   </nav>
 </div>
+
