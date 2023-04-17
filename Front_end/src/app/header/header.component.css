@@ -163,7 +163,8 @@ li {
 .mx-background-top-linear {
   background: -webkit-linear-gradient(45deg, #141618 48%, #141618 48%);
   background: -webkit-linear-gradient(left, #54d400 48%, #141618 48%);
-  background: linear-gradient(45deg, #2d0e57 48%, #282830 48%);
+   background: linear-gradient(45deg, #2d0e57 29%, #282830 65%);
+
 }
 
 .navbar-brand {
