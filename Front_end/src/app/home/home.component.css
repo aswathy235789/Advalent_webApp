@@ -416,10 +416,10 @@ border-radius: 30px;
   }
   .home .img,
   .home .content {
-    flex: 1 0 24rem;
+    flex: 1 1 45rem;
   }
   .home .img img {
-    width: 100%;
+    width: 90%;
   }
   .home .content h3 {
     font-size: 40px;
@@ -427,7 +427,7 @@ border-radius: 30px;
     text-shadow: 0.5rem 0 0.5rem rgba(0, 0, 0, 0.1);
   }
   .home .content p {
-    font-size: 1.7rem;
+    font-size: 119%;
     color: #333;
     padding: 1px 0;
     line-height: 1.5;
