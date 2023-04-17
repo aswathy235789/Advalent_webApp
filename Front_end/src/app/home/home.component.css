@@ -66,11 +66,7 @@ section {
 section .section-title {
     font-family:Arial, Helvetica, sans-serif ;
     text-align: center;
-<<<<<<< HEAD
-    color: #007b5e;
-=======
     color: #1d4075;
->>>>>>> dad2892de312b61817d61dc60366d855ef431559
     margin-bottom: 23px;
     text-transform: uppercase;
 }
@@ -562,11 +558,7 @@ span{
 }
 .hire{
   font-size: 18px;
-<<<<<<< HEAD
-  background: #4070f4;
-=======
   background: #3a50b1;
->>>>>>> dad2892de312b61817d61dc60366d855ef431559
   color: #fff;
   text-decoration: none;
   border: none;
@@ -576,10 +568,5 @@ span{
 }
 .hire:hover{
   background: #000;
-<<<<<<< HEAD
-  border: 1px solid #4070f4;
-}
-=======
   border: 1px solid #20ac13;
 }
->>>>>>> dad2892de312b61817d61dc60366d855ef431559
