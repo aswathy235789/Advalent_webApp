@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 
 
@@ -14,6 +16,8 @@ import { HomeComponent } from './home/home.component';
 import { ClaimsComponent } from './claims/claims.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 
@@ -26,14 +30,17 @@ import { AlertBoxComponent } from './alert-box/alert-box.component';
     HeaderComponent,
     HomeComponent,
     ClaimsComponent,
-    AlertBoxComponent
+    AlertBoxComponent,
+    DialogComponent
     
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   
     
   ],

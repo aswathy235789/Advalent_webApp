@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { CityserviceService } from '../cityservice.service';
 import { DiseaseService } from '../disease.service';
 import { RegisterServiceService } from '../register-service.service';
-
-
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-register',
@@ -58,7 +58,7 @@ export class RegisterComponent {
    this.showOther=!this.showOther;
   }
 
-  constructor(private formBuilder: FormBuilder,private route:Router,private cityService: CityserviceService,private registerService:RegisterServiceService,private diseaseService: DiseaseService) {
+  constructor(private formBuilder: FormBuilder,private route:Router,private cityService: CityserviceService,private registerService:RegisterServiceService,private diseaseService: DiseaseService,private dialog: MatDialog) {
     // const currentYear = new Date().getFullYear();
     // this.maxDate = `${currentYear - 0}-12-31`;
     // this.minDate = `${currentYear - 100}-01-01`; 
@@ -239,6 +239,12 @@ export class RegisterComponent {
             console.log('Registration form is invalid');
             console.log('Registration form submitted: ', this.registrationForm.value);
             alert("Fill all cells!");
+            // const dialogRef = this.dialog.open(DialogComponent, {
+            //   data: {
+            //     //title: 'Fill all cells!',
+            //     message: 'Please fill all cells before submitting the form.'
+            //   }
+            // });
            
     }
   }

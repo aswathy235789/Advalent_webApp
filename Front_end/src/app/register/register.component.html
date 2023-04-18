@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap"> -->
   <title>Registration Form</title>
   <style>
     body {
@@ -22,29 +23,35 @@
 </head>
 <body>
   <div class="reg">
-    <br><br><br>
+    <br><br>
   <section class="h-100 h-custom gradient-custom-2">
     <div class="container py-5 h-50">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-lg-8 col-xl-8">
           <div class="card card-registration shadow-2-strong">
           
-            <div class="card-body p-4 p-md-4">  
+            <div class="card-body p-8 p-md-5">  
               <!-- <h2 class="fw-normal mb-2" style="color: #4d4d51; text-align: center;"><B>MEMBER REGISTRATION</B></h2> -->
               <form [formGroup]="registrationForm">
                 <div class="row">
+
+                
+                   
+                   
+
                   <div class="col-md-6 mb-4 pb-2">
                     <div class="form-outline">
-                      <label class="form-label" for="form3Examplev2"   >First Name</label>
+                      <label class="form-label" for="form3Examplev2">First Name</label>
                       <input type="text" id="form3Examplev2" class="form-control form-control-lg" [required]="true"  formControlName="firstName"/>
                       <div *ngIf="registrationForm.get('firstName')?.invalid && (registrationForm.get('firstName')?.dirty || registrationForm.get('firstName')?.touched)">
                         <div *ngIf="registrationForm.get('firstName')?.errors?.['required']"  class="alert alert-danger">First Name is required</div>
                       </div>
+
                     </div>
                   </div>
                   <div class="col-md-6 mb-4 pb-2">
                     <div class="form-outline">
-                      <label class="form-label" for="form3Example"   >Last Name</label>
+                      <label class="form-label" for="form3Example">Last Name</label>
                       <input type="text" id="form3Example" class="form-control form-control-lg" [required]="true"  formControlName="lastName"/>
                       <div *ngIf="registrationForm.get('lastName')?.invalid && (registrationForm.get('lastName')?.dirty || registrationForm.get('lastName')?.touched)">
                         <div *ngIf="registrationForm.get('lastName')?.errors?.['required']"  class="alert alert-danger">Last Name is required</div>
