@@ -239,6 +239,12 @@ export class RegisterComponent {
             console.log('Registration form is invalid');
             console.log('Registration form submitted: ', this.registrationForm.value);
             alert("Fill all cells!");
+            // const dialogRef = this.dialog.open(DialogComponent, {
+            //   data: {
+            //     //title: 'Fill all cells!',
+            //     message: 'Please fill all cells before submitting the form.'
+            //   }
+            // });
            
     }
   }
