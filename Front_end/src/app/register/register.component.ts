@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { CityserviceService } from '../cityservice.service';
 import { DiseaseService } from '../disease.service';
 import { RegisterServiceService } from '../register-service.service';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogComponent } from '../dialog/dialog.component';
+
+
 
 @Component({
   selector: 'app-register',
@@ -58,7 +58,7 @@ export class RegisterComponent {
    this.showOther=!this.showOther;
   }
 
-  constructor(private formBuilder: FormBuilder,private route:Router,private cityService: CityserviceService,private registerService:RegisterServiceService,private diseaseService: DiseaseService,private dialog: MatDialog) {
+  constructor(private formBuilder: FormBuilder,private route:Router,private cityService: CityserviceService,private registerService:RegisterServiceService,private diseaseService: DiseaseService) {
     // const currentYear = new Date().getFullYear();
     // this.maxDate = `${currentYear - 0}-12-31`;
     // this.minDate = `${currentYear - 100}-01-01`; 
