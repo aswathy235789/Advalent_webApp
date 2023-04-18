@@ -17,7 +17,6 @@ import { ClaimsComponent } from './claims/claims.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DialogComponent } from './dialog/dialog.component';
 
 
 
@@ -30,8 +29,7 @@ import { DialogComponent } from './dialog/dialog.component';
     HeaderComponent,
     HomeComponent,
     ClaimsComponent,
-    AlertBoxComponent,
-    DialogComponent
+    AlertBoxComponent
     
   ],
   imports: [
@@ -39,7 +37,6 @@ import { DialogComponent } from './dialog/dialog.component';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatDialogModule,
     BrowserAnimationsModule
   
     
