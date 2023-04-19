@@ -1,8 +1,10 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormGroupDirective, AbstractControl, ValidatorFn, FormControl, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
+import { flatMap } from 'rxjs';
 import { CityserviceService } from '../cityservice.service';
 import { DiseaseService } from '../disease.service';
+import { MedicalHistoryService } from '../medical-history.service';
 import { RegisterServiceService } from '../register-service.service';
 
 
@@ -14,20 +16,31 @@ import { RegisterServiceService } from '../register-service.service';
 })
 export class RegisterComponent {
   [x: string]: any;
+  memberDiseases!: string[];
 
   @ViewChild('otherText')
   otherText!: ElementRef;
   errorAlert!: boolean;
   
 
-  getMedicalHistory(): string {
+  getMedicalHistory(): string[] {
     const checkboxes = document.querySelectorAll('input[name=disease]:checked');
     const selectedDiseases = Array.from(checkboxes).map((cb: any) => cb.value);
-   
+
+    
     // const selectedDiseases = Array.from(checkboxes).map(cb => cb.value);
     const otherText = this.otherText.nativeElement.value;
+   
 
-    return selectedDiseases.concat(otherText).join(', ');
+  //   this.memberDiseases=Array.from(checkboxes).map((cb: any) => cb.value);
+  //  this.memberDiseases.push(otherText);
+
+                            selectedDiseases.push(otherText);
+                                                    // console.log(selectedDiseases);
+                            return selectedDiseases;
+  
+
+    //return selectedDiseases.concat(otherText).join(', ');
   }
 
 
@@ -58,7 +71,12 @@ export class RegisterComponent {
    this.showOther=!this.showOther;
   }
 
-  constructor(private formBuilder: FormBuilder,private route:Router,private cityService: CityserviceService,private registerService:RegisterServiceService,private diseaseService: DiseaseService) {
+  constructor(private formBuilder: FormBuilder,
+    private route:Router,
+    private cityService: CityserviceService,
+    private registerService:RegisterServiceService,
+    private diseaseService: DiseaseService,
+    private medicalHistoryService: MedicalHistoryService) {
     // const currentYear = new Date().getFullYear();
     // this.maxDate = `${currentYear - 0}-12-31`;
     // this.minDate = `${currentYear - 100}-01-01`; 
@@ -183,44 +201,121 @@ export class RegisterComponent {
 
                      
                                           const { confirmPassword, ...formData } = this.registrationForm.value;
-                                          const registrationData = formData;
-                                          const medicalHistoryStr = this.getMedicalHistory();
-                                          const dataWithMedicalHistory = { ...registrationData, medicalHistory: medicalHistoryStr };
-                                          const output = JSON.stringify(dataWithMedicalHistory);
+                                        //  const registrationData = formData;
+                        //                   const medicalHistoryStr = this.getMedicalHistory();
+                        //                   const dataWithMedicalHistory = { ...registrationData, medicalHistory: medicalHistoryStr };
+                        //                   const output = JSON.stringify(dataWithMedicalHistory);
                                           
-                        //formData.append('data', dataWithMedicalHistory);
-                        console.log(output);
+                        // //formData.append('data', dataWithMedicalHistory);
+                        // console.log(output);
 
 
-                      this.registerService.register(output)
-                      .subscribe(
-                        response => {
-                          console.log('Registration successful', response);
+                    //   this.registerService.register(output)
+                    //   .subscribe(
+                    //     response => {
+                    //       const memberId = response.id;
+                    //       console.log('Registration successful', response);
+                    //       this.showAlert = true;
+
+                    //       setTimeout(() => {
+                    //         this.route.navigate(['/login']);
+                    //       }, 2000);
+                    //      this.registerService.register(output)
+                    //   .subscribe(
+                    //     response => {
+                    //       const memberId = response.id;
+                    //       console.log('Registration successful', response);
                           
-                          this.showAlert = true;
+                    //       this.medicalHistoryService.addDiseasesToMember(response.id, this.memberDiseases)
+                    //       .subscribe(response => {
+                    //         console.log('Diseases added to member', response);
+                         
+                            
+                    //       }, (error: any) => {
+                    //         console.log(error);
+                    //         console.log("error in adding medical history")
+                    //         // Handle error here
+                    //       });
+                          
+                          
+                    //       this.showAlert = true;
 
-                          setTimeout(() => {
-                            this.route.navigate(['/login']);
-                          }, 2000);
-                        },
-                        error => {
-                          if (error.status === 500) {
-                              this.errorMessage = `<Strong>Registration Failed ! </strong><br>Email is already registered. Please use a different email`;
-                          } else {
-                              this.errorMessage = '<Strong>Registration Failed! Try again';
-                          }
-                          setTimeout(() => {
-                              this.errorMessage = '';
-                          }, 2000);
-                      }
+                    //       setTimeout(() => {
+                    //         this.route.navigate(['/login']);
+                    //       }, 2000);
+
+                              
+                           
+                              
+                    //     },
+                    //     error => {
+                    //       if (error.status === 500) {
+                    //           this.errorMessage = `<Strong>Registration Failed ! </strong><br>Email is already registered. Please use a different email`;
+                    //       } else {
+                    //           this.errorMessage = '<Strong>Registration Failed! Try again';
+                    //       }
+                    //       setTimeout(() => {
+                    //           this.errorMessage = '';
+                    //       }, 2000);
+                    //   }
                       
-                      );
+                    //   );
   
 
                     
                        
-                     console.log('Registration form submitted:-success ');
-                     
+                    //  console.log('Registration form submitted:-success ');
+                              
+                           
+                              
+                    //     },
+                    //     error => {
+                    //       if (error.status === 500) {
+                    //           this.errorMessage = `<Strong>Registration Failed ! </strong><br>Email is already registered. Please use a different email`;
+                    //       } else {
+                    //           this.errorMessage = '<Strong>Registration Failed! Try again';
+                    //       }
+                    //       setTimeout(() => {
+                    //           this.errorMessage = '';
+                    //       }, 2000);
+                    //   }
+                      
+                    //   );
+
+
+                    // start
+
+                    this.registerService.register(formData)
+  .pipe(
+    flatMap((response: any) => {
+      const memberId = response.id;
+      console.log('Registration successful', response);
+      this.showAlert = true;
+      setTimeout(() => {
+        this.route.navigate(['/login']);
+      }, 2000);
+     
+      return this.medicalHistoryService.addDiseasesToMember(memberId, this.getMedicalHistory());
+    })
+  )
+  .subscribe(
+    response => {
+      console.log('Diseases added to member', response);
+      // Handle success here
+    },
+    error => {
+      if (error.status === 500) {
+        this.errorMessage = `<Strong>Registration Failed ! </strong><br>Email is already registered. Please use a different email`;
+      }
+      setTimeout(() => {
+        this.errorMessage = '';
+      }, 2000);
+    }
+  );
+console.log('Registration form submitted:-success ');
+
+                    // end
+                   
                     
        
                     
