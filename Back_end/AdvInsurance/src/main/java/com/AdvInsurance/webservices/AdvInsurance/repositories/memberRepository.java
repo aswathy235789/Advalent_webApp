@@ -1,10 +1,10 @@
-package com.AdvInsurance.webservices.AdvInsurance.registration;
+package com.AdvInsurance.webservices.AdvInsurance.repositories;
 
 
+import com.AdvInsurance.webservices.AdvInsurance.entity_classes.member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.lang.reflect.Member;
 import java.util.List;
 import java.util.Optional;
 @Repository
