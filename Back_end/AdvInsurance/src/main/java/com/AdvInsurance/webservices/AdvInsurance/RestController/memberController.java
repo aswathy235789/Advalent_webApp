@@ -1,12 +1,17 @@
-package com.AdvInsurance.webservices.AdvInsurance.registration;
+package com.AdvInsurance.webservices.AdvInsurance.RestController;
 
+import com.AdvInsurance.webservices.AdvInsurance.entity_classes.*;
+import com.AdvInsurance.webservices.AdvInsurance.login_auth.JwtUtil;
+import com.AdvInsurance.webservices.AdvInsurance.login_auth.LoginRequest;
+import com.AdvInsurance.webservices.AdvInsurance.repositories.*;
+import com.AdvInsurance.webservices.AdvInsurance.services.memberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.lang.reflect.Member;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,7 +21,7 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class memberController {
 
-    private final memberService memberService;
+    private final com.AdvInsurance.webservices.AdvInsurance.services.memberService memberService;
     private final StateRepository stateRepository;
     private final CityRepository cityRepository;
     @Autowired
@@ -24,14 +29,20 @@ public class memberController {
     @Autowired
     private JwtUtil jwtUtil;
 
+
 //    @Autowired
 //    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private memberRepository memberRepository;
+    @Autowired
+    private MemberDiseaseRepository memberDiseaseRepository;
 
     @Autowired
-    public memberController(memberService memberService, StateRepository stateRepository, CityRepository cityRepository, JwtUtil jwtUtil, com.AdvInsurance.webservices.AdvInsurance.registration.memberRepository memberRepository) {
+    private MedicalHistoryRepository medicalHistoryRepository;
+
+    @Autowired
+    public memberController(memberService memberService, StateRepository stateRepository, CityRepository cityRepository, JwtUtil jwtUtil, com.AdvInsurance.webservices.AdvInsurance.repositories.memberRepository memberRepository) {
         this.memberService = memberService;
         this.stateRepository = stateRepository;
         this.cityRepository = cityRepository;
@@ -40,18 +51,32 @@ public class memberController {
     }
 
     // Register a member
-    @PostMapping("/register")
-    public ResponseEntity<member> register(@RequestBody member newMember) {
-        try {
-           //
-            member savedMember = memberService.saveRegistration(newMember);
+                            @PostMapping("/register")
+                            public ResponseEntity<member> register(@RequestBody member newMember) {
+                                try {
+                                   //
+                                    member savedMember = memberService.saveRegistration(newMember);
 
 
-            return new ResponseEntity<>(savedMember, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+                                    return new ResponseEntity<>(savedMember, HttpStatus.CREATED);
+                                } catch (Exception e) {
+                                    return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+                                }
+                            }
+
+
+//    @PostMapping("/register")
+//    public ResponseEntity<Map<String, Long>> register(@RequestBody member newMember) {
+//        try {
+//            member savedMember = memberService.saveRegistration(newMember);
+//            Map<String, Long> response = new HashMap<>();
+//            response.put("id", savedMember.getId());
+//            return new ResponseEntity<>(response, HttpStatus.CREATED);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+
 
     // Get registrations by first name
     @GetMapping("/registrations/{firstName}")
@@ -169,6 +194,86 @@ public class memberController {
             }
         }
     }
+
+//    Adding medical history
+//    @PostMapping("/{memberId}/diseases")
+//    public ResponseEntity<?> addDiseasesToMember(@PathVariable Long memberId, @RequestBody List<String> diseases) {
+//        // Find the member with the given ID
+//        Optional<member> optionalMember = memberRepository.findById(memberId);
+//        if (!optionalMember.isPresent()) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        member member = optionalMember.get();
+//
+//        // Create and save MemberDisease entities for each disease
+//        List<MemberDisease> memberDiseases = new ArrayList<>();
+//        for (String diseaseName : diseases) {
+//            MemberDisease memberDisease = new MemberDisease();
+//            memberDisease.setName(diseaseName);
+//            memberDiseases.add(memberDiseaseRepository.save(memberDisease));
+//        }
+//
+//        // Insert each disease ID as a separate record in the medical_history table
+//        for (MemberDisease memberDisease : memberDiseases) {
+//            MedicalHistory medicalHistory = new MedicalHistory();
+//            medicalHistory.setMember(member);
+//            medicalHistory.setMemberDisease(memberDisease);
+//            medicalHistoryRepository.save(medicalHistory);
+//        }
+//
+//        return ResponseEntity.ok("Medical history added successfully.");
+//    }
+
+
+
+//    start
+
+    @PostMapping("/{memberId}/diseases")
+    public ResponseEntity<?> addDiseasesToMember(@PathVariable Long memberId, @RequestBody List<String> diseases) {
+        // Find the member with the given ID
+        Optional<member> optionalMember = memberRepository.findById(memberId);
+        if (!optionalMember.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        member member = optionalMember.get();
+
+        // Create and save MemberDisease entities for each new disease
+        List<MemberDisease> newMemberDiseases = new ArrayList<>();
+        for (String diseaseName : diseases) {
+            Optional<MemberDisease> optionalDisease = memberDiseaseRepository.findByName(diseaseName);
+            MemberDisease memberDisease;
+            if (optionalDisease.isPresent()) {
+                // Disease already exists in the member disease table
+                memberDisease = optionalDisease.get();
+            } else {
+                // Create a new disease entity and save it to the member disease table
+                memberDisease = new MemberDisease();
+                memberDisease.setName(diseaseName);
+                memberDisease = memberDiseaseRepository.save(memberDisease);
+                newMemberDiseases.add(memberDisease);
+            }
+
+            // Update medical history table with the disease ID
+            MedicalHistory medicalHistory = new MedicalHistory();
+            medicalHistory.setMember(member);
+            medicalHistory.setMemberDisease(memberDisease);
+            medicalHistoryRepository.save(medicalHistory);
+        }
+
+        if (newMemberDiseases.size() > 0) {
+            return ResponseEntity.ok("New diseases added and medical history updated successfully.");
+        } else {
+            return ResponseEntity.ok("Medical history updated successfully.");
+        }
+    }
+
+    //end
+
+
+
+
+
+
     private boolean isValidEmail(String email) {
         // Check if email contains '@' and '.'
         //if (email != null && email.contains("@") && email.contains(".")) {
