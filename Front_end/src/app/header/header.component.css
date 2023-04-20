@@ -40,99 +40,6 @@ body {
   margin:0;
   display:inline-block;
   font-size: 13px;
-<<<<<<< HEAD
-  font-weight: 400;
-  line-height: 50px;
-  padding-left: 18px;
-}
-
-ul.social-network {
-border:none;
-margin:0;
-padding:0;
-}
-
-ul.social-network li {
-border:none;  
-margin:0;
-}
-
-ul.social-network li i {
-margin:0;
-}
-
-ul.social-network li {
-  display:inline;
-  margin: 0 5px;
-  border: 0px solid #2D2D2D;
-  padding: 5px 0 0;
-  width: 32px;
-  display: inline-block;
-  text-align: center;
-  height: 32px;
-  vertical-align: baseline;
-  color: #000;
-}
-
-ul.social-network {
-list-style: none;
-margin: 5px 0 10px -25px;
-float: right;
-}
-
-.waves-effect {
-  position: relative;
-  cursor: pointer;
-  display: inline-block;
-  overflow: hidden;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  vertical-align: middle;
-  z-index: 1;
-  will-change: opacity, transform;
-  transition: .3s ease-out;
-  color: #fff;
-}
-a {
-color: #0a0a0a;
-text-decoration: none;
-}
-
-li {
-  list-style-type: none;
-}
-.bg-image-full {
-  background-position: center center;
-  background-repeat: no-repeat;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-}
-.bg-dark {
-  background-color: #141618!important;
-}
-
-.mx-background-top-linear {
-  background: -webkit-linear-gradient(45deg, #141618 48%, #141618 48%);
-  background: -webkit-linear-gradient(left, #54d400 48%, #141618 48%);
-   background: linear-gradient(45deg, #2d0e57 29%, #282830 65%);
-
-}
-
-.navbar-brand {
-  display: inline-block;
-  padding-top: 0.3125rem;
-  padding-bottom: 0.3125rem;
-  margin-right: 1rem;
-  font-size: 3.25rem;
-  line-height: inherit;
-  white-space: nowrap;
-}
-=======
   color: #f1f6ff;
   }
   
@@ -269,4 +176,3 @@ li {
     line-height: inherit;
     white-space: nowrap;
   }
->>>>>>> dad2892de312b61817d61dc60366d855ef431559
