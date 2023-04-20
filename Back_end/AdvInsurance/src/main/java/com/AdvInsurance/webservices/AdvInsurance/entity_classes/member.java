@@ -1,4 +1,4 @@
-package com.AdvInsurance.webservices.AdvInsurance.registration;
+package com.AdvInsurance.webservices.AdvInsurance.entity_classes;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.ColumnTransformer;
@@ -54,8 +54,8 @@ public class member {
     @Column(name = "govt_id_number")
     private String idNumber;
 
-    @Column(name = "medical_history")
-    private String medicalHistory;
+//    @Column(name = "medical_history")
+//    private String medicalHistory;
 
     @Column(name = "smoking")
     private Boolean smoking;
@@ -166,13 +166,13 @@ public class member {
         this.idNumber = idNumber;
     }
 
-    public String getMedicalHistory() {
-        return medicalHistory;
-    }
-
-    public void setMedicalHistory(String medicalHistory) {
-        this.medicalHistory = medicalHistory;
-    }
+//    public String getMedicalHistory() {
+//        return medicalHistory;
+//    }
+//
+//    public void setMedicalHistory(String medicalHistory) {
+//        this.medicalHistory = medicalHistory;
+//    }
 
     public Boolean getSmoking() {
         return smoking;

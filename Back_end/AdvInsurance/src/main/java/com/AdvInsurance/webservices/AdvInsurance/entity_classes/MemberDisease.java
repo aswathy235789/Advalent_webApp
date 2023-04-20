@@ -1,15 +1,20 @@
-package com.AdvInsurance.webservices.AdvInsurance.registration;
+package com.AdvInsurance.webservices.AdvInsurance.entity_classes;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 
+
+
 @Entity
-@Table(name="diseases")
-public class Diseases {
+@Table(name = "member_disease")
+public class MemberDisease {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private  String name;
+
+    @Column(name = "name")
+    private String name;
 
     public Long getId() {
         return id;
@@ -26,4 +31,5 @@ public class Diseases {
     public void setName(String name) {
         this.name = name;
     }
+// Constructors, getters, and setters
 }

@@ -1,6 +1,4 @@
-package com.AdvInsurance.webservices.AdvInsurance.registration;
-
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+package com.AdvInsurance.webservices.AdvInsurance.login_auth;
 
 public class LoginRequest {
 
