@@ -22,7 +22,7 @@ a:focus, a:hover { text-decoration: none; color: #f85759; }
   
   @media only screen and (max-width: 768px) {
     .page-header {
-      height: 37rem; /* Set a smaller height for mobile devices */
+      height: 48rem; /* Set a smaller height for mobile devices */
       background-position: center; /* Center the image */
     }
   }
@@ -439,7 +439,6 @@ border-radius: 30px;
 
 
 
- @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap');
 *{
   margin: 0;
   padding: 0;
