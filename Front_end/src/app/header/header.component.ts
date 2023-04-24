@@ -14,6 +14,7 @@ export class HeaderComponent {
   constructor(private authService: AuthServiceService){}
   showAlertBoX: boolean = false;
   
+  
   logout() {
     this.showAlertBoX = true;
      // Call logout method of AuthService
