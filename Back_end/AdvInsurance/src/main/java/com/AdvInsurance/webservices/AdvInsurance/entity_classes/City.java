@@ -1,4 +1,4 @@
-package com.AdvInsurance.webservices.AdvInsurance.registration;
+package com.AdvInsurance.webservices.AdvInsurance.entity_classes;
 
 import jakarta.persistence.*;
 

@@ -1,17 +1,17 @@
-package com.AdvInsurance.webservices.AdvInsurance.registration;
+package com.AdvInsurance.webservices.AdvInsurance.services;
 
+import com.AdvInsurance.webservices.AdvInsurance.entity_classes.member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 @Service
 public class memberService {
 
     @Autowired
-    private memberRepository memberRepository;
+    private com.AdvInsurance.webservices.AdvInsurance.repositories.memberRepository memberRepository;
 
 //    public memberService(com..webservices.HealthInsuranceClaims.registration.memberRepository memberRepository) {
 //        this.memberRepository = memberRepository;
