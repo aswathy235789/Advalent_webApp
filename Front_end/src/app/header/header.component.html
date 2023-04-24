@@ -14,29 +14,30 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
-
         <ul class="navbar-nav ml-auto">
-
-          <li class="nav-item active">
+          <li class="nav-item ">
             <a class="nav-link" href="#">Home</a>
-              <!-- <span class="sr-only">(current)</span> -->
-            
-          </li>
-
+          </li>&nbsp;&nbsp;&nbsp;&nbsp;
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Claims
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Claim Submission</a>
+              <a class="dropdown-item" href="#">Claim History</a>
+              <a class="dropdown-item" href="#">Claim Status</a>
+            </div>
+          </li>&nbsp;&nbsp;&nbsp;&nbsp;
           <li class="nav-item">
-            <a class="nav-link" href="#">Claims</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link"(click)="logout()">Logout</a></li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="nav-link" (click)="logout()">Logout</a>
+          </li>&nbsp;&nbsp;
         </ul>
       </div>
       <div *ngIf="showAlertBoX" class="alert">
         <app-alert-box message="You have been logged out successfully !" (closeAlert)="closeAlertBox()"></app-alert-box>
       </div>
-      
     </div>
-    
   </nav>
+  
 </div>
 
