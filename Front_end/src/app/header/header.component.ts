@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthServiceService } from '../auth-service.service';
+import * as $ from 'jquery';
+import 'bootstrap';
+
 
 @Component({
   selector: 'app-header',
@@ -10,6 +13,8 @@ import { AuthServiceService } from '../auth-service.service';
 export class HeaderComponent {
   constructor(private authService: AuthServiceService){}
   showAlertBoX: boolean = false;
+  
+  
   logout() {
     this.showAlertBoX = true;
      // Call logout method of AuthService
@@ -20,5 +25,17 @@ export class HeaderComponent {
     // redirect to login page
     // this.router.navigate(['/login']);
   }
+
+  
+  
+
+  
+
+  
   
 }
+/* Add this JavaScript to enable the dropdown menu */
+
+
+
+
