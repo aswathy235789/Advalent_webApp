@@ -16,6 +16,7 @@ import { ClaimsComponent } from './claims/claims.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ClaimSubmissionComponent } from './claim-submission/claim-submission.component';
 
 
 
@@ -27,7 +28,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     HomeComponent,
     ClaimsComponent,
-    AlertBoxComponent
+    AlertBoxComponent,
+    ClaimSubmissionComponent
     
   ],
   imports: [
