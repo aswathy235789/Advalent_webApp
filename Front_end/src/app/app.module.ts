@@ -21,6 +21,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { ClaimSubmissionComponent } from './claim-submission/claim-submission.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { SampledropdownComponent } from './sampledropdown/sampledropdown.component';
+
 
 
 
@@ -33,8 +36,10 @@ import { ClaimSubmissionComponent } from './claim-submission/claim-submission.co
     HeaderComponent,
     HomeComponent,
     ClaimsComponent,
-    AlertBoxComponent,
-    ClaimSubmissionComponent
+    ClaimSubmissionComponent,
+    SampledropdownComponent,
+    AlertBoxComponent
+ 
     
   ],
   imports: [
@@ -42,7 +47,8 @@ import { ClaimSubmissionComponent } from './claim-submission/claim-submission.co
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgSelectModule
   
     
   ],
