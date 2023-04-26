@@ -7,7 +7,6 @@ import { CodesService } from '../Services/codes.service';
 import { ProviderService } from '../Services/provider.service';
 
 import { forkJoin } from 'rxjs';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -38,12 +37,11 @@ export class ClaimSubmissionComponent {
   cptCodes:any = [];
 
   providers:any=[];
-claimsubmission!: FormGroup;
 
 
 
 
-  constructor(private http: HttpClient, private codeservice: CodesService, private providerService: ProviderService,private formBuilder: FormBuilder) { }
+  constructor(private http: HttpClient, private codeservice: CodesService, private providerService: ProviderService) { }
 
 
 
@@ -77,22 +75,7 @@ claimsubmission!: FormGroup;
 
     )
 
-
-this.claimsubmission = this.formBuilder.group({
-  providerName: ['', Validators.required],
-  providerType: ['', Validators.required],
-  address: ['', Validators.required],
-  phoneNumber: ['', Validators.required],
-  typeOfClaim: ['', Validators.required],
-  dateOfService: ['', Validators.required],
-  cpt: ['', Validators.required],
-  icd: ['', Validators.required],
-  serviceReceived: ['', Validators.required],
-  amountCharged: ['', Validators.required]
-
-  });
-}
-
+  }
 
 
 
@@ -118,6 +101,5 @@ this.claimsubmission = this.formBuilder.group({
  
 
 }
-
 
 
