@@ -20,6 +20,7 @@ import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
+import { ClaimSubmissionComponent } from './claim-submission/claim-submission.component';
 
 
 
@@ -32,8 +33,8 @@ import { MatCardModule } from '@angular/material/card';
     HeaderComponent,
     HomeComponent,
     ClaimsComponent,
-    AlertBoxComponent
- 
+    AlertBoxComponent,
+    ClaimSubmissionComponent
     
   ],
   imports: [

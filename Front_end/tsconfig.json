@@ -23,10 +23,10 @@
       "ES2022",
       "dom"
     ],
-    "types": [
-     "jest"
-      // "jquery"
-    ]
+    // "types": [
+    //  "jest"
+    //   // "jquery"
+    // ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
