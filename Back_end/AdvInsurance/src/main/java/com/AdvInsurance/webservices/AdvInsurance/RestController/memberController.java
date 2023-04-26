@@ -26,6 +26,7 @@ public class memberController {
     private final CityRepository cityRepository;
     @Autowired
     private DiseasesRepository diseaseRepository;
+
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -40,6 +41,13 @@ public class memberController {
 
     @Autowired
     private MedicalHistoryRepository medicalHistoryRepository;
+    @Autowired
+    private IcdRepository Icd_codeRepository;
+    @Autowired
+    private CptRepository Cpt_codeRepository;
+
+    @Autowired
+    private ProvidersRepository providersRepository;
 
     @Autowired
     public memberController(memberService memberService, StateRepository stateRepository, CityRepository cityRepository, JwtUtil jwtUtil, com.AdvInsurance.webservices.AdvInsurance.repositories.memberRepository memberRepository) {
@@ -129,53 +137,6 @@ public class memberController {
 
     }
 
-
-
-//    @PostMapping("/login")
-//    public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
-//
-//        member member=  memberRepository.findByEmailAndPassword(loginRequest.getEmail(), loginRequest.getPassword());
-//        if (member != null) {
-//            String jwt = jwtUtil.generateToken(member.getEmail());
-//            return ResponseEntity.ok(jwt);
-//        } else {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-//        }
-//    }
-
-//    @PostMapping("/login")
-//    public ResponseEntity<?> login(@RequestBody LoginRequest authenticationRequest) {
-//        String email = authenticationRequest.getEmail();
-//        String password = authenticationRequest.getPassword();
-//
-//        // Verify email and password
-//        //System.out.println("password= "+password);
-//        if (isValidUser(email, password)) {
-//            // Generate JWT token
-//            String token = JwtUtil.generateToken(email);
-//            return ResponseEntity.ok(token);
-//        } else {
-//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-//        }
-//    }
-
-//    private boolean isValidUser(String email, String password) {
-//        BCryptPasswordEncoder bcrypt=new BCryptPasswordEncoder();
-//       // String encrypt_psd=bcrypt.encode(password);
-//        //encrypt the passed psd
-//        member member = memberRepository.findByEmail(email);//check if email present or not
-//
-//         if(member != null)
-//         {
-//             if(bcrypt.matches(password,member.getPassword()))
-//             {
-//                 return true;
-//             }
-//         }
-//          return false;
-//    }
-
-
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest authenticationRequest) {
         String email = authenticationRequest.getEmail();
@@ -195,38 +156,7 @@ public class memberController {
         }
     }
 
-//    Adding medical history
-//    @PostMapping("/{memberId}/diseases")
-//    public ResponseEntity<?> addDiseasesToMember(@PathVariable Long memberId, @RequestBody List<String> diseases) {
-//        // Find the member with the given ID
-//        Optional<member> optionalMember = memberRepository.findById(memberId);
-//        if (!optionalMember.isPresent()) {
-//            return ResponseEntity.notFound().build();
-//        }
-//        member member = optionalMember.get();
-//
-//        // Create and save MemberDisease entities for each disease
-//        List<MemberDisease> memberDiseases = new ArrayList<>();
-//        for (String diseaseName : diseases) {
-//            MemberDisease memberDisease = new MemberDisease();
-//            memberDisease.setName(diseaseName);
-//            memberDiseases.add(memberDiseaseRepository.save(memberDisease));
-//        }
-//
-//        // Insert each disease ID as a separate record in the medical_history table
-//        for (MemberDisease memberDisease : memberDiseases) {
-//            MedicalHistory medicalHistory = new MedicalHistory();
-//            medicalHistory.setMember(member);
-//            medicalHistory.setMemberDisease(memberDisease);
-//            medicalHistoryRepository.save(medicalHistory);
-//        }
-//
-//        return ResponseEntity.ok("Medical history added successfully.");
-//    }
 
-
-
-//    start
 
     @PostMapping("/{memberId}/diseases")
     public ResponseEntity<?> addDiseasesToMember(@PathVariable Long memberId, @RequestBody List<String> diseases) {
@@ -306,6 +236,23 @@ public class memberController {
         return (isEmailValid && isPasswordValid);
     }
 
+
+    @GetMapping("/search/icd")
+    public List<Icd_Codes> search_ICD(@RequestParam("q") String searchTerm) {
+//        return Icd_codeRepository.findByCodeContainingIgnoreCase(searchTerm);
+        return Icd_codeRepository.findByCodeContainingIgnoreCaseOrDescriptionContainingIgnoreCase(searchTerm, searchTerm);
+    }
+    @GetMapping("/search/cpt")
+    public List<Cpt_Codes> search_CPT(@RequestParam("q") String searchTerm) {
+//        return Cpt_codeRepository.findByCodeContainingIgnoreCase(searchTerm);
+       return Cpt_codeRepository.findByCodeContainingIgnoreCaseOrDescriptionContainingIgnoreCase(searchTerm, searchTerm);
+    }
+
+    @GetMapping("/providers")
+
+    public List<Providers> getProviders() {
+        return providersRepository.findAll();
+    }
 
 
 }
