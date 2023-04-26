@@ -176,3 +176,13 @@ body {
     line-height: inherit;
     white-space: nowrap;
   }
+
+  .dropdown-menu-dark .dropdown-item:hover {
+    background-color: #343a40;
+    color: #fff;
+  }
+  
+
+
+
+  

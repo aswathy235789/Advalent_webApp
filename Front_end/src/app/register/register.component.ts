@@ -2,10 +2,10 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators,FormGroupDirective, AbstractControl, ValidatorFn, FormControl, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { flatMap } from 'rxjs';
-import { CityserviceService } from '../cityservice.service';
-import { DiseaseService } from '../disease.service';
-import { MedicalHistoryService } from '../medical-history.service';
-import { RegisterServiceService } from '../register-service.service';
+import { CityserviceService } from '../Services/cityservice.service';
+import { DiseaseService } from '../Services/disease.service';
+import { MedicalHistoryService } from '../Services/medical-history.service';
+import { RegisterServiceService } from '../Services/register-service.service';
 
 
 
