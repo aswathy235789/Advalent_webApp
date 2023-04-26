@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthServiceService } from '../auth-service.service';
+import { AuthServiceService } from '../Services/auth-service.service';
 // import * as $ from 'jquery';
 import 'bootstrap';
 

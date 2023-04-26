@@ -1,4 +1,5 @@
 <app-header></app-header>
+
 <br><br><br>
 
 <section class="h-100 h-custom gradient-custom-2">
@@ -41,6 +42,11 @@
                               <option value="type1">Provider Type 1</option>
                               <option value="type2">Provider Type 2</option>
                               <option value="type3">Provider Type 3</option>
+                            </select> -->
+
+                            <select formControlName="providers" class="form-control form-control-lg"  style="width: 500px" required>
+                              <option value="">Select Provider Type</option>
+                              <option *ngFor="let provider of providers" [value]="provider.id">{{ provider.name }}</option>
                             </select>
                             <div *ngIf="claimsubmission.get('providerType')?.invalid && (claimsubmission.get('providerType')?.dirty || claimsubmission.get('providerType')?.touched)">
                                 <div *ngIf="claimsubmission.get('providerType')?.errors?.['required']"  class="alert alert-danger">Provider Type is required</div>
@@ -89,9 +95,9 @@
                                 <label class="form-label" for="form3Examplev2">Type of claim</label>
                                 <select id="form3Examplev2" class="form-control form-control-lg" [required]="true"   formControlName="typeOfClaim" >
                                   <option value="">Select type of claim</option>
-                                  <option value="health">Health claim</option>
-                                  <option value="auto">Auto claim</option>
-                                  <option value="property">Property claim</option>
+                                  <option value="health">Vision insurance claim</option>
+                                  <option value="auto">Dental insurance claim</option>
+                                  <option value="property">Prescription drug claim (RX)</option>
                                 </select>
                               </div>
     
@@ -108,7 +114,7 @@
                       </div>
                     
   
-                      <div class="mb-4 pb-2">
+                      <div class="mb-6 pb-2">
                         <div class="form-outline form-white">
                           <label class="form-label" for="form3Examplea3">CPT</label>
                           <select id="form3Examplea3" class="form-control form-control-lg" [required]="true"  formControlName="cpt" >
@@ -116,7 +122,23 @@
                             <option value="cpt1">CPT code 1</option>
                             <option value="cpt2">CPT code 2</option>
                             <option value="cpt3">CPT code 3</option>
-                          </select>
+                          </select> -->
+
+                    <ng-select [items]="icdCodes"
+                              [searchFn]="search_ICD_Fn"
+                              [bindLabel]="'code'"
+                              [bindValue]="'description'"
+                              [multiple]="false"
+                              [addTag]="false"
+                              (scroll)="true"
+                              style="width: 500px"
+                              placeholder="Search ICD codes">
+                              <!-- (search)="search($event)"> -->
+                      <ng-template ng-option-tmp let-item="item">
+                        <div>{{ item.code }} - {{ item.description }}</div>
+                      </ng-template>
+                    </ng-select>
+
                         </div>
                       </div>
                       
@@ -128,7 +150,21 @@
                             <option value="icd1">ICD code 1</option>
                             <option value="icd2">ICD code 2</option>
                             <option value="icd3">ICD code 3</option>
-                          </select>
+                          </select> -->
+                       <ng-select [items]="cptCodes"
+                                  [searchFn]="search_CPT_Fn"
+                                  [bindLabel]="'code'"
+                                  [bindValue]="'description'"
+                                  [multiple]="false"
+                                  [addTag]="false"
+                                  (scroll)="true"
+                                  style="width: 500px"
+                                  placeholder="Search CPT codes">
+                                  <!-- (search)="search($event)"> -->
+                                <ng-template ng-option-tmp let-item="item">
+                                  <div>{{ item.code }} - {{ item.description }}</div>
+                                </ng-template>
+                         </ng-select>
                         </div>
                       </div>
 
@@ -154,11 +190,14 @@
                       </div>
                       
     
-  
+  <!-- <br> -->
                     <div class="form-check d-flex justify-content-start mb-4 pb-3">
                       <input class="form-check-input me-3" type="checkbox" value="" id="form2Example3c" />
-                      <label class="form-check-label text-white" for="form2Example3">
-                        We hereby declare that the information fumished in this Claim Form is true & correct to the best of our knowledge and belief.</label>
+                      <!-- <label class="form-check-label text-white" for="form2Example3"> -->
+                        <!-- I hereby declare that the information fumished in this Claim Form is true & correct to the best of my knowledge and belief.</label> -->
+                       <p style="font-family: Arial, Helvetica, sans-serif;"> I declare that the information provided in this claim submission form is true & correct to the best of my knowledge </p>
+                        <!-- </label>  -->
+                      
                     </div>
   
                     <button type="button" class="btn btn-light btn-lg"
@@ -173,7 +212,7 @@
         </div>
       </div>
     </div>
-  </section>
+</section>
 
   <footer style=" bottom: 0; left: 0; width: 100%;  background: linear-gradient(to bottom, #2d0e57 29%, #282830 65%); color: #f5f5f5; padding: 5px;">
 

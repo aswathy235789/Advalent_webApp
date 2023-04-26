@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoginRequest } from './login-request';
+import { LoginRequest } from '../login-request';
 
 @Injectable({
   providedIn: 'root'
