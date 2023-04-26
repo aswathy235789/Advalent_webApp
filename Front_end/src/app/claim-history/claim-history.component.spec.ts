@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ClaimsComponent } from './claims.component';
+import { ClaimHistoryComponent } from './claim-history.component';
 
-describe('ClaimsComponent', () => {
-  let component: ClaimsComponent;
-  let fixture: ComponentFixture<ClaimsComponent>;
+describe('ClaimHistoryComponent', () => {
+  let component: ClaimHistoryComponent;
+  let fixture: ComponentFixture<ClaimHistoryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ClaimsComponent ]
+      declarations: [ ClaimHistoryComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ClaimsComponent);
+    fixture = TestBed.createComponent(ClaimHistoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
