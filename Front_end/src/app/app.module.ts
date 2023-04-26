@@ -18,8 +18,14 @@ import { ClaimsComponent } from './claims/claims.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSelectModule } from '@angular/material/select';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { MatCardModule } from '@angular/material/card';
+
+import { MatOptionModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
+import { SampledropdownComponent } from './sampledropdown/sampledropdown.component';
 
 
 
@@ -32,7 +38,9 @@ import { MatCardModule } from '@angular/material/card';
     HeaderComponent,
     HomeComponent,
     ClaimsComponent,
-    AlertBoxComponent
+    AlertBoxComponent,
+    
+    SampledropdownComponent
  
     
   ],
@@ -41,7 +49,14 @@ import { MatCardModule } from '@angular/material/card';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatFormFieldModule,
+    MatOptionModule,
+    MatInputModule,
+    MatSelectModule,
+    MatIconModule,
+    NgSelectModule
+
   
     
   ],
