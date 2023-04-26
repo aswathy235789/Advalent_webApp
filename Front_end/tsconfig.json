@@ -24,10 +24,9 @@
       "dom"
     ],
     // "types": [
-    //   "jest"
-    //    // "jquery"
-    //  ]
-    
+    //  "jest"
+    //   // "jquery"
+    // ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

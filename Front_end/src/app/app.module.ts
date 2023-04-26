@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
 
 
 
@@ -16,7 +18,10 @@ import { ClaimsComponent } from './claims/claims.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AlertBoxComponent } from './alert-box/alert-box.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
 import { ClaimSubmissionComponent } from './claim-submission/claim-submission.component';
+
 
 
 
@@ -37,8 +42,7 @@ import { ClaimSubmissionComponent } from './claim-submission/claim-submission.co
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
-    
+    BrowserAnimationsModule
   
     
   ],
