@@ -23,6 +23,10 @@
       "ES2022",
       "dom"
     ],
+    // "types": [
+    //   "jest"
+    //    // "jquery"
+    //  ]
     
   },
   "angularCompilerOptions": {
