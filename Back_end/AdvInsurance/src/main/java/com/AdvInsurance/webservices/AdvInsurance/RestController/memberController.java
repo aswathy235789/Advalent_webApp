@@ -1,6 +1,7 @@
 package com.AdvInsurance.webservices.AdvInsurance.RestController;
 
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.*;
+import com.AdvInsurance.webservices.AdvInsurance.login_auth.Adjudicator_LoginRequest;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.JwtUtil;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.LoginRequest;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.*;
@@ -45,6 +46,10 @@ public class memberController {
     private IcdRepository Icd_codeRepository;
     @Autowired
     private CptRepository Cpt_codeRepository;
+
+    @Autowired
+    private adjudicatorRepository adjudicatorRepository;
+
 
     @Autowired
     private ProvidersRepository providersRepository;
@@ -252,6 +257,29 @@ public class memberController {
 
     public List<Providers> getProviders() {
         return providersRepository.findAll();
+    }
+
+
+    @PostMapping("/adjudicator/login")
+    public ResponseEntity<?> adjudicator_login(@RequestBody Adjudicator_LoginRequest authenticationRequest) {
+        String username = authenticationRequest.getUsername();
+        String password = authenticationRequest.getPassword();
+
+        adjudicator adjudicator = adjudicatorRepository.findByUsername(username); // Check that the username is exist or not
+        if (adjudicator != null) { // If username exists
+
+            if (adjudicator.getPassword().equals(password)) { // If password matches
+
+// Generate JWT token (Login Success)
+                String token = JwtUtil.generate_Adjudicator_Token(username);
+                return ResponseEntity.ok(token);
+
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect password.");
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Username not found.");
+        }
     }
 
 
