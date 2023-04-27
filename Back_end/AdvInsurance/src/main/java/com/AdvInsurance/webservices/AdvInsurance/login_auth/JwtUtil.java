@@ -30,21 +30,31 @@ public class JwtUtil {
                 .compact();
     }
 
-    public static String getEmailFromToken(String token) {
-        Jws<Claims> claims = Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token);
-
-        return claims.getBody().getSubject();
+    public static String generate_Adjudicator_Token(String username) {
+        return Jwts.builder()
+                .setSubject(username)
+                .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .compact();
     }
 
-    public static boolean validateToken(String token) {
-        try {
-            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
-            return true;
-        } catch (Exception ex) {
-            return false;
-        }
-    }
+//    public static String getEmailFromToken(String token) {
+//        Jws<Claims> claims = Jwts.parser()
+//                .setSigningKey(SECRET_KEY)
+//                .parseClaimsJws(token);
+//
+//        return claims.getBody().getSubject();
+//    }
+//
+//    public static boolean validateToken(String token) {
+//        try {
+//            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
+//            return true;
+//        } catch (Exception ex) {
+//            return false;
+//        }
+//    }
+
+
 }
 
