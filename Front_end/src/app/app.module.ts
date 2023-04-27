@@ -19,6 +19,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { SampledropdownComponent } from './sampledropdown/sampledropdown.component';
 import { ClaimHistoryComponent } from './claim-history/claim-history.component';
 import { ClaimStatusComponent } from './claim-status/claim-status.component';
+import { AdjudicatorLoginComponent } from './adjudicator-login/adjudicator-login.component';
 
 
 
@@ -35,7 +36,8 @@ import { ClaimStatusComponent } from './claim-status/claim-status.component';
     SampledropdownComponent,
     AlertBoxComponent,
     ClaimHistoryComponent,
-    ClaimStatusComponent   
+    ClaimStatusComponent,
+    AdjudicatorLoginComponent   
 
   ],
 
