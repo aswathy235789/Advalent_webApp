@@ -22,7 +22,7 @@ export class AdjudicatorAuthService {
     logout() {
       sessionStorage.removeItem('token'); // Remove JWT token from session storage
       localStorage.removeItem('token');
-      this.router.navigate(['/workQueue'], { queryParams: { logout: true } }); // Redirect to login page with a query parameter to show logout message
+      this.router.navigate(['/DashBoard'], { queryParams: { logout: true } }); // Redirect to login page with a query parameter to show logout message
     }
 
 }
