@@ -18,6 +18,7 @@ public class memberService {
 //    }
 
     public member saveRegistration(member registration) {
+        //Encode the password
         BCryptPasswordEncoder bcrypt=new BCryptPasswordEncoder();
         String encrypt_psd=bcrypt.encode(registration.getPassword());
         registration.setPassword(encrypt_psd);

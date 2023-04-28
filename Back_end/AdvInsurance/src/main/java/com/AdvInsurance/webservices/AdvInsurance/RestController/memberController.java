@@ -6,12 +6,14 @@ import com.AdvInsurance.webservices.AdvInsurance.login_auth.JwtUtil;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.LoginRequest;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.*;
 import com.AdvInsurance.webservices.AdvInsurance.services.memberService;
+import com.AdvInsurance.webservices.AdvInsurance.services.claimsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,12 +24,19 @@ import java.util.Optional;
 @RequestMapping("/api")
 public class memberController {
 
-    private final com.AdvInsurance.webservices.AdvInsurance.services.memberService memberService;
+//    private final com.AdvInsurance.webservices.AdvInsurance.services.memberService memberService;
     private final StateRepository stateRepository;
     private final CityRepository cityRepository;
     @Autowired
     private DiseasesRepository diseaseRepository;
 
+    @Autowired
+    private ClaimsRepository claimsRepository;
+
+    @Autowired
+    private memberService memberService;
+    @Autowired
+    private  claimsService claimsService;
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -55,12 +64,13 @@ public class memberController {
     private ProvidersRepository providersRepository;
 
     @Autowired
-    public memberController(memberService memberService, StateRepository stateRepository, CityRepository cityRepository, JwtUtil jwtUtil, com.AdvInsurance.webservices.AdvInsurance.repositories.memberRepository memberRepository) {
+    public memberController(memberService memberService, StateRepository stateRepository, CityRepository cityRepository, com.AdvInsurance.webservices.AdvInsurance.services.claimsService claimsService, JwtUtil jwtUtil) {
         this.memberService = memberService;
         this.stateRepository = stateRepository;
         this.cityRepository = cityRepository;
+        this.claimsService = claimsService;
         this.jwtUtil = jwtUtil;
-        this.memberRepository = memberRepository;
+       // this.memberRepository = memberRepository;
     }
 
     // Register a member
@@ -270,7 +280,7 @@ public class memberController {
 
             if (adjudicator.getPassword().equals(password)) { // If password matches
 
-// Generate JWT token (Login Success)
+               // Generate JWT token (Login Success)
                 String token = JwtUtil.generate_Adjudicator_Token(username);
                 return ResponseEntity.ok(token);
 
@@ -281,6 +291,19 @@ public class memberController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Username not found.");
         }
     }
+    @PostMapping("/claims/submission")
+    public  ResponseEntity<?> claimSubmission(Claims claims){
+        try {
+
+               Claims savedClaim=claimsRepository.save(claims);
+//           Claims  savedClaim= claimsService.saveClaimSubmission(claims);
+            return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 
 
 }
