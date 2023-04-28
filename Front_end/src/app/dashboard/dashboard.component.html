@@ -37,7 +37,7 @@ const data = [
       Date: "2022-12-07",
       Amount: 100000,
       eligibility: 'No',
-      status: 'Rejected',
+      action: 'Rejected',
       Comments: 'Doesnot pass the background check'
     },
     {
@@ -46,7 +46,7 @@ const data = [
       Date: "2023-05-01",
       Amount: 25000,
       eligibility: 'Yes',
-      status: 'Pending',
+      action: 'Pending',
       Comments: 'Processing'
 
     },
@@ -56,7 +56,7 @@ const data = [
       Date: "2023-03-21",
       Amount: 45750,
       eligibility: 'Yes',
-      status: 'Approved',
+      action: 'Approved',
       Comments: 'Approved'
     },
     {
@@ -65,7 +65,7 @@ const data = [
       Date: "2023-05-11",
       Amount: 15400,
       eligibility: 'Yes',
-      status: 'Pending',
+      action: 'Pending',
       Comments: 'Processing'
 
     },
@@ -75,7 +75,7 @@ const data = [
       Date: "2023-04-12",
       Amount: 9740,
       eligibility: 'No',
-      status: 'Pending',
+      action: 'Pending',
       Comments: 'Background check processing'
 
     }
@@ -93,9 +93,9 @@ const data = [
       <td data-label="eligibility">${item.eligibility}</td>
       <td data-label="Action">
         <select>
-          <option value="Rejected" ${item.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
-          <option value="Pending" ${item.status === 'Pending' ? 'selected' : ''}>Pending</option>
-          <option value="Approved" ${item.status === 'Approved' ? 'selected' : ''}>Approved</option>
+          <option value="Rejected" ${item.action === 'Rejected' ? 'selected' : ''}>Rejected</option>
+          <option value="Pending" ${item.action === 'Pending' ? 'selected' : ''}>Pending</option>
+          <option value="Approved" ${item.action=== 'Approved' ? 'selected' : ''}>Approved</option>
         </select>
       </td>
       <td data-label="comment">${item.Comments}</td>
