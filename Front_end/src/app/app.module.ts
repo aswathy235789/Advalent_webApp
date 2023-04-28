@@ -20,6 +20,7 @@ import { SampledropdownComponent } from './sampledropdown/sampledropdown.compone
 import { ClaimHistoryComponent } from './claim-history/claim-history.component';
 import { ClaimStatusComponent } from './claim-status/claim-status.component';
 import { AdjudicatorLoginComponent } from './adjudicator-login/adjudicator-login.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
@@ -37,7 +38,8 @@ import { AdjudicatorLoginComponent } from './adjudicator-login/adjudicator-login
     AlertBoxComponent,
     ClaimHistoryComponent,
     ClaimStatusComponent,
-    AdjudicatorLoginComponent   
+    AdjudicatorLoginComponent,
+    DashboardComponent   
 
   ],
 
