@@ -1,0 +1,45 @@
+  import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Claims;
+  import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Cpt_Icd_Codes;;
+
+
+
+    #Rule 1- Delayed Claim submission
+    rule "Check Claim Submission Date"
+           when
+               $claim: Claim($serviceDate : serviceDate, $submissionDate : submissionDate, $response : response == null)
+               eval($submissionDate >= $serviceDate && $submissionDate <= $serviceDate.plusMonths(1))
+            then
+                $claim.setResponse("NO");
+    end
+
+    #Rule 2
+    rule "Check CPT-ICD Combination"
+    when
+        $claim : Claim($cptCode : cptCode, $icdCode : icdCode, $amountBilled : amountBilled)
+        $cptIcd : CptIcd(cptCode == $cptCode, icdCode == $icdCode)
+    then
+        if ($amountBilled > $cptIcd.getCharges()) {
+             $claim.setResponse("NO");
+        }
+        else {
+            $claim.setResponse("YES");
+        }
+    end
+
+
+    #Rule 3 - Claim exceeds policy limits
+    rule "Check with Threshold Value if CPT-ICD Combination is not present"
+    when
+        $claim : Claim($cptCode : cptCode, $icdCode : icdCode, $amountBilled : amountBilled, $response : response == null)
+        not CptIcd(cptCode == $cptCode, icdCode == $icdCode)
+    then
+        if ($amountBilled > <threshold_value>) {
+            $claim.setResponse("NO");
+        } else {
+            $claim.setResponse("YES");
+        }
+    end
+
+
+
+
