@@ -26,7 +26,7 @@
 						<div class="input-box">	
 							<div class="container py-4 shadow" style="width:350px;">	
                                 <h2>Adjudicator Login</h2>
-							<form [formGroup]="AdjudicatorLogin">
+							<form [formGroup]="AdjudicatorLogin" (ngSubmit)="onSubmit()">
 	
 								<div class="md-form input-with-pre-icon">						
 									<input type="text" id="prefixInside2" class="form-control form-control-lg" placeholder="Username" formControlName="username">
@@ -44,7 +44,7 @@
                                   <div *ngIf="AdjudicatorLogin.get('password')?.invalid && (AdjudicatorLogin.get('password')?.dirty || AdjudicatorLogin.get('password')?.touched)">
                                     <div *ngIf="AdjudicatorLogin.get('password')?.errors?.['required']"  class="alert alert-danger"> password is required</div>
                                   </div>	
-									<button class="btn btn-primary  rounded-pill shadow" type="submit">
+									<button class="btn btn-primary  rounded-pill shadow" type="submit" type="submit">
 								<i class="bi bi-box-arrow-in-right me-2"></i>Login
 								</button>
 							</form>	
