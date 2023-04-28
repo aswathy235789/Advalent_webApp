@@ -2,6 +2,7 @@ package com.AdvInsurance.webservices.AdvInsurance.entity_classes;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -47,7 +48,7 @@ public class Claims {
         private String status;
 
         @Column(name = "date_of_submission")
-        private Date date_of_submission;
+        private LocalDate date_of_submission;
 
     public Long getClaim_id() {
         return claim_id;
@@ -145,12 +146,12 @@ public class Claims {
         this.status = status;
     }
 
-    public Date getDate_of_submission() {
+    public LocalDate getDate_of_submission() {
         return date_of_submission;
     }
 
-    public void setDate_of_submission(Date date_of_submission) {
-        this.date_of_submission = date_of_submission;
+    public void setDate_of_submission(LocalDate date_of_submission) {
+        this.date_of_submission = LocalDate.now(); //set as Current Date
     }
 }
 
