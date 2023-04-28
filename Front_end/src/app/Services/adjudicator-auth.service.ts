@@ -3,23 +3,20 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Adjudicator_LoginRequest } from '../adjudicator_login_reguest';
-import { LoginRequest } from '../login-request';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthServiceService {
-  AuthenticateUser(adjudicator_LoginRequest: Adjudicator_LoginRequest) {
-    throw new Error('Method not implemented.');
-  }
- 
- 
-  private loginUrl = 'http://localhost:8080/api/login';
+export class AdjudicatorAuthService {
+
+
+  
+  private loginUrl = 'http://localhost:8080/api/adjudicator/login';
   
     constructor(private http: HttpClient,private router:Router) { }
   
-    authenticateUser(loginRequest: LoginRequest): Observable<string> {
-      return this.http.post<string>(this.loginUrl, loginRequest, { responseType: 'text' as 'json' });
+    AuthenticateUser(adjudicator_LoginRequest: Adjudicator_LoginRequest): Observable<string> {
+      return this.http.post<string>(this.loginUrl, Adjudicator_LoginRequest, { responseType: 'text' as 'json' });
     }
 
     logout() {
@@ -27,8 +24,5 @@ export class AuthServiceService {
       localStorage.removeItem('token');
       this.router.navigate(['/login'], { queryParams: { logout: true } }); // Redirect to login page with a query parameter to show logout message
     }
+
 }
-
-
-
-
