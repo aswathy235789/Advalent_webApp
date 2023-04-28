@@ -48,6 +48,10 @@
 								<i class="bi bi-box-arrow-in-right me-2"></i>Login
 								</button>
 							</form>	
+							<div *ngIf="errorMessage" class="alert alert-danger"><span
+								[innerHTML]="errorMessage"></span></div>
+							  <br>
+							  <div *ngIf="showAlert" class="alert alert-success">Logging in...</div>
 					</div>
 				</div>
 			</div>

@@ -37,13 +37,13 @@ export class AdjudicatorLoginComponent {
     this.adjudicator_LoginRequest.username = this.AdjudicatorLogin.controls['username'].value;
     this.adjudicator_LoginRequest.password = this.AdjudicatorLogin.controls['password'].value;
     if (this.AdjudicatorLogin.controls['username'].invalid) {
-      // Handle invalid email here
+    
       this.AdjudicatorLogin.controls['username'].setErrors({ 'invalid-username': true });
     } else if (this.AdjudicatorLogin.controls['password'].invalid) {
       // Handle invalid password here
       this.AdjudicatorLogin.controls['password'].setErrors({ 'invalid-password - password must be minimum of length 6': true });
     } else {
-      // Set the email and password values of the loginRequest object
+ 
     
    
   
@@ -69,16 +69,15 @@ export class AdjudicatorLoginComponent {
 
 
           if (error.status === 400) {
-            //this.loginForm.controls['email'].setErrors({ 'invalid-email': true });
-            //this.loginForm.controls['password'].setErrors({ 'invalid-password': true });
-            this.errorMessage = 'Invalid email or password.';
+         
+            this.errorMessage = 'Invalid Username or password.';
           } else if (error.status === 500) {
             this.errorMessage = 'Internal Server Error! Try again';
           } if (error.status === 401) {
             this.errorMessage = 'Incorrect  Password!';
           }
           else {
-            this.errorMessage = '<strong>Login Failed!! </strong><br> Invalid email and password';
+            this.errorMessage = '<strong>Login Failed!! </strong><br> Invalid username and password';
           }
           setTimeout(() => {
             this.errorMessage = '';

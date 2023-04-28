@@ -16,13 +16,13 @@ export class AdjudicatorAuthService {
     constructor(private http: HttpClient,private router:Router) { }
   
     AuthenticateUser(adjudicator_LoginRequest: Adjudicator_LoginRequest): Observable<string> {
-      return this.http.post<string>(this.loginUrl, Adjudicator_LoginRequest, { responseType: 'text' as 'json' });
+      return this.http.post<string>(this.loginUrl, adjudicator_LoginRequest, { responseType: 'text' as 'json' });
     }
 
     logout() {
       sessionStorage.removeItem('token'); // Remove JWT token from session storage
       localStorage.removeItem('token');
-      this.router.navigate(['/login'], { queryParams: { logout: true } }); // Redirect to login page with a query parameter to show logout message
+      this.router.navigate(['/workQueue'], { queryParams: { logout: true } }); // Redirect to login page with a query parameter to show logout message
     }
 
 }
