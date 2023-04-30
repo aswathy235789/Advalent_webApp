@@ -7,6 +7,7 @@ import { CodesService } from '../Services/codes.service';
 import { ProviderService } from '../Services/provider.service';
 
 import { forkJoin } from 'rxjs';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 
 
@@ -28,6 +29,8 @@ import { forkJoin } from 'rxjs';
 
 
 export class ClaimSubmissionComponent {
+    claimsubmission!: FormGroup;
+  
 
 
 
@@ -41,7 +44,7 @@ export class ClaimSubmissionComponent {
 
 
 
-  constructor(private http: HttpClient, private codeservice: CodesService, private providerService: ProviderService) { }
+  constructor(private http: HttpClient, private codeservice: CodesService, private providerService: ProviderService,private formBuilder: FormBuilder) { }
 
 
 
@@ -75,6 +78,22 @@ export class ClaimSubmissionComponent {
 
     )
 
+this.claimsubmission = this.formBuilder.group({
+    providerName: ['', Validators.required],
+    providerType: ['', Validators.required],
+    address: ['', Validators.required],
+    phoneNumber: ['', Validators.required,Validators.pattern(/^\d{10}$/)],
+    typeOfClaim: ['', Validators.required],
+    dateOfService: ['', Validators.required],
+    cpt:  ['', Validators.required],
+    icd: ['', Validators.required],
+    serviceReceived:new FormControl('', [Validators.required, Validators.maxLength(50)]),
+    amountCharged: ['', Validators.required],
+    declaration: ['', Validators.required]
+});
+
+
+
   }
 
 
@@ -97,9 +116,20 @@ export class ClaimSubmissionComponent {
     return item.description.toLowerCase().indexOf(term.toLowerCase()) > -1 || item.code.toLowerCase().indexOf(term.toLowerCase()) > -1;
 
   }
+submitForm() {
+    if (this.claimsubmission.valid) {
+      // form is valid, submit the data
+    } else {
+      // form is invalid, show error messages
+      this.claimsubmission.markAllAsTouched();
+    }
+  }
+  
 
  
 
 }
+
+
 
 
