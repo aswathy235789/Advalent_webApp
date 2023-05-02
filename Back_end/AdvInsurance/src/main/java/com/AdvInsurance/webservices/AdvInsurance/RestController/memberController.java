@@ -290,21 +290,19 @@ public class memberController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Username not found.");
         }
+
     }
     @PostMapping("/claims/submission")
     public  ResponseEntity<?> claimSubmission(@RequestBody Claims claims){
         try {
 
            Claims  savedClaim= claimsService.saveClaimSubmission(claims);
+
             return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
-
-
 }
 
 
