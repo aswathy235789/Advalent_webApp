@@ -5,7 +5,7 @@
     }
     .card-registration .select-input.form-control[readonly]:not([disabled]) {
     font-size: 1rem;
-    line-height: 2.15;
+    line-height: 1.15;
     padding-left: .75em;
     padding-right: .75em;
     }
@@ -21,11 +21,11 @@
     background: -webkit-linear-gradient(to right, rgb(88, 105, 136), rgba(194, 233, 251, 1));
     
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, rgb(84, 100, 129), rgba(194, 233, 251, 1))
+    background: linear-gradient(to right, rgb(173, 199, 221), rgba(194, 233, 251, 1))
     }
     
     .bg-indigo {
-    background-color: #332a79;
+    background-color: #1d40a1;
     }
     @media (min-width: 992px) {
     .card-registration-2 .bg-indigo {
@@ -33,7 +33,7 @@
     border-bottom-right-radius: 15px;
     }
     }
-    @media (max-width: 991px) {
+    @media (max-width: 992px) {
     .card-registration-2 .bg-indigo {
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -41,6 +41,6 @@
     }
 
 .p-5 {
-    padding: 2rem!important;
+    padding: 1rem!important;
 }
 
