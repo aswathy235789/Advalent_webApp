@@ -54,7 +54,7 @@ export class AdjudicatorLoginComponent {
   
           this.showAlert=true;
           setTimeout(() => {
-            this.router.navigate(['/workQueue']);
+            this.router.navigate(['/DashBoard']);
           }, 2000);
         },
         (error) => {
