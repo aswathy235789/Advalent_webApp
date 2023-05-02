@@ -29,6 +29,28 @@ else
     $claim.setEligibility("Eligible");
 end
 
+# Rule 3: Check vision claim eligibility based on age and type of claim
+rule "Check Vision Claim Eligibility"
+when
+$claim: Claims($eligibility : eligibility == null, $typeOfClaim : typeOfClaim == "Vision", $dob : dob)
+eval(Period.between($dob, LocalDate.now()).getYears() >= 10)
+then
+$claim.setEligibility("Eligible");
+else
+$claim.setEligibility("Not Eligible");
+end
+
+# Rule 4: Check dental claim eligibility based on age and type of claim
+rule "Check Dental Claim Eligibility"
+when
+$claim: Claims($eligibility : eligibility == null, $typeOfClaim : typeOfClaim == "Dental", $dob : dob)
+eval(Period.between($dob, LocalDate.now()).getYears() >= 5)
+then
+$claim.setEligibility("Eligible");
+else
+$claim.setEligibility("Not Eligible");
+end
+
 
 
 
