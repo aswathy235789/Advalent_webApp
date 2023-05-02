@@ -302,7 +302,25 @@ public class memberController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
     }
+
+
+
+    @GetMapping("/claims/{id}")
+    public ResponseEntity<?> getClaimStatus(@PathVariable("id") Long id) {
+        try {
+            Claims claim = claimsService.getClaimById(id);
+            if (claim != null) {
+                return new ResponseEntity<>(claim, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>("Claim not found", HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
 
 
