@@ -292,11 +292,10 @@ public class memberController {
         }
     }
     @PostMapping("/claims/submission")
-    public  ResponseEntity<?> claimSubmission(Claims claims){
+    public  ResponseEntity<?> claimSubmission(@RequestBody Claims claims){
         try {
 
-               Claims savedClaim=claimsRepository.save(claims);
-//           Claims  savedClaim= claimsService.saveClaimSubmission(claims);
+           Claims  savedClaim= claimsService.saveClaimSubmission(claims);
             return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
