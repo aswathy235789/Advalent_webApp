@@ -19,4 +19,18 @@ public class claimsService {
 
         return savedClaim;
     }
+//    public Claims getClaimById(Long id) {
+//        // Retrieve the claim details from the data store using the claim ID
+//        Claims claim =claimsService.getClaimById(id);
+//
+//        return claim;
+//    }
+
+    public Claims getClaimById(Long id) {
+
+        Claims claim = claimsRepository.findById(id).orElse(null);
+
+        return claim;
+    }
+
 }
