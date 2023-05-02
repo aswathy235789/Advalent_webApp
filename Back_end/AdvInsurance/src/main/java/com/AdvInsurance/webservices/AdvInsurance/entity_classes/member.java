@@ -13,6 +13,8 @@ public class member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+
     @Column(name = "firstname")
     private String firstName;
 
@@ -39,6 +41,22 @@ public class member {
     @Column(name = "city_id")
     private String city;
 
+    @Column(name = "role")
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+
+
+
+
+
 
 //    @ManyToOne
 //    @JoinColumn(name = "state_id")
@@ -56,6 +74,8 @@ public class member {
 
 //    @Column(name = "medical_history")
 //    private String medicalHistory;
+
+
 
     @Column(name = "smoking")
     private Boolean smoking;
