@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthServiceService } from '../Services/auth-service.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
@@ -10,7 +11,8 @@ export class DashboardComponent implements OnInit {
 
   dashboardData: any = {};
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,private authService: AuthServiceService) { }
+  showAlertBoX: boolean = false;
 
   ngOnInit(): void {
     this.fetchDashboardData();
@@ -26,4 +28,20 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  onActionChange(item: any) {
+    console.log('New action:', item.action);
+    // TODO: Send PUT request to update the item's action in the backend
+  }
+
+  
+  logout() {
+    this.showAlertBoX = true;
+     // Call logout method of AuthService
+  }
+  closeAlertBox() {
+    this.showAlertBoX = false;
+    this.authService.logout();
+    // redirect to login page
+    // this.router.navigate(['/login']);
+  }
 }
