@@ -5,6 +5,7 @@ import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Claims;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.ClaimsRepository;
 //
 //import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,8 @@ public class claimsService {
 
     @Autowired
     private ClaimsRepository claimsRepository;
-//    @Autowired
-//    private KieSession kieSession;
+    @Autowired
+    private KieSession kieSession;
 
     public claimsService(ClaimsRepository claimsRepositor) {
         this.claimsRepository = claimsRepository;
