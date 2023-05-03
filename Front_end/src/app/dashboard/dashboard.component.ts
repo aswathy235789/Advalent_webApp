@@ -26,4 +26,9 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  onActionChange(item: any) {
+    console.log('New action:', item.action);
+    // TODO: Send PUT request to update the item's action in the backend
+  }
+
 }
