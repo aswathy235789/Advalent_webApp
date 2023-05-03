@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ClaimServiceService } from '../Services/claim-service.service';
 
 @Component({
@@ -6,30 +9,29 @@ import { ClaimServiceService } from '../Services/claim-service.service';
   templateUrl: './claim-status.component.html',
   styleUrls: ['./claim-status.component.css']
 })
-export class ClaimStatusComponent {
+export class ClaimStatusComponent implements OnInit {
 
-  
-  // claim_id!: number;
-  // claimStatus: Claim;
-  // errorMessage!: string;
+  claimForm!: FormGroup;
+  claim: any;
+  message!: string;
 
-  // constructor(private claimService: ClaimServiceService) { }
+  constructor(private fb: FormBuilder, private claimsService: ClaimServiceService) { }
+
+  ngOnInit(): void {
+    this.claimForm = this.fb.group({
+      claimId: ['', Validators.required]
+    });
+  }
 
   // getClaimStatus() {
-  //   this.claimService.getClaimStatusById(this.claim_id)
-  //     .subscribe(
-  //       claim => {
-  //         this.claimStatus = claim;
-  //         this.errorMessage = null;
-  //       },
-  //       error => {
-  //         this.claimStatus = null;
-  //         this.errorMessage = `Claim with ID ${this.claim_id} not found.`;
-  //         console.error(error);
-  //       }
-  //     );
-  // }  
-  
+  //   const id = this.claimForm.controls.claimId.value;
+  //   this.claimsService.getClaimById(id).subscribe(data => {
+  //     this.claim = data;
+  //     this.message = '';
+  //   }, error => {
+  //     this.claim = null;
+  //     this.message = error.error;
+  //   });
+  // }
 
 }
-

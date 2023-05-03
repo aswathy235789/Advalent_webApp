@@ -1,19 +1,36 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClaimServiceService {
+  getClaimStatus(claimId: any) {
+    throw new Error('Method not implemented.');
+  }
+ 
+  private baseUrl = 'http://localhost:8080/api';
 
-//   private baseUrl = 'http://localhost:8080/api/claims/{id}';
+  constructor(private http: HttpClient) { }
 
+  getClaimById(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/claims/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
 
-//   constructor(private http: HttpClient) {  }
-//   getClaimStatusById(claim_id: number): Observable<any[]> {
-//     const url = `${this.baseUrl}/${claim_id}`;
-//     return this.http.get<any[]>(url);
-
-// }
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Unknown error occurred';
+    if (error.error instanceof ErrorEvent) {
+      // client-side error
+      errorMessage = error.error.message;
+    } else {
+      // server-side error
+      errorMessage = error.error;
+    }
+    console.error(errorMessage);
+    return throwError(errorMessage);
+  }
 }
