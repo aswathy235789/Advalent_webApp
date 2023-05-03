@@ -9,9 +9,7 @@ import { LoginRequest } from '../login-request';
   providedIn: 'root'
 })
 export class AuthServiceService {
-  AuthenticateUser(adjudicator_LoginRequest: Adjudicator_LoginRequest) {
-    throw new Error('Method not implemented.');
-  }
+  
  
  
   private loginUrl = 'http://localhost:8080/api/login';
