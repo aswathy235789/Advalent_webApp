@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Claims } from '../claims';
 import { ClaimServiceService } from '../Services/claim-service.service';
 
 @Component({
@@ -9,29 +10,20 @@ import { ClaimServiceService } from '../Services/claim-service.service';
   templateUrl: './claim-status.component.html',
   styleUrls: ['./claim-status.component.css']
 })
-export class ClaimStatusComponent implements OnInit {
+export class ClaimStatusComponent  {
 
-  claimForm!: FormGroup;
-  claim: any;
-  message!: string;
+  claimId!: string;
+  claim!: Claims | null;
+  errorMessage!: string;
 
-  constructor(private fb: FormBuilder, private claimsService: ClaimServiceService) { }
+  constructor(private claimsService: ClaimServiceService) {}
 
-  ngOnInit(): void {
-    this.claimForm = this.fb.group({
-      claimId: ['', Validators.required]
-    });
+  onSubmit() {
+    this.claimsService.getClaimById(this.claimId)
+      .subscribe(
+        claim => this.claim = claim,
+        error => this.errorMessage = error
+      );
   }
-
-  // getClaimStatus() {
-  //   const id = this.claimForm.controls.claimId.value;
-  //   this.claimsService.getClaimById(id).subscribe(data => {
-  //     this.claim = data;
-  //     this.message = '';
-  //   }, error => {
-  //     this.claim = null;
-  //     this.message = error.error;
-  //   });
-  // }
 
 }
