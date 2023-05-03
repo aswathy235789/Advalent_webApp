@@ -62,27 +62,30 @@ export class LoginComponent implements OnInit {
    
   
       this.authService.authenticateUser(this.loginRequest).subscribe(
-        token => {
-          localStorage.setItem('token', token);
+       (response:any) => {
+         console.log(response);
          
-  
+          const responseObject = JSON.parse(response);
+          localStorage.setItem('token', responseObject.token);
+
+          localStorage.setItem('memberId', responseObject.Id);
+          //console.log(responseObject.role);
+         
+
           this.showAlert=true;
+          
           setTimeout(() => {
-            this.router.navigate(['/home']);
+            if(responseObject.role=="adjudicator")
+                   this.router.navigate(['/DashBoard']);
+            else
+                this.router.navigate(['/home']);
           }, 2000);
         },
+        
         (error) => {
 
          
-          // this.errorMessage = '<strong>Login Failed!! </strong><br> Invalid email or password';
-
-          // setTimeout(() => {
-          //   this.errorMessage = '';
-          // }, 2000); // show the error message for 1.5 seconds
-
-
-
-          if (error.status === 400) {
+                  if (error.status === 400) {
             //this.loginForm.controls['email'].setErrors({ 'invalid-email': true });
             //this.loginForm.controls['password'].setErrors({ 'invalid-password': true });
             this.errorMessage = 'Invalid email or password.';

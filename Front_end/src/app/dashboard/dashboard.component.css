@@ -1,8 +1,9 @@
-
+a{
+  color: #1ea17a;
+}
 .container {
   max-width: 100%;
 }
-
 table {
   width: 100%;
   margin-bottom: 27px;

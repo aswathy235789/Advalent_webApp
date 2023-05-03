@@ -1,50 +1,38 @@
- <!-- <table>
-  <thead>
-    <tr>
-      <th>Claim ID</th>
-      <th>Patient Name</th>
-      <th>Amount</th>
-      <th>Date of Submission</th>
-      <th>Eligibility</th>
-      <th>Action</th>
-      <th></th>
-    </tr>
-  </thead>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<style>
+		.navbar-brand {
+			text-transform: uppercase;
+			color: rgb(203, 207, 230);
+		}
+	</style>
+</head>
+<body>
 
-  <tbody>
-    <tr *ngFor="let item of dashboardData">
-      <td>{{ item.claimId }}</td>
-      <td>{{ item.memberName }}</td>
-      <td>{{ item.amountBilled }}</td>
-      <td>{{ item.dateOfSubmission }}</td>
-      <td></td>
-      <td>
-        <select [(ngModel)]="item.action" (change)="onActionChange(item)">
-          <option [ngValue]="null" disabled>Select Action</option>
-          <option [ngValue]="'approved'">Approved</option>
-          <option [ngValue]="'pending'">Pending</option>
-          <option [ngValue]="'rejected'">Rejected</option>
-        </select>
-      </td>
-      <td>
-        <button class="btn btn-details">View Claim Details</button>
-        <button class="btn btn-details">View Patient Details</button>
-       
-        </td>
-    </tr>
-  </tbody>
-
-</table>
-
-<br>
-<div class="container">
-  <div class="btn-group">
-    <button class="btn" onclick="saveTable()">Save</button>
-  </div>
-</div>
- -->
-
-
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg fixed-top" style="background: linear-gradient(89.5deg, rgb(4, 29, 55) -0.1%, rgb(2, 67, 135) 25.1%, rgb(28, 133, 243) 49.6%, rgb(69, 135, 206) 74.5%);
+  ">
+		<div class="container">
+			<a class="navbar-brand" style="color:#fff; font-size: 24px; font-weight: 700;">ADV Insurance</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" style="color: #fff; font-size: 14px; font-weight: 500;" (click)="logout()">LOGOUT</a>
+          </li>&nbsp;&nbsp;
+        </ul>
+      </div>
+      <div *ngIf="showAlertBoX" class="alert">
+        <app-alert-box message="You have been logged out successfully !" (closeAlert)="closeAlertBox()"></app-alert-box>
+      </div>			</div>
+		
+	</nav>
+<br><br><br><br><br>
  <div class="container">
   <table class="table">
     <thead>
@@ -89,3 +77,5 @@
   </div>
 </div>
 </div>
+
+
