@@ -8,6 +8,7 @@ import { ProviderService } from '../Services/provider.service';
 
 import { forkJoin } from 'rxjs';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AlertBoxComponent } from '../alert-box/alert-box.component';
 
 
 
@@ -118,9 +119,10 @@ this.claimsubmission = this.formBuilder.group({
   }
 submitForm() {
     if (this.claimsubmission.valid) {
-      // form is valid, submit the data
+      
+
     } else {
-      // form is invalid, show error messages
+      alert("Please fill out all fields");
       this.claimsubmission.markAllAsTouched();
     }
   }
