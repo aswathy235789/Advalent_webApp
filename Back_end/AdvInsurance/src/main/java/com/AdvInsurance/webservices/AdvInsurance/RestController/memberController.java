@@ -7,7 +7,9 @@ import com.AdvInsurance.webservices.AdvInsurance.login_auth.JwtUtil;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.LoginRequest;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.*;
 import com.AdvInsurance.webservices.AdvInsurance.services.memberService;
+import com.AdvInsurance.webservices.AdvInsurance.configuration.DroolsConfig;
 import com.AdvInsurance.webservices.AdvInsurance.services.claimsService;
+import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +40,11 @@ public class memberController {
     private  claimsService claimsService;
     @Autowired
     private JwtUtil jwtUtil;
+
+    @Autowired
+    private DroolsConfig droolsConfig;
+//    @Autowired
+//    private KieSession kieSession;
 
 
 //    @Autowired
@@ -300,17 +307,32 @@ public class memberController {
         }
 
     }
+//    @PostMapping("/claims/submission")
+//    public  ResponseEntity<?> claimSubmission(@RequestBody Claims claims){
+//        try {
+//
+//           Claims  savedClaim= claimsService.saveClaimSubmission(claims);
+//
+//            return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+
     @PostMapping("/claims/submission")
-    public  ResponseEntity<?> claimSubmission(@RequestBody Claims claims){
+    public ResponseEntity<?> claimSubmission(@RequestBody Claims claims) {
         try {
-
-           Claims  savedClaim= claimsService.saveClaimSubmission(claims);
-
+//            KieSession kieSession = droolsConfig.kieSession();
+//            kieSession.insert(claims);
+//            kieSession.fireAllRules();
+            Claims savedClaim = claimsService.saveClaimSubmission(claims);
             return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
     }
+
     @GetMapping("/adjudicator/Dashboard")
     public List<ClaimDto> getAllClaims() {
                 return claimsService.getAllClaims();
