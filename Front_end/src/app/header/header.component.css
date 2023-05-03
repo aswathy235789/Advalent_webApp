@@ -162,7 +162,7 @@ body {
   .mx-background-top-linear {
     background: -webkit-linear-gradient(45deg, #141618 48%, #141618 48%);
     background: -webkit-linear-gradient(left, #54d400 48%, #141618 48%);
-background: linear-gradient(89.5deg, rgb(4, 29, 55) -0.1%, rgb(2, 67, 135) 25.1%, rgb(28, 133, 243) 49.6%, rgb(115, 181, 250) 74.5%);
+background: linear-gradient(89.5deg, rgb(4, 29, 55) -0.1%, rgb(2, 67, 135) 25.1%, rgb(28, 133, 243) 49.6%, rgb(69, 135, 206) 74.5%);
   
   }
   
