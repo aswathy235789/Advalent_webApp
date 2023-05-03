@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 
@@ -50,7 +50,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpClientModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgSelectModule   
+    NgSelectModule ,
+    FormsModule  
 
   ],
 

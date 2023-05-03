@@ -1,19 +1,26 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
+import { Claims } from '../claims';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClaimServiceService {
+  private claimsUrl = 'http://localhost:8080/claims';
 
-//   private baseUrl = 'http://localhost:8080/api/claims/{id}';
+  constructor(private http: HttpClient) {}
 
+  private handleError(error: any) {
+    console.error(error);
+    return throwError('An error occurred, please try again later.');
+  }
 
-//   constructor(private http: HttpClient) {  }
-//   getClaimStatusById(claim_id: number): Observable<any[]> {
-//     const url = `${this.baseUrl}/${claim_id}`;
-//     return this.http.get<any[]>(url);
-
-// }
+  getClaimById(id: string): Observable<Claims> {
+    const url = `${this.claimsUrl}/${id}`;
+    return this.http.get<Claims>(url).pipe(
+      catchError(this.handleError)
+    );
+  }
 }
