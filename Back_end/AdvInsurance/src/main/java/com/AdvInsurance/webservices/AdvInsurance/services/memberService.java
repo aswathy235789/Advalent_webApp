@@ -22,6 +22,7 @@ public class memberService {
         BCryptPasswordEncoder bcrypt=new BCryptPasswordEncoder();
         String encrypt_psd=bcrypt.encode(registration.getPassword());
         registration.setPassword(encrypt_psd);
+        registration.setRole("user"); //set default as user
 
         return memberRepository.save(registration);
     }

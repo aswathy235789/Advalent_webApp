@@ -1,5 +1,6 @@
 package com.AdvInsurance.webservices.AdvInsurance.RestController;
 
+import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimDto;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.*;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.Adjudicator_LoginRequest;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.JwtUtil;
@@ -14,9 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.Console;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:4200")
 //@CrossOrigin(origins = "*")
@@ -78,6 +77,7 @@ public class memberController {
                             public ResponseEntity<member> register(@RequestBody member newMember) {
                                 try {
                                    //
+
                                     member savedMember = memberService.saveRegistration(newMember);
 
 
@@ -159,9 +159,17 @@ public class memberController {
 
         // Verify email and password
         if (isValidUser(email, password)) {
-            // Generate JWT token
-            String token = JwtUtil.generateToken(email);
-            return ResponseEntity.ok(token);
+
+
+            member logged_user=memberRepository.findByEmail(email);
+            String token = JwtUtil.generateToken(email); // Generate JWT token
+            String role = logged_user.getRole();
+            Long memberId = logged_user.getId();
+            Map<String, String> responseBody = new HashMap<>();
+            responseBody.put("token", token);
+            responseBody.put("Id", String.valueOf(memberId));
+            responseBody.put("role", role);
+            return ResponseEntity.ok(responseBody);
         } else {
             if (!isValidEmail(email)) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid email");
@@ -320,6 +328,15 @@ public class memberController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    @GetMapping("/adjudicator/Dashboard")
+    public List<ClaimDto> getAllClaims() {
+                return claimsService.getAllClaims();
+            }
+
+
+
 
 }
 

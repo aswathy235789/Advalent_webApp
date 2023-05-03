@@ -14,6 +14,9 @@ public class Claims {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long claim_id;
 
+        @Column(name = "member_id")
+        private  Long member_id;
+
         @Column(name = "date_of_service")
         private Date date_of_service;
 
@@ -56,6 +59,14 @@ public class Claims {
 
     public void setClaim_id(Long claim_id) {
         this.claim_id = claim_id;
+    }
+
+    public Long getMember_id() {
+        return member_id;
+    }
+
+    public void setMember_id(Long member_id) {
+        this.member_id = member_id;
     }
 
     public Date getDate_of_service() {
