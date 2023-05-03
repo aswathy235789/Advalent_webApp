@@ -1,197 +1,81 @@
-<nav class="navbar navbar-light bg-light"></nav>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<style>
+		.navbar-brand {
+			text-transform: uppercase;
+			color: rgb(203, 207, 230);
+		}
+	</style>
+</head>
+<body>
 
-      
-
-
-
-
-<table>
-  <thead>
-    <tr>
-      
-      <th>Claim ID</th>
-      <th>Patient Name</th>
-      <th>Amount</th>
-      <th>Date of Submission</th>
-      <th>Eligibility</th>
-      <th>Action</th>
-      <th> </th>
-    </tr>
-  </thead>
-  
-  <tbody>
-    <tr *ngFor="let item of dashboardData">
-      <td>{{ item.claimId }}</td>
-      <td>{{ item.memberName }}</td>
-      <td>{{ item.amountBilled}}</td>
-      <td>{{ item.dateOfSubmission }}</td>
-      <td></td>
-      <td></td>    
-      <td>
-        <button class="btn btn-details">View Claim Details</button>
-        <button class="btn btn-details">View Patient Details</button>
-       
-        </td>
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg fixed-top" style="background: linear-gradient(89.5deg, rgb(4, 29, 55) -0.1%, rgb(2, 67, 135) 25.1%, rgb(28, 133, 243) 49.6%, rgb(69, 135, 206) 74.5%);
+  ">
+		<div class="container">
+			<a class="navbar-brand" style="color:#fff; font-size: 24px; font-weight: 700;">ADV Insurance</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" style="color: #fff; font-size: 14px; font-weight: 500;" (click)="logout()">LOGOUT</a>
+          </li>&nbsp;&nbsp;
+        </ul>
+      </div>
+      <div *ngIf="showAlertBoX" class="alert">
+        <app-alert-box message="You have been logged out successfully !" (closeAlert)="closeAlertBox()"></app-alert-box>
+      </div>			</div>
+		
+	</nav>
+<br><br><br><br><br>
+ <div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Claim ID</th>
+        <th>Patient Name</th>
+        <th>Amount</th>
+        <th>Date of Submission</th>
+        <th>Eligibility</th>
+        <th>Action</th>
+        <th></th>
+        <th></th>
       </tr>
-     
-  </tbody>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dashboardData">
+        <td>{{ item.claimId }}</td>
+        <td>{{ item.memberName }}</td>
+        <td>{{ item.amountBilled }}</td>
+        <td>{{ item.dateOfSubmission }}</td>
+        <td>{{ item.eligibility }}</td>
+        <td>
+          <select [(ngModel)]="item.action" (change)="onActionChange(item)">
+            <option value="approved">Approved</option>
+            <option value="pending">Pending</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </td>
+        <td>
+          <button class="btn btn-details">View Claim Details</button></td>
+        <td>  <button class="btn btn-details">View Patient Details</button>
+         
+          </td>
+      </tr>
+    </tbody>
+  </table>
   
-</table>
 <br>
-<div class="container">
+<div class="submit">
   <div class="btn-group">
     <button class="btn" onclick="saveTable()">Save</button>
   </div>
 </div>
+</div>
 
 
-
-
-
-<!-- <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Work Queue</title>
-    <link rel="stylesheet" href="dashboard.component.css">
-  </head>
-  <body>
-    <table>
-      <thead>
-        <tr>
-          <th>Claim ID</th>
-          <th>Patient Name</th>
-          <th>Date of Submission</th>
-          <th>Amount</th>
-          <th>Eligibility</th>
-          <th>Action</th>
-          <th>Comments</th>
-
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="workqueue-table">
-      </tbody>
-    </table>
-    <br>
-    <div class="btn-group">
-        <button class="btn" onclick="saveTable()">Save</button>
-    </div>
-   
-  </body>
-
-</html>
-
-
-
-<script>
-  // fetch data from database
-const data = [
-{
-  id: 1,
-  patientname: 'Harry Potter',
-  Date: "2022-12-07",
-  Amount: 100000,
-  eligibility: 'No',
-  action: 'Rejected',
-  Comments: 'Doesnot pass the background check'
-},
-{
-  id: 2,
-  patientname: 'Klaus Mikaelson',
-  Date: "2023-05-01",
-  Amount: 25000,
-  eligibility: 'Yes',
-  action: 'Pending',
-  Comments: 'Processing'
-
-},
-{
-  id: 3,
-  patientname: 'Arya Stark',
-  Date: "2023-03-21",
-  Amount: 45750,
-  eligibility: 'Yes',
-  action: 'Approved',
-  Comments: 'Approved'
-},
-{
-  id: 4,
-  patientname: 'Sheldon Copper',
-  Date: "2023-05-11",
-  Amount: 15400,
-  eligibility: 'Yes',
-  action: 'Pending',
-  Comments: 'Processing'
-
-},
-{
-  id: 5,
-  patientname: 'Monica Geller',
-  Date: "2023-04-12",
-  Amount: 9740,
-  eligibility: 'No',
-  action: 'Pending',
-  Comments: 'Background check processing'
-
-}
-];
-
-// populate table with data
-const tableBody = document.querySelector('#workqueue-table');
-data.forEach(item => {
-const row = document.createElement('tr');
-row.innerHTML = `
-  <td data-label="ID">${item.id}</td>
-  <td data-label="patientname">${item.patientname}</td>
-  <td data-label="date">${item.Date}</td>
-  <td data-label="amount">${item.Amount}</td>
-  <td data-label="eligibility">${item.eligibility}</td>
-  <td data-label="Action">
-    <select>
-      <option value="Rejected" ${item.action === 'Rejected' ? 'selected' : ''}>Rejected</option>
-      <option value="Pending" ${item.action === 'Pending' ? 'selected' : ''}>Pending</option>
-      <option value="Approved" ${item.action=== 'Approved' ? 'selected' : ''}>Approved</option>
-    </select>
-  </td>
-  <td data-label="comment">${item.Comments}</td>
- <td>
- <button class="btn btn-details">View Claim Details</button>
- <button class="btn btn-details">View Patient Details</button>
-
- </td>
-`;
-tableBody.appendChild(row);
-});
-
-//   // add event listeners to dropdowns
-//   const dropdowns = document.querySelectorAll('select');
-//   dropdowns.forEach(dropdown => {
-//     dropdown.addEventListener('change', (event) => {
-//       const id = event.target.closest('tr').querySelector('[data-label="ID"]').textContent;
-//       const status = event.target.value;
-//       console.log(`Item ${id} is now ${status}`);
-//       // update database with new status
-//     });
-//   });
-
-
-//   // save table data
-//   function saveTable() {
-//     const rows = document.querySelectorAll('#workqueue tbody tr');
-//     const data = [];
-//     rows.forEach(row => {
-//       const id = row.querySelector('td:first-child').textContent;
-//       const patientname = row.querySelector('td:nth-child(2)').textContent;
-//       const Date = row.querySelector('td:nth-child(3)').textContent;
-//       const Amount = row.querySelector('td:nth-child(4)').textContent;
-//       const eligibility = row.querySelector('td:nth-child(5)').textContent;
-//       const Action = row.querySelector('select').value;
-//       const Comments = row.querySelector('td:nth-child(7)').textContent;
-//       data.push({ id,patientname, Date,Amount,eligibility,Action, Comments });
-//     });
-//     console.log(data);
-//   }
-
- </script> --> 

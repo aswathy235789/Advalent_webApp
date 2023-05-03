@@ -1,6 +1,6 @@
 export interface Claims {
 
-  id: any ;
+  id: any;
   status: string;
   date_of_service:Date;
   amount_billed:number;
