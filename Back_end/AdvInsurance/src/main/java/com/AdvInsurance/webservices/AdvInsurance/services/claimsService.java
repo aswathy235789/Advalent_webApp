@@ -3,6 +3,8 @@ package com.AdvInsurance.webservices.AdvInsurance.services;
 import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimDto;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Claims;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.ClaimsRepository;
+//
+//import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +18,17 @@ public class claimsService {
 
     @Autowired
     private ClaimsRepository claimsRepository;
+//    @Autowired
+//    private KieSession kieSession;
+
+    public claimsService(ClaimsRepository claimsRepositor) {
+        this.claimsRepository = claimsRepository;
+//        this.kieSession = kieSession;
+    }
 
     public Claims saveClaimSubmission(Claims claims) {
-
+//        kieSession.insert(claims);
+//        kieSession.fireAllRules();
         Claims savedClaim= claimsRepository.save(claims);
 
         return savedClaim;
@@ -68,6 +78,13 @@ public class claimsService {
 
         return claimDto;
     }
+
+//    @Autowired
+//    public void ClaimService(KieSession kieSession) {
+//        this.kieSession = kieSession;
+//    }
+
+
 
 
 }
