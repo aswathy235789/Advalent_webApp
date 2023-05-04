@@ -9,14 +9,15 @@ import com.AdvInsurance.webservices.AdvInsurance.repositories.*;
 import com.AdvInsurance.webservices.AdvInsurance.services.memberService;
 import com.AdvInsurance.webservices.AdvInsurance.configuration.DroolsConfig;
 import com.AdvInsurance.webservices.AdvInsurance.services.claimsService;
-import org.kie.api.runtime.KieSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Console;
+
 import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -43,12 +44,8 @@ public class memberController {
 
     @Autowired
     private DroolsConfig droolsConfig;
-//    @Autowired
-//    private KieSession kieSession;
 
 
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private memberRepository memberRepository;
@@ -290,7 +287,7 @@ public class memberController {
         String username = authenticationRequest.getUsername();
         String password = authenticationRequest.getPassword();
 
-        adjudicator adjudicator = adjudicatorRepository.findByUsername(username); // Check that the username is exist or not
+        adjudicator adjudicator = adjudicatorRepository.findByUsername(username); // Check that the username is exists or not
         if (adjudicator != null) { // If username exists
 
             if (adjudicator.getPassword().equals(password)) { // If password matches
@@ -307,36 +304,6 @@ public class memberController {
         }
 
     }
-//    @PostMapping("/claims/submission")
-//    public  ResponseEntity<?> claimSubmission(@RequestBody Claims claims){
-//        try {
-//
-//           Claims  savedClaim= claimsService.saveClaimSubmission(claims);
-//
-//            return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-
-    @PostMapping("/claims/submission")
-    public ResponseEntity<?> claimSubmission(@RequestBody Claims claims) {
-        try {
-
-
-            Claims savedClaim = claimsService.saveClaimSubmission(claims);
-
-
-
-
-            return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-
-
 
     @GetMapping("/claims/{id}")
     public ResponseEntity<?> getClaimStatus(@PathVariable("id") Long id) {
@@ -359,6 +326,21 @@ public class memberController {
 
 
 
+    @PostMapping("/claims/submission")
+    public ResponseEntity<?> claimSubmission(@RequestBody Claims claims) {
+        try {
+            Claims savedClaim = claimsService.saveClaimSubmission(claims);
+
+            return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/adjudicator/view/{id}")
+    public Map<String, Object> getClaimDetails(@PathVariable("id") Long id) throws ChangeSetPersister.NotFoundException {
+        return claimsService.getClaimDetails(id);
+    }
 
 }
 
