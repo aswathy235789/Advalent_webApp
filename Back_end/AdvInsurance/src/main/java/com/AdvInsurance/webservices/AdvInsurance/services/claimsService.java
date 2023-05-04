@@ -91,11 +91,6 @@ public class claimsService {
         return claimDto;
     }
 
-//    @Autowired
-//    public void ClaimService(KieSession kieSession) {
-//        this.kieSession = kieSession;
-//    }
-
     public Map<String, Object> getClaimDetails(Long id) throws ChangeSetPersister.NotFoundException {
         Claims claim = claimsRepository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new);
         LocalDate dateOfService = claim.getDate_of_service();
