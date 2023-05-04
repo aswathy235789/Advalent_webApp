@@ -289,11 +289,14 @@ export class RegisterComponent {
   .pipe(
     flatMap((response: any) => {
       const memberId = response.id;
+     
+
       console.log('Registration successful', response);
       this.showAlert = true;
       setTimeout(() => {
         this.route.navigate(['/login']);
       }, 2000);
+
      
       return this.medicalHistoryService.addDiseasesToMember(memberId, this.getMedicalHistory());
     })

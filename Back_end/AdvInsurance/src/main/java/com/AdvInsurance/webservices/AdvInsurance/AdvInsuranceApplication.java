@@ -13,4 +13,5 @@ public class AdvInsuranceApplication {
 		SpringApplication.run(AdvInsuranceApplication.class, args);
 	}
 
+
 }

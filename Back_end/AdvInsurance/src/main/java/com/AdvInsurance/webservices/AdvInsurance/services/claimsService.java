@@ -3,10 +3,13 @@ package com.AdvInsurance.webservices.AdvInsurance.services;
 import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimDto;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Claims;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.ClaimsRepository;
+import com.AdvInsurance.webservices.AdvInsurance.configuration.DroolsConfig;
+import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,20 +19,31 @@ public class claimsService {
 
     @Autowired
     private ClaimsRepository claimsRepository;
+    @Autowired
+    private KieSession kieSession;
+    @Autowired
+    private DroolsConfig droolsConfig;
 
-    public Claims saveClaimSubmission(Claims claims) {
+    public claimsService(ClaimsRepository claimsRepository) {
+        this.claimsRepository = claimsRepository;
+//        this.kieSession = kieSession;
+    }
+
+    public Claims saveClaimSubmission(Claims claims) throws IOException {
+//        kieSession.insert(claims);
+//        kieSession.fireAllRules();
+
+
+        KieSession kieSession = droolsConfig.getKieSession();
+        kieSession.insert(claims);
+        kieSession.fireAllRules();               //Set Eligibility
 
         Claims savedClaim= claimsRepository.save(claims);
 
         return savedClaim;
     }
 
-//    public Claims getClaimById(Long id) {
-//        // Retrieve the claim details from the data store using the claim ID
-//        Claims claim =claimsService.getClaimById(id);
-//
-//        return claim;
-//    }
+
 
     public Claims getClaimById(Long id) {
 
@@ -68,6 +82,13 @@ public class claimsService {
 
         return claimDto;
     }
+
+//    @Autowired
+//    public void ClaimService(KieSession kieSession) {
+//        this.kieSession = kieSession;
+//    }
+
+
 
 
 }

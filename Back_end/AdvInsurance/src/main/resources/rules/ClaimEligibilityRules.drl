@@ -3,56 +3,31 @@ import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Cpt_Codes;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Icd_Codes;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
-
-#Rule 1- Delayed Claim submission
-rule "Check Claim Submission Date"
+rule "Check Claim Submission Date - Within One Month"
 when
-    $claim: Claims($serviceDate : serviceDate, $submissionDate : submissionDate, $eligibility : eligibility == null)
-    eval($submissionDate >= $serviceDate && $submissionDate <= $serviceDate.plusMonths(1))
+    $Claims: Claims($date_of_service : date_of_service, $date_of_submission : date_of_submission, $eligibility : eligibility == "")
+    eval(
+        LocalDate.parse($date_of_submission.toString()).compareTo(LocalDate.parse($date_of_service.toString())) >= 0 &&
+        ChronoUnit.MONTHS.between(LocalDate.parse($date_of_service.toString()), LocalDate.parse($date_of_submission.toString())) <= 1
+    )
 then
-    $claim.setEligibility("Not Eligible");
-else
-    $claim.setEligibility("Eligible");
-end
-
-#Rule 2
-rule "Check Total Charges"
-when
-    $claim: Claims($amountBilled : amountBilled, $eligibility : eligibility == null)
-    $Cpt_Codes: Cpt_Codes()
-    $Icd_Codes: Icd_Codes()
-    eval($amountBilled > ($Icd_Codes.getCharge() + $Cpt_Codes.getCharge()))
-then
-    $claim.setEligibility("Not Eligible");
-else
-    $claim.setEligibility("Eligible");
-end
-
-# Rule 3: Check vision claim eligibility based on age and type of claim
-rule "Check Vision Claim Eligibility"
-when
-$claim: Claims($eligibility : eligibility == null, $typeOfClaim : typeOfClaim == "Vision", $dob : dob)
-eval(Period.between($dob, LocalDate.now()).getYears() >= 10)
-then
-$claim.setEligibility("Eligible");
-else
-$claim.setEligibility("Not Eligible");
-end
-
-# Rule 4: Check dental claim eligibility based on age and type of claim
-rule "Check Dental Claim Eligibility"
-when
-$claim: Claims($eligibility : eligibility == null, $typeOfClaim : typeOfClaim == "Dental", $dob : dob)
-eval(Period.between($dob, LocalDate.now()).getYears() >= 5)
-then
-$claim.setEligibility("Eligible");
-else
-$claim.setEligibility("Not Eligible");
+    $Claims.setEligibility("Eligible");
 end
 
 
+rule "Check Claim Submission Date - Not Within One Month"
+when
+    $Claims: Claims($date_of_service : date_of_service, $date_of_submission : date_of_submission, $eligibility : eligibility == "")
+    not(eval(
+        LocalDate.parse($date_of_submission.toString()).compareTo(LocalDate.parse($date_of_service.toString())) >= 0 &&
+        ChronoUnit.MONTHS.between(LocalDate.parse($date_of_service.toString()), LocalDate.parse($date_of_submission.toString())) <= 1
+    ))
 
+then
+    $Claims.setEligibility("Not Eligible - Delayed Submission");
+end
 
 
 
