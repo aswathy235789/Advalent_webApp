@@ -1,6 +1,4 @@
-a{
-  color: #1ea17a;
-}
+
 .container {
   max-width: 100%;
 }
@@ -21,7 +19,7 @@ table td {
 table th {
   background-color: #f2f2f2;
   font-size: 16px;
-  background-color: #2694d3;
+  background-color: rgb(6, 16, 51);
   color: #fff;
 
 }
@@ -49,10 +47,6 @@ select {
   margin-right: 10px;
 }
 
-.btn-details {
-  background-color: #1ea17a;
-}
-
 .btn-group {
   display: inline-block;
   justify-content: center;
@@ -60,8 +54,7 @@ select {
 
 .btn-group .btn {
   margin-right: 0;
-  background-color: #2694d3;
-}
+  background-color: rgb(6, 16, 51);}
 
 .submit {
   text-align: center;
