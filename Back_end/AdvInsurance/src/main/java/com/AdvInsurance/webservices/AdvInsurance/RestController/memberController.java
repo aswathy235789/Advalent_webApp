@@ -322,11 +322,13 @@ public class memberController {
     @PostMapping("/claims/submission")
     public ResponseEntity<?> claimSubmission(@RequestBody Claims claims) {
         try {
-            KieSession kieSession = droolsConfig.getKieSession();
-            kieSession.insert(claims);
-            kieSession.fireAllRules();
+
 
             Claims savedClaim = claimsService.saveClaimSubmission(claims);
+
+
+
+
             return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

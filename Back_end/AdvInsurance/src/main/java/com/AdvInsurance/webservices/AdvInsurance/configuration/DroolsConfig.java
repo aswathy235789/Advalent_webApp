@@ -1,13 +1,4 @@
 package com.AdvInsurance.webservices.AdvInsurance.configuration;
-//
-//import org.kie.api.KieServices;
-//import org.kie.api.builder.*;
-//import org.kie.api.io.Resource;
-//import org.kie.api.io.ResourceType;
-//import org.kie.api.runtime.KieContainer;
-//import org.kie.api.runtime.KieSession;
-//import org.kie.internal.io.ResourceFactory;
-//import org.springframework.context.annotation.Bean;
 import org.kie.api.KieServices;
 import org.kie.api.builder.*;
 import org.kie.api.runtime.KieContainer;
@@ -18,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
 
-import static org.kie.dmn.core.util.KieHelper.getKieContainer;
 
 @Configuration
 public class DroolsConfig {
