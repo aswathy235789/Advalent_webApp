@@ -1,11 +1,13 @@
 package com.AdvInsurance.webservices.AdvInsurance.RestController;
 
 import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimDto;
+import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimHistoryDto;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.*;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.Adjudicator_LoginRequest;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.JwtUtil;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.LoginRequest;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.*;
+import com.AdvInsurance.webservices.AdvInsurance.services.ClaimsHistoryService;
 import com.AdvInsurance.webservices.AdvInsurance.services.memberService;
 import com.AdvInsurance.webservices.AdvInsurance.services.claimsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Console;
 import java.util.*;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:50726")
 //@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
@@ -26,6 +27,8 @@ public class memberController {
 //    private final com.AdvInsurance.webservices.AdvInsurance.services.memberService memberService;
     private final StateRepository stateRepository;
     private final CityRepository cityRepository;
+    private final ClaimsHistoryService claimsHistoryService;
+
     @Autowired
     private DiseasesRepository diseaseRepository;
 
@@ -38,6 +41,7 @@ public class memberController {
     private  claimsService claimsService;
     @Autowired
     private JwtUtil jwtUtil;
+
 
 
 //    @Autowired
@@ -63,10 +67,11 @@ public class memberController {
     private ProvidersRepository providersRepository;
 
     @Autowired
-    public memberController(memberService memberService, StateRepository stateRepository, CityRepository cityRepository, com.AdvInsurance.webservices.AdvInsurance.services.claimsService claimsService, JwtUtil jwtUtil) {
+    public memberController(memberService memberService, StateRepository stateRepository, CityRepository cityRepository, ClaimsHistoryService claimsHistoryService, com.AdvInsurance.webservices.AdvInsurance.services.claimsService claimsService, JwtUtil jwtUtil) {
         this.memberService = memberService;
         this.stateRepository = stateRepository;
         this.cityRepository = cityRepository;
+        this.claimsHistoryService = claimsHistoryService;
         this.claimsService = claimsService;
         this.jwtUtil = jwtUtil;
        // this.memberRepository = memberRepository;
@@ -338,7 +343,18 @@ public class memberController {
 
 
 
-}
+    @GetMapping("/{member_id}/claims")
+    public ResponseEntity<List<ClaimHistoryDto>> getClaimHistoryForMember(@PathVariable Long member_id) {
+//        ClaimsHistoryService claimsHistoryService = new ClaimsHistoryService(claimsRepository);
+        List<ClaimHistoryDto> claims = claimsHistoryService.getClaimHistoryForMember(member_id);
+        return new ResponseEntity<>(claims, HttpStatus.OK);
+    }
+
+
+
+
+
+    }
 
 
 

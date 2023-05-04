@@ -14,11 +14,12 @@ public class Claims {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long claim_id;
 
-        @Column(name = "member_id")
+//        @ManyToOne(fetch = FetchType.LAZY)
+        @Column(name = "member_id", nullable = false)
         private  Long member_id;
 
         @Column(name = "date_of_service")
-        private Date date_of_service;
+        private LocalDate date_of_service;
 
         @Column(name = "amount_billed")
         private Double amount_billed;
@@ -69,11 +70,11 @@ public class Claims {
         this.member_id = member_id;
     }
 
-    public Date getDate_of_service() {
+    public LocalDate getDate_of_service() {
         return date_of_service;
     }
 
-    public void setDate_of_service(Date date_of_service) {
+    public void setDate_of_service(LocalDate date_of_service) {
         this.date_of_service = date_of_service;
     }
 
@@ -165,7 +166,4 @@ public class Claims {
         this.date_of_submission = LocalDate.now(); //set as Current Date
     }
 }
-
-
-
 
