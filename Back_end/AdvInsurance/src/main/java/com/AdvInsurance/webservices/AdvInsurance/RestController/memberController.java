@@ -322,20 +322,19 @@ public class memberController {
     @PostMapping("/claims/submission")
     public ResponseEntity<?> claimSubmission(@RequestBody Claims claims) {
         try {
-//            KieSession kieSession = droolsConfig.kieSession();
-//            kieSession.insert(claims);
-//            kieSession.fireAllRules();
+
+
             Claims savedClaim = claimsService.saveClaimSubmission(claims);
+
+
+
+
             return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
-<<<<<<< HEAD
     }
 
-=======
-    }
 
 
 
@@ -353,8 +352,6 @@ public class memberController {
         }
     }
 
-
->>>>>>> bddf901f0200f595bd84da96ef23f2f04513ec30
     @GetMapping("/adjudicator/Dashboard")
     public List<ClaimDto> getAllClaims() {
                 return claimsService.getAllClaims();

@@ -2,6 +2,8 @@ package com.AdvInsurance.webservices.AdvInsurance.entity_classes;
 
 import jakarta.persistence.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -18,7 +20,7 @@ public class Claims {
         private  Long member_id;
 
         @Column(name = "date_of_service")
-        private Date date_of_service;
+        private LocalDate  date_of_service;
 
         @Column(name = "amount_billed")
         private Double amount_billed;
@@ -53,6 +55,25 @@ public class Claims {
         @Column(name = "date_of_submission")
         private LocalDate date_of_submission;
 
+//    public Date getDate_of_submission() {
+//        return date_of_submission;
+//
+//    }
+//
+//    public void setDate_of_submission(Date date_of_submission) {
+//        this.date_of_submission = new Date();
+//    }
+
+    public LocalDate getDate_of_submission() {
+        return date_of_submission;
+    }
+
+    public void setDate_of_submission(LocalDate date_of_submission) {
+        this.date_of_submission = LocalDate.now(); //set as Current Date
+    }
+
+
+
     public Long getClaim_id() {
         return claim_id;
     }
@@ -69,12 +90,12 @@ public class Claims {
         this.member_id = member_id;
     }
 
-    public Date getDate_of_service() {
+    public LocalDate  getDate_of_service() {
         return date_of_service;
     }
 
-    public void setDate_of_service(Date date_of_service) {
-        this.date_of_service = date_of_service;
+    public void setDate_of_service(LocalDate  date_of_service) {
+        this.date_of_service =date_of_service;
     }
 
     public Double getAmount_billed() {
@@ -157,13 +178,7 @@ public class Claims {
         this.status = status;
     }
 
-    public LocalDate getDate_of_submission() {
-        return date_of_submission;
-    }
 
-    public void setDate_of_submission(LocalDate date_of_submission) {
-        this.date_of_submission = LocalDate.now(); //set as Current Date
-    }
 }
 
 

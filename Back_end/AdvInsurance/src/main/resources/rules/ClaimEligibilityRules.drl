@@ -3,21 +3,31 @@ import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Cpt_Codes;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Icd_Codes;
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
-
-
-rule "Check Claim Submission Date"
+rule "Check Claim Submission Date - Within One Month"
 when
-    Claims: Claims(submissionDate >= serviceDate && submissionDate <= serviceDate.plusMonths(1))
+    $Claims: Claims($date_of_service : date_of_service, $date_of_submission : date_of_submission, $eligibility : eligibility == "")
+    eval(
+        LocalDate.parse($date_of_submission.toString()).compareTo(LocalDate.parse($date_of_service.toString())) >= 0 &&
+        ChronoUnit.MONTHS.between(LocalDate.parse($date_of_service.toString()), LocalDate.parse($date_of_submission.toString())) <= 1
+    )
 then
-    $claim.setEligibility("Not Eligible");
-else
-    $claim.setEligibility("Eligible");
+    $Claims.setEligibility("Eligible");
 end
 
 
+rule "Check Claim Submission Date - Not Within One Month"
+when
+    $Claims: Claims($date_of_service : date_of_service, $date_of_submission : date_of_submission, $eligibility : eligibility == "")
+    not(eval(
+        LocalDate.parse($date_of_submission.toString()).compareTo(LocalDate.parse($date_of_service.toString())) >= 0 &&
+        ChronoUnit.MONTHS.between(LocalDate.parse($date_of_service.toString()), LocalDate.parse($date_of_submission.toString())) <= 1
+    ))
 
-
+then
+    $Claims.setEligibility("Not Eligible - Delayed Submission");
+end
 
 
 

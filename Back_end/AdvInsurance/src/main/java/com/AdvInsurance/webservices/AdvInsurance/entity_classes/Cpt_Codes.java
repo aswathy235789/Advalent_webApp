@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.apache.poi.hpsf.Decimal;
 
 @Entity
 public class Cpt_Codes {
@@ -12,6 +13,15 @@ public class Cpt_Codes {
     private Long id;
     private String code;
     private String description;
+    private Double charges;
+
+    public Double getCharges() {
+        return charges;
+    }
+
+    public void setCharges(Double charges) {
+        this.charges = charges;
+    }
 
     public Long getId() {
         return id;
