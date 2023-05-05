@@ -4,10 +4,12 @@ import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimDto;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Claims;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.member;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.ClaimsRepository;
+import com.AdvInsurance.webservices.AdvInsurance.repositories.memberRepository;
 import com.AdvInsurance.webservices.AdvInsurance.configuration.DroolsConfig;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.memberRepository;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
@@ -29,9 +31,11 @@ public class claimsService {
     private KieSession kieSession;
     @Autowired
     private DroolsConfig droolsConfig;
-
     @Autowired
     private memberRepository memberRepository;
+
+    // @Autowired
+    // private memberRepository memberRepository;
 
     public Claims saveClaimSubmission(Claims claims) throws IOException {
 

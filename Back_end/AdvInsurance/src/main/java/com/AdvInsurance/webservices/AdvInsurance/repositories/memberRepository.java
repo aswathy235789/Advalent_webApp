@@ -16,12 +16,15 @@ public interface memberRepository  extends JpaRepository<member, Long> {
     List<member> findByFirstName(String firstName);
 
 
-    member findMemberById(Long id);
+   
 
-       member save(member member);
+    Optional<member> findByIdNumber(String idNumber);
+
+    member save(member member);
 
    Optional<member> findById(Long id);
 
     member findByEmail(String email);
-}
 
+    member findMemberById(Long id);
+}

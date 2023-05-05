@@ -1,6 +1,7 @@
 package com.AdvInsurance.webservices.AdvInsurance.RestController;
 
 import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimDto;
+import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimHistoryDto;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.*;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.Adjudicator_LoginRequest;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.JwtUtil;
@@ -16,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -27,6 +27,8 @@ public class memberController {
 
     private final StateRepository stateRepository;
     private final CityRepository cityRepository;
+
+
     @Autowired
     private DiseasesRepository diseaseRepository;
 
@@ -67,6 +69,7 @@ public class memberController {
         this.memberService = memberService;
         this.stateRepository = stateRepository;
         this.cityRepository = cityRepository;
+        // this.claimsHistoryService = claimsHistoryService;
         this.claimsService = claimsService;
         this.jwtUtil = jwtUtil;
        // this.memberRepository = memberRepository;
@@ -239,7 +242,7 @@ public class memberController {
         String username = authenticationRequest.getUsername();
         String password = authenticationRequest.getPassword();
 
-        adjudicator adjudicator = adjudicatorRepository.findByUsername(username); // Check that the username is exist or not
+        adjudicator adjudicator = adjudicatorRepository.findByUsername(username); // Check that the username is exists or not
         if (adjudicator != null) { // If username exists
 
             if (adjudicator.getPassword().equals(password)) { // If password matches
@@ -294,8 +297,34 @@ public class memberController {
     }
 
 
+    // @PostMapping("/claims/submission")
+    // public ResponseEntity<?> claimSubmission(@RequestBody Claims claims) {
+    //     try {
+    //         Claims savedClaim = claimsService.saveClaimSubmission(claims);
 
-}
+    //         return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
+    //     } catch (Exception e) {
+    //         return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
+    // }
+
+    // @GetMapping("/adjudicator/view/{id}")
+    // public Map<String, Object> getClaimDetails(@PathVariable("id") Long id) throws ChangeSetPersister.NotFoundException {
+    //     return claimsService.getClaimDetails(id);
+    // }
+
+//     @GetMapping("/{member_id}/claims")
+//     public ResponseEntity<List<ClaimHistoryDto>> getClaimHistoryForMember(@PathVariable Long member_id) {
+// //        ClaimsHistoryService claimsHistoryService = new ClaimsHistoryService(claimsRepository);
+//         List<ClaimHistoryDto> claims = claimsHistoryService.getClaimHistoryForMember(member_id);
+//         return new ResponseEntity<>(claims, HttpStatus.OK);
+//     }
+
+
+
+
+
+    }
 
 
 
