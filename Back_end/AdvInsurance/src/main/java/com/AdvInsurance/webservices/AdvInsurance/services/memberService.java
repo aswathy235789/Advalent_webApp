@@ -14,10 +14,6 @@ public class memberService {
     @Autowired
     private memberRepository memberRepository;
 
-//    public memberService(com..webservices.HealthInsuranceClaims.registration.memberRepository memberRepository) {
-//        this.memberRepository = memberRepository;
-//    }
-
     public member saveRegistration(member registration) {
         //Encode the password
         BCryptPasswordEncoder bcrypt=new BCryptPasswordEncoder();
@@ -41,8 +37,4 @@ public class memberService {
     }
 
 
-
-
-
-    // add more methods here as needed
 

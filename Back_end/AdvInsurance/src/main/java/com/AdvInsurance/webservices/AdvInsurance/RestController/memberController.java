@@ -1,7 +1,6 @@
 package com.AdvInsurance.webservices.AdvInsurance.RestController;
 
 import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimDto;
-import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimHistoryDto;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.*;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.Adjudicator_LoginRequest;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.JwtUtil;
@@ -17,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -273,7 +274,7 @@ public class memberController {
 
 
 
-    @GetMapping("/claims/{id}")
+    @GetMapping("/claims/status/{id}")
     public ResponseEntity<?> getClaimStatus(@PathVariable("id") Long id) {
         try {
             Claims claim = claimsService.getClaimById(id);
@@ -284,6 +285,15 @@ public class memberController {
             }
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/claims/history/{memberId}")
+    public List<Object[]> getClaimsByMemberId(@PathVariable Long memberId) {
+        try {
+            return claimsRepository.findMemberById(memberId);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error fetching claims for memberId " + memberId, e);
         }
     }
 
@@ -308,18 +318,10 @@ public class memberController {
     //     }
     // }
 
-    // @GetMapping("/adjudicator/view/{id}")
-    // public Map<String, Object> getClaimDetails(@PathVariable("id") Long id) throws ChangeSetPersister.NotFoundException {
-    //     return claimsService.getClaimDetails(id);
-    // }
-
-//     @GetMapping("/{member_id}/claims")
-//     public ResponseEntity<List<ClaimHistoryDto>> getClaimHistoryForMember(@PathVariable Long member_id) {
-// //        ClaimsHistoryService claimsHistoryService = new ClaimsHistoryService(claimsRepository);
-//         List<ClaimHistoryDto> claims = claimsHistoryService.getClaimHistoryForMember(member_id);
-//         return new ResponseEntity<>(claims, HttpStatus.OK);
+//     @GetMapping("/adjudicator/view/{id}")
+//     public Map<String, Object> getClaimDetails(@PathVariable("id") Long id) throws ChangeSetPersister.NotFoundException {
+//         return claimsService.getClaimDetails(id);
 //     }
-
 
 
 
