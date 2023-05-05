@@ -200,92 +200,9 @@ export class RegisterComponent {
                   
 
                      
-                                          const { confirmPassword, ...formData } = this.registrationForm.value;
-                                        //  const registrationData = formData;
-                        //                   const medicalHistoryStr = this.getMedicalHistory();
-                        //                   const dataWithMedicalHistory = { ...registrationData, medicalHistory: medicalHistoryStr };
-                        //                   const output = JSON.stringify(dataWithMedicalHistory);
-                                          
-                        // //formData.append('data', dataWithMedicalHistory);
-                        // console.log(output);
-
-
-                    //   this.registerService.register(output)
-                    //   .subscribe(
-                    //     response => {
-                    //       const memberId = response.id;
-                    //       console.log('Registration successful', response);
-                    //       this.showAlert = true;
-
-                    //       setTimeout(() => {
-                    //         this.route.navigate(['/login']);
-                    //       }, 2000);
-                    //      this.registerService.register(output)
-                    //   .subscribe(
-                    //     response => {
-                    //       const memberId = response.id;
-                    //       console.log('Registration successful', response);
-                          
-                    //       this.medicalHistoryService.addDiseasesToMember(response.id, this.memberDiseases)
-                    //       .subscribe(response => {
-                    //         console.log('Diseases added to member', response);
-                         
-                            
-                    //       }, (error: any) => {
-                    //         console.log(error);
-                    //         console.log("error in adding medical history")
-                    //         // Handle error here
-                    //       });
-                          
-                          
-                    //       this.showAlert = true;
-
-                    //       setTimeout(() => {
-                    //         this.route.navigate(['/login']);
-                    //       }, 2000);
-
-                              
-                           
-                              
-                    //     },
-                    //     error => {
-                    //       if (error.status === 500) {
-                    //           this.errorMessage = `<Strong>Registration Failed ! </strong><br>Email is already registered. Please use a different email`;
-                    //       } else {
-                    //           this.errorMessage = '<Strong>Registration Failed! Try again';
-                    //       }
-                    //       setTimeout(() => {
-                    //           this.errorMessage = '';
-                    //       }, 2000);
-                    //   }
-                      
-                    //   );
-  
-
-                    
-                       
-                    //  console.log('Registration form submitted:-success ');
-                              
-                           
-                              
-                    //     },
-                    //     error => {
-                    //       if (error.status === 500) {
-                    //           this.errorMessage = `<Strong>Registration Failed ! </strong><br>Email is already registered. Please use a different email`;
-                    //       } else {
-                    //           this.errorMessage = '<Strong>Registration Failed! Try again';
-                    //       }
-                    //       setTimeout(() => {
-                    //           this.errorMessage = '';
-                    //       }, 2000);
-                    //   }
-                      
-                    //   );
-
-
-                    // start
-
-                    this.registerService.register(formData)
+                     const { confirmPassword, ...formData } = this.registrationForm.value;
+                                    
+                   this.registerService.register(formData)
   .pipe(
     flatMap((response: any) => {
       const memberId = response.id;

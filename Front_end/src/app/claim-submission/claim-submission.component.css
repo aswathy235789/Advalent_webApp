@@ -44,3 +44,12 @@
     padding: 1rem!important;
 }
 
+
+.cpt_select .ng-dropdown-panel {
+    max-height: 400px; /* adjust this value as needed */
+  }
+  
+  .cpt_select .ng-dropdown-panel ::ng-deep .ng-scrollbar-thumb {
+    height: 100px; /* adjust this value as needed */
+  }
+  
