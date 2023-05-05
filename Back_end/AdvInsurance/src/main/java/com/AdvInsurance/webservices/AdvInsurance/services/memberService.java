@@ -4,6 +4,7 @@ import com.AdvInsurance.webservices.AdvInsurance.entity_classes.member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.AdvInsurance.webservices.AdvInsurance.repositories.memberRepository;
 
 import java.util.List;
 
@@ -11,11 +12,7 @@ import java.util.List;
 public class memberService {
 
     @Autowired
-    private com.AdvInsurance.webservices.AdvInsurance.repositories.memberRepository memberRepository;
-
-//    public memberService(com..webservices.HealthInsuranceClaims.registration.memberRepository memberRepository) {
-//        this.memberRepository = memberRepository;
-//    }
+    private memberRepository memberRepository;
 
     public member saveRegistration(member registration) {
         //Encode the password
@@ -40,8 +37,4 @@ public class memberService {
     }
 
 
-
-
-
-    // add more methods here as needed
 

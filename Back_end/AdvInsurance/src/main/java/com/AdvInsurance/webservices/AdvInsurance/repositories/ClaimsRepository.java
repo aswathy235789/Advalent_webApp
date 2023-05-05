@@ -3,21 +3,25 @@ package com.AdvInsurance.webservices.AdvInsurance.repositories;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Claims;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ClaimsRepository extends JpaRepository<Claims, Long> {
+
+
     Claims save(Claims claims);
 
 
 
-
-
     @Query( "SELECT c.amount_billed, c.claim_id, c.date_of_submission, m.firstName, m.lastName FROM Claims c INNER JOIN member m ON c.member_id = m.id")
-
     List<Object[]> getAllClaims();
-    List<Claims> findByMemberId(Long member_id);
+//    List<Claims> findByMemberId(Long member_id);
+//    @Query("SELECT c.claim_id, c.date_of_submission, c.type_of_claim, c.amount_billed, c.status FROM Claims c WHERE c.member_id = memberId")
+//    List<Object[]> findMemberById(Long memberId);
+@Query("SELECT c.claim_id, c.date_of_submission, c.type_of_claim, c.amount_billed, c.status FROM Claims c WHERE c.member_id = :memberId")
+List<Object[]> findMemberById(@Param("memberId") Long memberId);
+
 
 
 

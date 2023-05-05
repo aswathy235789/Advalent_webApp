@@ -1,35 +1,34 @@
 package com.AdvInsurance.webservices.AdvInsurance.RestController;
 
 import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimDto;
-import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimHistoryDto;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.*;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.Adjudicator_LoginRequest;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.JwtUtil;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.LoginRequest;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.*;
-import com.AdvInsurance.webservices.AdvInsurance.services.ClaimsHistoryService;
+import com.AdvInsurance.webservices.AdvInsurance.services.claimsService;
 import com.AdvInsurance.webservices.AdvInsurance.services.memberService;
 import com.AdvInsurance.webservices.AdvInsurance.configuration.DroolsConfig;
-import com.AdvInsurance.webservices.AdvInsurance.services.claimsService;
-import org.kie.api.runtime.KieSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.*;
 
-@CrossOrigin(origins = "http://localhost:50726")
+@CrossOrigin(origins = "http://localhost:4200")
 //@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
 public class memberController {
 
-//    private final com.AdvInsurance.webservices.AdvInsurance.services.memberService memberService;
     private final StateRepository stateRepository;
     private final CityRepository cityRepository;
-    private final ClaimsHistoryService claimsHistoryService;
+
 
     @Autowired
     private DiseasesRepository diseaseRepository;
@@ -46,13 +45,6 @@ public class memberController {
 
     @Autowired
     private DroolsConfig droolsConfig;
-//    @Autowired
-//    private KieSession kieSession;
-
-
-
-//    @Autowired
-//    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private memberRepository memberRepository;
@@ -74,11 +66,11 @@ public class memberController {
     private ProvidersRepository providersRepository;
 
     @Autowired
-    public memberController(memberService memberService, StateRepository stateRepository, CityRepository cityRepository, ClaimsHistoryService claimsHistoryService, com.AdvInsurance.webservices.AdvInsurance.services.claimsService claimsService, JwtUtil jwtUtil) {
+    public memberController(memberService memberService, StateRepository stateRepository, CityRepository cityRepository, claimsService claimsService, JwtUtil jwtUtil) {
         this.memberService = memberService;
         this.stateRepository = stateRepository;
         this.cityRepository = cityRepository;
-        this.claimsHistoryService = claimsHistoryService;
+        // this.claimsHistoryService = claimsHistoryService;
         this.claimsService = claimsService;
         this.jwtUtil = jwtUtil;
        // this.memberRepository = memberRepository;
@@ -100,19 +92,6 @@ public class memberController {
                             }
 
 
-//    @PostMapping("/register")
-//    public ResponseEntity<Map<String, Long>> register(@RequestBody member newMember) {
-//        try {
-//            member savedMember = memberService.saveRegistration(newMember);
-//            Map<String, Long> response = new HashMap<>();
-//            response.put("id", savedMember.getId());
-//            return new ResponseEntity<>(response, HttpStatus.CREATED);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-
-
     // Get registrations by first name
     @GetMapping("/registrations/{firstName}")
     public ResponseEntity<List<member>> getRegistrationsByFirstName(@PathVariable String firstName) {
@@ -128,25 +107,6 @@ public class memberController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-//    @GetMapping("/email/{email}")
-//    public ResponseEntity<List<member>> getRegistrationsByEmail(@PathVariable String email) {
-//        try {
-//            List<member> registrations = memberService.findByEmail(email);
-//
-//            if (registrations.isEmpty()) {
-//                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//            } else {
-//                return new ResponseEntity<>(registrations, HttpStatus.OK);
-//            }
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-
-
-
-
 
     @GetMapping("/states")
     public List<State> getStates() {
@@ -232,12 +192,6 @@ public class memberController {
         }
     }
 
-    //end
-
-
-
-
-
 
     private boolean isValidEmail(String email) {
         // Check if email contains '@' and '.'
@@ -249,9 +203,6 @@ public class memberController {
        // }
         return false; // Email does not exist in database or is not valid
     }
-
-
-
 
     private boolean isValidUser(String email, String password) {
         boolean isEmailValid = false;
@@ -271,15 +222,12 @@ public class memberController {
         return (isEmailValid && isPasswordValid);
     }
 
-
     @GetMapping("/search/icd")
     public List<Icd_Codes> search_ICD(@RequestParam("q") String searchTerm) {
-//        return Icd_codeRepository.findByCodeContainingIgnoreCase(searchTerm);
         return Icd_codeRepository.findByCodeContainingIgnoreCaseOrDescriptionContainingIgnoreCase(searchTerm, searchTerm);
     }
     @GetMapping("/search/cpt")
     public List<Cpt_Codes> search_CPT(@RequestParam("q") String searchTerm) {
-//        return Cpt_codeRepository.findByCodeContainingIgnoreCase(searchTerm);
        return Cpt_codeRepository.findByCodeContainingIgnoreCaseOrDescriptionContainingIgnoreCase(searchTerm, searchTerm);
     }
 
@@ -295,7 +243,7 @@ public class memberController {
         String username = authenticationRequest.getUsername();
         String password = authenticationRequest.getPassword();
 
-        adjudicator adjudicator = adjudicatorRepository.findByUsername(username); // Check that the username is exist or not
+        adjudicator adjudicator = adjudicatorRepository.findByUsername(username); // Check that the username is exists or not
         if (adjudicator != null) { // If username exists
 
             if (adjudicator.getPassword().equals(password)) { // If password matches
@@ -310,29 +258,12 @@ public class memberController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Username not found.");
         }
-
     }
-//    @PostMapping("/claims/submission")
-//    public  ResponseEntity<?> claimSubmission(@RequestBody Claims claims){
-//        try {
-//
-//           Claims  savedClaim= claimsService.saveClaimSubmission(claims);
-//
-//            return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
 
     @PostMapping("/claims/submission")
     public ResponseEntity<?> claimSubmission(@RequestBody Claims claims) {
         try {
-
-
             Claims savedClaim = claimsService.saveClaimSubmission(claims);
-
-
-
 
             return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
         } catch (Exception e) {
@@ -343,7 +274,7 @@ public class memberController {
 
 
 
-    @GetMapping("/claims/{id}")
+    @GetMapping("/claims/status/{id}")
     public ResponseEntity<?> getClaimStatus(@PathVariable("id") Long id) {
         try {
             Claims claim = claimsService.getClaimById(id);
@@ -357,21 +288,40 @@ public class memberController {
         }
     }
 
+    @GetMapping("/claims/history/{memberId}")
+    public List<Object[]> getClaimsByMemberId(@PathVariable Long memberId) {
+        try {
+            return claimsRepository.findMemberById(memberId);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error fetching claims for memberId " + memberId, e);
+        }
+    }
+
     @GetMapping("/adjudicator/Dashboard")
     public List<ClaimDto> getAllClaims() {
                 return claimsService.getAllClaims();
             }
-
-
-
-
-    @GetMapping("/{member_id}/claims")
-    public ResponseEntity<List<ClaimHistoryDto>> getClaimHistoryForMember(@PathVariable Long member_id) {
-//        ClaimsHistoryService claimsHistoryService = new ClaimsHistoryService(claimsRepository);
-        List<ClaimHistoryDto> claims = claimsHistoryService.getClaimHistoryForMember(member_id);
-        return new ResponseEntity<>(claims, HttpStatus.OK);
+    @GetMapping("/adjudicator/view/{id}")
+    public Map<String, Object> getClaimDetails(@PathVariable("id") Long id) throws ChangeSetPersister.NotFoundException {
+        return claimsService.getClaimDetails(id);
     }
 
+
+    // @PostMapping("/claims/submission")
+    // public ResponseEntity<?> claimSubmission(@RequestBody Claims claims) {
+    //     try {
+    //         Claims savedClaim = claimsService.saveClaimSubmission(claims);
+
+    //         return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
+    //     } catch (Exception e) {
+    //         return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    //     }
+    // }
+
+//     @GetMapping("/adjudicator/view/{id}")
+//     public Map<String, Object> getClaimDetails(@PathVariable("id") Long id) throws ChangeSetPersister.NotFoundException {
+//         return claimsService.getClaimDetails(id);
+//     }
 
 
 
