@@ -8,7 +8,7 @@ import { Claims } from '../claims';
   providedIn: 'root'
 })
 export class ClaimServiceService {
-  private claimsUrl = 'http://localhost:8080/api/claims';
+  private claimsUrl = 'http://localhost:8080/api/claims/status';
 
   constructor(private http: HttpClient) {}
 
