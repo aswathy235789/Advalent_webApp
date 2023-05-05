@@ -6,9 +6,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./alert-box.component.css']
 })
 export class AlertBoxComponent {
-  alertMessage!: string;
-  alertType!: string;
-  showAlertBox!: boolean;
+  
   showAlert(arg0: string, arg1: string) {
     throw new Error('Method not implemented.');
   }
