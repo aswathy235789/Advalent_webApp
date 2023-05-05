@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { CodesService } from '../Services/codes.service';
 
 import { ProviderService } from '../Services/provider.service';
+import { ClaimServiceService } from '../Services/claim-service.service';
 
 import { forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -36,30 +37,30 @@ export class ClaimSubmissionComponent {
 
 
 
-  icdCodes:any = [];
+icdCodes:any = [];
 
-  cptCodes:any = [];
+cptCodes:any = [];
 
-  providers:any=[];
-
-
-
-
-  constructor(private http: HttpClient, private codeservice: CodesService, private providerService: ProviderService,private formBuilder: FormBuilder) { }
+providers:any=[];
 
 
 
 
-  ngOnInit(): void {
-
-    const icdCodes$ = this.codeservice.get_ICD_Codes('');
-
-    const cptCodes$ = this.codeservice.get_CPT_Codes('');
+constructor(private http: HttpClient, private codeservice: CodesService, private providerService: ProviderService,private formBuilder: FormBuilder,private claimsService: ClaimServiceService) { }
 
 
 
 
-    forkJoin([icdCodes$, cptCodes$]).subscribe(([icdCodes, cptCodes]) => {
+ngOnInit(): void {
+
+ const icdCodes$ = this.codeservice.get_ICD_Codes('');
+
+ const cptCodes$ = this.codeservice.get_CPT_Codes('');
+
+
+
+
+forkJoin([icdCodes$, cptCodes$]).subscribe(([icdCodes, cptCodes]) => {
 
       this.icdCodes = icdCodes;
 
@@ -67,7 +68,6 @@ export class ClaimSubmissionComponent {
 
     });
 
-   
 
     this.providerService.getAllProviders().subscribe(
 
@@ -83,7 +83,7 @@ this.claimsubmission = this.formBuilder.group({
     providerName: ['', Validators.required],
     providerType: ['', Validators.required],
     address: ['', Validators.required],
-    phoneNumber: ['', Validators.required,Validators.pattern(/^\d{10}$/)],
+    phoneNumber: ['', Validators.required],
     typeOfClaim: ['', Validators.required],
     dateOfService: ['', Validators.required],
     cpt:  ['', Validators.required],
@@ -95,8 +95,6 @@ this.claimsubmission = this.formBuilder.group({
 
 
   }
-
-
 
 
   //Search for icd codes
@@ -119,8 +117,22 @@ this.claimsubmission = this.formBuilder.group({
 submitForm() {
     if (this.claimsubmission.valid) {
       
+    
+      const { declaration, ...formData } = this.claimsubmission.value;
+      console.log(formData);
 
-    } else {
+      this.claimsService.claimSubmission(formData).subscribe((response) => {
+        console.log(response); // print response in console
+     
+      }, (error) => {
+       
+        console.error('Error: ' + error.message);
+      });
+      
+         
+
+    } 
+    else {
       alert("Please fill out all fields");
       this.claimsubmission.markAllAsTouched();
     }

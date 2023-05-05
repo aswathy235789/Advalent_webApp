@@ -18,9 +18,12 @@ export class ClaimServiceService {
   }
 
   getClaimById(id: string): Observable<Claims> {
-    const url = `${this.claimsUrl}/${id}`;
+    const url = `${this.claimsUrl}/status/${id}`;
     return this.http.get<Claims>(url).pipe(
       catchError(this.handleError)
     );
   }
+
+ 
+  
 }

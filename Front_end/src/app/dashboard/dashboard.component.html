@@ -33,7 +33,7 @@
 		
 	</nav>
 <br><br><br><br><br>
- <div class="container">
+<div *ngIf="dashboardData && dashboardData.length > 0" class="container">
   <table class="table">
     <thead>
       <tr>
@@ -43,6 +43,7 @@
         <th>Date of Submission</th>
         <th>Eligibility</th>
         <th>Action</th>
+        <th></th>
         <th></th>
       </tr>
     </thead>
@@ -61,38 +62,38 @@
           </select>
         </td>
         <td>
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">View Details
-          </button>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"(click)="fetchClaimDetails(item.claimId)">View Details</button>
         </td>
+        <td>
+          <div class="submit">
+            <div class="btn-group">
+              <button class="btn" onclick="saveTable()">Save</button>
+              <!--    <button class="btn" (click)="saveTable()">Save</button>
+          -->
+            </div>
+          </div></td>
       </tr>
     </tbody>
   </table>
-  
-<br>
-<div class="submit">
-  <div class="btn-group">
-    <button class="btn" onclick="saveTable()">Save</button>
-    <!--    <button class="btn" (click)="saveTable()">Save</button>
--->
-  </div>
+ 
 </div>
-</div>
-
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title" id="staticBackdropLabel" style="font-family:serif; font-weight: 600;">DETAILS</h1>
+        <h1 class="modal-title" id="staticBackdropLabel" style="font-family:serif; font-weight: 900;"> DETAILS</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" style="font-size: 16px;font-family:serif">
-        <!-- Sample Body Content-->
-        Claim Id :<br> 
-        Name: <br> 
-        Date of Submission:<br>
-        Amount:<br>
-        Eligibility: <br>
+        <p>Date Of Birth: {{ claimDetails.dateOfBirth }}</p>
+        <p>Gender: {{ claimDetails.gender }}</p>
+        <p>Date Of Service: {{ claimDetails.dateOfService }}</p>
+        <p>Claim Type: {{ claimDetails.claimType }}</p>
+        <p>Provider Name: {{ claimDetails.providerName }}</p>
+        <p>Date Of Service: {{ claimDetails.dateOfService }}</p>
+        <p>CPT Code: {{ claimDetails.cptCode }}</p>
+        <p>ICD Code: {{ claimDetails.icdCode }}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -100,3 +101,4 @@
     </div>
   </div>
 </div>
+
