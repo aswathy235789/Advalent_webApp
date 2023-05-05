@@ -8,6 +8,9 @@ import { Claims } from '../claims';
   providedIn: 'root'
 })
 export class ClaimServiceService {
+  // claimSubmission(formData: any) {
+  //   throw new Error('Method not implemented.');
+  // }
   private claimsUrl = 'http://localhost:8080/api/claims';
 
   constructor(private http: HttpClient) {}
@@ -23,7 +26,10 @@ export class ClaimServiceService {
       catchError(this.handleError)
     );
   }
-
+  claimSubmission(claimData: any) {
+        return this.http.post(`${this.claimsUrl}/submission`, claimData);
+    
+      }
  
   
 }

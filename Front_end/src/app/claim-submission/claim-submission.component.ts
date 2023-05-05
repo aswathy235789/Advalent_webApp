@@ -9,7 +9,7 @@ import { ClaimServiceService } from '../Services/claim-service.service';
 
 import { forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AlertBoxComponent } from '../alert-box/alert-box.component';
+
 
 
 
@@ -114,6 +114,8 @@ this.claimsubmission = this.formBuilder.group({
     return item.description.toLowerCase().indexOf(term.toLowerCase()) > -1 || item.code.toLowerCase().indexOf(term.toLowerCase()) > -1;
 
   }
+
+
 submitForm() {
     if (this.claimsubmission.valid) {
       
@@ -137,10 +139,12 @@ submitForm() {
       this.claimsubmission.markAllAsTouched();
     }
   }
-  
-
-
 }
+
+
+
+
+
 
 
 

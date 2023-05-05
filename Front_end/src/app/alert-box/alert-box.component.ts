@@ -6,6 +6,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./alert-box.component.css']
 })
 export class AlertBoxComponent {
+  
+  showAlert(arg0: string, arg1: string) {
+    throw new Error('Method not implemented.');
+  }
   @Input()
   message!: string;
   @Output() closeAlert = new EventEmitter();
@@ -13,4 +17,5 @@ export class AlertBoxComponent {
   close() {
     this.closeAlert.emit();
   }
+ 
 }
