@@ -30,9 +30,9 @@ export class DashboardComponent implements OnInit {
 
   onActionChange(item: any) {
     console.log('New action:', item.action);
+    // item.dirty = true; // set dirty flag
     // TODO: Send PUT request to update the item's action in the backend
   }
-
   
   logout() {
     this.showAlertBoX = true;
@@ -44,4 +44,23 @@ export class DashboardComponent implements OnInit {
     // redirect to login page
     // this.router.navigate(['/login']);
   }
-}
+
+  // TO SAVE THE CHANGES IN DATABASE
+  
+  // saveTable() {
+  //   const dirtyItems = this.dashboardData.filter((item: { dirty: any; }) => item.dirty);
+  //   if (dirtyItems.length > 0) {
+  //     const url = 'http://localhost:8080/api/adjudicator/Dashboard';
+  //     this.http.put(url, dirtyItems).subscribe((response: any) => {
+  //       console.log('Data saved:', response);
+  //       // Reset the dirty flag for each item
+  //       dirtyItems.forEach((item: { dirty: boolean; }) => item.dirty = false);
+  //       this.showAlertBoX = true;
+  //     }, error => {
+  //       console.error('Data save error:', error);
+  //     });
+  //   }
+  }
+
+
+
