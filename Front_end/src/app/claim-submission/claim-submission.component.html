@@ -128,9 +128,9 @@
                                     [title]="claimsubmission.get('typeOfClaim')?.errors?.['required'] ?
                                              'Type of claim is required' : ''">
                               <option value="">Select type of claim</option>
-                              <option value="health">Vision insurance claim</option>
-                              <option value="auto">Dental insurance claim</option>
-                              <option value="property">Prescription drug claim (RX)</option>
+                              <option value="vision">Vision insurance claim</option>
+                              <option value="dental">Dental insurance claim</option>
+                              <option value="Prescription drug">Prescription drug claim (RX)</option>
                             </select>
                             <div *ngIf="claimsubmission.get('typeOfClaim')?.invalid &&
                                         (claimsubmission.get('typeOfClaim')?.dirty ||
@@ -167,13 +167,13 @@
                             [items]="icdCodes"
                             [searchFn]="search_ICD_Fn"
                             [bindLabel]="'code'"
-                            [bindValue]="'description'"
+                            [bindValue]="'code'"
                             [multiple]="false"
                             [addTag]="false"
                             (scroll)="true"
                             formControlName="icd"
-                            placeholder="Search CPT codes"
-              
+                            placeholder="Search ICD codes"
+                            
                             >
                             
                             <ng-template ng-option-tmp let-item="item">
@@ -181,10 +181,7 @@
                             </ng-template>
                             
                           </ng-select>
-                          
-                          <!-- <div *ngIf="claimsubmission.get('icd')?.invalid && (claimsubmission.get('icd')?.dirty || claimsubmission.get('icd')?.touched)" class="text-danger">
-                            <small *ngIf="claimsubmission.get('icd')?.errors?.['required']" class="text-danger">ICD Code is required.</small>
-                          </div> -->
+                       
                           
                         </div>
                         
@@ -195,16 +192,17 @@
                       <div class="mb-6 pb-2">
                         <div class="form-outline form-white">
                           <label class="form-label" for="form3Examplea4">CPT Code</label>
-                          <ng-select
+                          <ng-select class="cpt_select"
                             [items]="cptCodes"
                             [searchFn]="search_CPT_Fn"
                             [bindLabel]="'code'"
-                            [bindValue]="'description'"
+                            [bindValue]="'code'"
                             [multiple]="true"
                             [addTag]="false"
                             (scroll)="true"
                             placeholder="Search CPT codes"
-                            formControlName="cpt"
+                            formControlName="cpt" 
+                            
                           >
                             <ng-template ng-option-tmp let-item="item">
                               <div>{{ item.code }} - {{ item.description }}</div>
@@ -252,7 +250,7 @@
   
   
   <button type="button" class="btn btn-light btn-lg" 
-  data-mdb-ripple-color="dark" (click)="submitForm()">Submit</button>
+  data-mdb-ripple-color="dark" (click)="submitForm()">Submit</button><br>
   
                   </div>
                 </div>
@@ -269,9 +267,9 @@
 <footer
 style="bottom: 0; left: 0; width: 100%; font-size: 11px;  background: linear-gradient(to bottom, #0077b6, #004368); color: #f5f5f5; padding: 5px;">
 
-        <div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+<div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
 
-            <p style="margin: 0;">&copy; 2023 advinsurance.com. All rights reserved.</p>
+  <p style="margin: 0;">&copy; 2023 advinsurance.com. All rights reserved.</p>
         </div>
  </footer>
   
