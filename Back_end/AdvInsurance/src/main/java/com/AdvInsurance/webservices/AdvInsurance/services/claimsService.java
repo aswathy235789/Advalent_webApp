@@ -6,8 +6,11 @@ import com.AdvInsurance.webservices.AdvInsurance.entity_classes.member;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.ClaimsRepository;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.memberRepository;
 import com.AdvInsurance.webservices.AdvInsurance.configuration.DroolsConfig;
+import com.AdvInsurance.webservices.AdvInsurance.repositories.memberRepository;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
+
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +25,6 @@ import java.util.stream.Collectors;
 @Service
 
 public class claimsService {
-
     @Autowired
     private ClaimsRepository claimsRepository;
     @Autowired
@@ -32,15 +34,10 @@ public class claimsService {
     @Autowired
     private memberRepository memberRepository;
 
-    public claimsService(ClaimsRepository claimsRepository) {
-        this.claimsRepository = claimsRepository;
-//        this.kieSession = kieSession;
-    }
+    // @Autowired
+    // private memberRepository memberRepository;
 
     public Claims saveClaimSubmission(Claims claims) throws IOException {
-//        kieSession.insert(claims);
-//        kieSession.fireAllRules();
-
 
         KieSession kieSession = droolsConfig.getKieSession();
         kieSession.insert(claims);
@@ -91,6 +88,9 @@ public class claimsService {
         return claimDto;
     }
 
+
+
+//Fn for adjudicator view details
     public Map<String, Object> getClaimDetails(Long id) throws ChangeSetPersister.NotFoundException {
         Claims claim = claimsRepository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new);
         LocalDate dateOfService = claim.getDate_of_service();
@@ -111,11 +111,12 @@ public class claimsService {
         response.put("providerName", providerName);
         response.put("memberId", memberId);
 
-// response.put("lastName", lastName);
+//        response.put("lastName", lastName);
         response.put("gender", gender);
         response.put("dateOfBirth", dateOfBirth);
         return response;
     }
+
 
 
 }
