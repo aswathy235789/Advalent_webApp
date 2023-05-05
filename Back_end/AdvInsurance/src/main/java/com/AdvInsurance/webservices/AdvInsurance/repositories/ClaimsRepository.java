@@ -13,9 +13,12 @@ public interface ClaimsRepository extends JpaRepository<Claims, Long> {
 
 
 
+
     @Query( "SELECT c.amount_billed, c.claim_id, c.date_of_submission, m.firstName, m.lastName FROM Claims c INNER JOIN member m ON c.member_id = m.id")
 
     List<Object[]> getAllClaims();
+    List<Claims> findByMemberId(Long member_id);
+
 
 
 

@@ -7,7 +7,7 @@ import { CodesService } from '../Services/codes.service';
 import { ProviderService } from '../Services/provider.service';
 
 import { forkJoin } from 'rxjs';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertBoxComponent } from '../alert-box/alert-box.component';
 
 
@@ -88,7 +88,6 @@ this.claimsubmission = this.formBuilder.group({
     dateOfService: ['', Validators.required],
     cpt:  ['', Validators.required],
     icd: ['', Validators.required],
-    serviceReceived:new FormControl('', [Validators.required, Validators.maxLength(50)]),
     amountCharged: ['', Validators.required],
     declaration: ['', Validators.required]
 });
