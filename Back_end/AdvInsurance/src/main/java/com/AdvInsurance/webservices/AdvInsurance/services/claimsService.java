@@ -43,10 +43,15 @@ public class claimsService {
     }
 
 
-
     public Claims getClaimById(Long id) {
 
         Claims claim = claimsRepository.findById(id).orElse(null);
+
+        return claim;
+    }
+    public Claims save(Claims claims){
+
+        Claims claim = claimsRepository.save(claims);
 
         return claim;
     }
@@ -97,7 +102,6 @@ public class claimsService {
         response.put("dateOfBirth", dateOfBirth);
         return response;
     }
-
 
 
 }

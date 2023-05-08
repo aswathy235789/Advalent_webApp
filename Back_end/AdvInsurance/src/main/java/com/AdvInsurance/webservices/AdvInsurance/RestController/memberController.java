@@ -58,11 +58,10 @@ public class memberController {
     @Autowired
     private adjudicatorRepository adjudicatorRepository;
 
-
     @Autowired
     private ProvidersRepository providersRepository;
 
-    @Autowired
+      @Autowired
     public memberController(memberService memberService, StateRepository stateRepository, CityRepository cityRepository, claimsService claimsService, JwtUtil jwtUtil) {
         this.memberService = memberService;
         this.stateRepository = stateRepository;
@@ -303,7 +302,20 @@ public class memberController {
         return claimsService.getClaimDetails(id);
     }
 
-    }
+@PutMapping("/adjudicator/update-action/{id}")
+public ResponseEntity<?> updateClaimStatus(@PathVariable Long id, @RequestBody String status) {
+         Claims claim = claimsService.getClaimById(id);
+         if (claim == null) {
+             return ResponseEntity.notFound().build();
+         }
+         claim.setStatus(status);
+        Claims updatedClaim = claimsService.save(claim);
+         return ResponseEntity.ok(updatedClaim);
+        }
+
+        }
+
+
 
 
 
