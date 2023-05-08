@@ -4,22 +4,20 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { HeaderComponent } from './header/header.component';
+import { LoginComponent } from './users/user-login/login/login.component';
+import { RegisterComponent } from './users/user-registrations/register/register.component';
+import { HeaderComponent } from './users/user-account/header/header.component';
 
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './users/user-account/home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { AlertBoxComponent } from './alert-box/alert-box.component';
+import { AlertBoxComponent } from './users/user-account/alert-box/alert-box.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { ClaimSubmissionComponent } from './claim-submission/claim-submission.component';
+import { ClaimHistoryComponent } from './users/user-account/claims/claim-history/claim-history.component';
+import { ClaimSubmissionComponent } from './users/user-account/claims/claim-submission/claim-submission.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { SampledropdownComponent } from './sampledropdown/sampledropdown.component';
-import { ClaimHistoryComponent } from './claim-history/claim-history.component';
-import { ClaimStatusComponent } from './claim-status/claim-status.component';
-import { AdjudicatorLoginComponent } from './adjudicator-login/adjudicator-login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { ClaimStatusComponent } from './users/user-account/claims/claim-status/claim-status.component';
+
+import { DashboardComponent } from './adjudicator/dashboard/dashboard.component';
 
 
 
@@ -33,11 +31,11 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HeaderComponent,
     HomeComponent,
     ClaimSubmissionComponent,
-    SampledropdownComponent,
+
     AlertBoxComponent,
     ClaimHistoryComponent,
     ClaimStatusComponent,
-    AdjudicatorLoginComponent,
+
     DashboardComponent
 
   ],

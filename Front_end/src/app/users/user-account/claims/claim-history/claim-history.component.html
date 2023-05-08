@@ -1,0 +1,54 @@
+<!-- <app-header></app-header><br><br><br> -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- <title>Health Insurance Claim History</title> -->
+
+  </head>
+  <body>
+<br>
+    <!-- <h1>Health Insurance Claim History</h1> -->
+    <!-- start --><br>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form class="form-inline my-2 my-lg-0">
+            <div class="input-group">
+              <div class="input-group-append">
+              <input class="form-control"  style="width:500px;"type="search" placeholder="Search" aria-label="Search">
+              <!-- <button class="btn btn-outline-secondary btn-lg" type="submit"><i class="fas fa-search"></i></button> -->
+                <button class="btn btn-outline-primary btn-lg" style="height: 33px; width: 150px;margin-top: auto;" type="submit">Search</button>
+              </div>
+            </div>
+          </form><br>
+        </div>
+      </div>
+    </div>
+    
+
+
+
+    <table>
+      <thead>
+        <tr>
+          <th>Claim ID</th>
+          <th>Date Of Submission</th>
+          <th>Type Of Claim</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of rows">
+      <td>{{ row[0] }}</td>
+      <td>{{ row[1] }}</td>
+      <td>{{ row[2] }}</td>
+      <td>{{ row[3] }}</td>
+      <td>{{ row[4] }}</td>
+      </tr>
+      </tbody>
+      </table>
+
+  </body>
+</html>

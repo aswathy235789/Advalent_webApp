@@ -1,20 +1,14 @@
 package com.AdvInsurance.webservices.AdvInsurance.services;
-
+import com.AdvInsurance.webservices.AdvInsurance.configuration.DroolsConfig;
 import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimDto;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Claims;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.member;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.ClaimsRepository;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.memberRepository;
-import com.AdvInsurance.webservices.AdvInsurance.configuration.DroolsConfig;
-import com.AdvInsurance.webservices.AdvInsurance.repositories.memberRepository;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
-
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
-
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -58,8 +52,6 @@ public class claimsService {
     }
 
 
-
-
     public List<ClaimDto> getAllClaims() {
         List<Object[]> resultList = claimsRepository.getAllClaims();
 
@@ -72,19 +64,11 @@ public class claimsService {
 
     private ClaimDto mapToObject(Object[] result) {
         ClaimDto claimDto = new ClaimDto();
-
         claimDto.setClaimId((Long)result[1]);
-
-
-       claimDto.setDateOfSubmission(result[2].toString());
-
+        claimDto.setDateOfSubmission(result[2].toString());
         claimDto.setAmountBilled(result[0].toString());
-
-
-
-
         claimDto.setMemberName(result[3] + " " + result[4]);
-
+        claimDto.setEligibility(result[5].toString());
         return claimDto;
     }
 
@@ -99,7 +83,6 @@ public class claimsService {
         String icdCode = claim.getIcd_code();
         String providerName = claim.getProvider_name();
         member member = memberRepository.findMemberById(claim.getMember_id());
-
         Long memberId = member.getId();
         String gender = member.getGender();
         LocalDate dateOfBirth = member.getDateOfBirth();
@@ -110,8 +93,6 @@ public class claimsService {
         response.put("icdCode", icdCode);
         response.put("providerName", providerName);
         response.put("memberId", memberId);
-
-//        response.put("lastName", lastName);
         response.put("gender", gender);
         response.put("dateOfBirth", dateOfBirth);
         return response;

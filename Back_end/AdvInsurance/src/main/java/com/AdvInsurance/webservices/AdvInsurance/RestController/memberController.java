@@ -1,5 +1,5 @@
 package com.AdvInsurance.webservices.AdvInsurance.RestController;
-
+import com.AdvInsurance.webservices.AdvInsurance.configuration.DroolsConfig;
 import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimDto;
 import com.AdvInsurance.webservices.AdvInsurance.entity_classes.*;
 import com.AdvInsurance.webservices.AdvInsurance.login_auth.Adjudicator_LoginRequest;
@@ -8,8 +8,6 @@ import com.AdvInsurance.webservices.AdvInsurance.login_auth.LoginRequest;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.*;
 import com.AdvInsurance.webservices.AdvInsurance.services.claimsService;
 import com.AdvInsurance.webservices.AdvInsurance.services.memberService;
-import com.AdvInsurance.webservices.AdvInsurance.configuration.DroolsConfig;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
@@ -17,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -194,8 +191,7 @@ public class memberController {
 
 
     private boolean isValidEmail(String email) {
-        // Check if email contains '@' and '.'
-        //if (email != null && email.contains("@") && email.contains(".")) {
+
             member member = memberRepository.findByEmail(email);
             if (member != null) {
                 return true; // Email exists in database
@@ -279,6 +275,7 @@ public class memberController {
         try {
             Claims claim = claimsService.getClaimById(id);
             if (claim != null) {
+
                 return new ResponseEntity<>(claim, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>("Claim not found", HttpStatus.NOT_FOUND);
@@ -305,26 +302,6 @@ public class memberController {
     public Map<String, Object> getClaimDetails(@PathVariable("id") Long id) throws ChangeSetPersister.NotFoundException {
         return claimsService.getClaimDetails(id);
     }
-
-
-    // @PostMapping("/claims/submission")
-    // public ResponseEntity<?> claimSubmission(@RequestBody Claims claims) {
-    //     try {
-    //         Claims savedClaim = claimsService.saveClaimSubmission(claims);
-
-    //         return new ResponseEntity<>(savedClaim, HttpStatus.CREATED);
-    //     } catch (Exception e) {
-    //         return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
-    // }
-
-//     @GetMapping("/adjudicator/view/{id}")
-//     public Map<String, Object> getClaimDetails(@PathVariable("id") Long id) throws ChangeSetPersister.NotFoundException {
-//         return claimsService.getClaimDetails(id);
-//     }
-
-
-
 
     }
 
