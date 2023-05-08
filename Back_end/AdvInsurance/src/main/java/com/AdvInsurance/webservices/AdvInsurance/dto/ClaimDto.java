@@ -6,10 +6,15 @@ public class ClaimDto {
     private String dateOfSubmission;
     private String amountBilled;
     private String memberName;
+    private String eligibility;
 
+    public String getEligibility() {
+        return eligibility;
+    }
 
-
-
+    public void setEligibility(String eligibility) {
+        this.eligibility = eligibility;
+    }
 
 
     public String getMemberName() {
@@ -29,10 +34,6 @@ public class ClaimDto {
         this.claimId = claimId;
     }
 
-
-
-
-
     public String getAmountBilled() {
         return amountBilled;
     }
@@ -41,18 +42,11 @@ public class ClaimDto {
         this.amountBilled = amountBilled;
     }
 
-
     public String getDateOfSubmission() {
         return dateOfSubmission;
     }
-
     public void setDateOfSubmission(String dateOfSubmission) {
         this.dateOfSubmission = dateOfSubmission;
     }
-
-
-
-
-
 
 }

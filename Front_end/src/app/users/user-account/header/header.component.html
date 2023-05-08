@@ -1,0 +1,42 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- Navigation -->
+<div class="fixed-top">
+  
+  <nav class="navbar navbar-expand-lg navbar-dark mx-background-top-linear">
+    <div class="container">
+      <a class="navbar-brand" rel="nofollow" target="_blank" href="http://scadonsak.com/7bF" style="text-transform: uppercase;"><h1><b> ADV-INSURANCE</b></h1></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item ">
+            <a class="nav-link" routerLink="/home" >Home</a>
+          </li>&nbsp;&nbsp;&nbsp;&nbsp;
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Claims
+            </a>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item" routerLink="/claimSubmission" >Claim Submission</a></li>
+              <li><a class="dropdown-item" routerLink="/claimHistory">Claim History</a></li>
+              <li><a class="dropdown-item" routerLink="/claimStatus">Claim Status</a></li>
+            </ul>
+          </li>&nbsp;&nbsp;&nbsp;&nbsp;
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout()">Logout</a>
+          </li>&nbsp;&nbsp;
+        </ul>
+      </div>
+      <div *ngIf="showAlertBoX" class="alert">
+        
+        <app-alert-box message="You have been logged out successfully !" (closeAlert)="closeAlertBox()"></app-alert-box>
+      </div>
+    </div>
+  </nav>
+</div>

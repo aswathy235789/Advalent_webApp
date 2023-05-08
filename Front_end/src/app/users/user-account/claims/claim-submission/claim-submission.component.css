@@ -1,0 +1,55 @@
+@media (min-width: 1025px) {
+    .h-custom {
+    height: 100vh !important;
+    }
+    }
+    .card-registration .select-input.form-control[readonly]:not([disabled]) {
+    font-size: 1rem;
+    line-height: 1.15;
+    padding-left: .75em;
+    padding-right: .75em;
+    }
+    .card-registration .select-arrow {
+    top: 13px;
+    }
+    
+    .gradient-custom-2 {
+    /* fallback for old browsers */
+    background-image: linear-gradient(315deg, #aee1f9 0%, #f6ebe6 74%);
+    
+    /* Chrome 10-25, Safari 5.1-6 */
+    /* background: -webkit-linear-gradient(to right, rgb(88, 105, 136), rgba(194, 233, 251, 1));
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /* background: linear-gradient(to right, rgb(173, 199, 221), rgba(194, 233, 251, 1)) */ 
+    }
+    
+    .bg-indigo {
+    background-color: #1d40a1;
+    }
+    @media (min-width: 992px) {
+    .card-registration-2 .bg-indigo {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    }
+    }
+    @media (max-width: 992px) {
+    .card-registration-2 .bg-indigo {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    }
+    }
+
+.p-5 {
+    padding: 1rem!important;
+}
+
+
+.cpt_select .ng-dropdown-panel {
+    max-height: 400px; /* adjust this value as needed */
+  }
+  
+  .cpt_select .ng-dropdown-panel ::ng-deep .ng-scrollbar-thumb {
+    height: 100px; /* adjust this value as needed */
+  }
+  

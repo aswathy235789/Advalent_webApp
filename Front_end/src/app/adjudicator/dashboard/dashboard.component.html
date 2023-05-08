@@ -1,0 +1,104 @@
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	<style>
+		.navbar-brand {
+			text-transform: uppercase;
+			color: rgb(203, 207, 230);
+		}
+	</style>
+</head>
+<body>
+
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg fixed-top" style="background: linear-gradient(89.5deg, rgb(4, 29, 55) -0.1%, rgb(2, 67, 135) 25.1%, rgb(28, 133, 243) 49.6%, rgb(69, 135, 206) 74.5%);
+  ">
+		<div class="container">
+			<a class="navbar-brand" style="color:#fff; font-size: 24px; font-weight: 700;">ADV Insurance</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					
+					<li class="nav-item">
+            <a class="nav-link" style="color: #fff; font-size: 14px; font-weight: 500;" (click)="logout()">LOGOUT</a>
+          </li>&nbsp;&nbsp;
+        </ul>
+      </div>
+      <div *ngIf="showAlertBoX" class="alert">
+        <app-alert-box message="You have been logged out successfully !" (closeAlert)="closeAlertBox()"></app-alert-box>
+      </div>			</div>
+		
+	</nav>
+<br><br><br><br><br>
+<div *ngIf="dashboardData && dashboardData.length > 0" class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Claim ID</th>
+        <th>Patient Name</th>
+        <th>Amount</th>
+        <th>Date of Submission</th>
+        <th>Eligibility</th>
+        <th>Action</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of dashboardData">
+        <td>{{ item.claimId }}</td>
+        <td>{{ item.memberName }}</td>
+        <td>{{ item.amountBilled }}</td>
+        <td>{{ item.dateOfSubmission }}</td>
+        <td>{{ item.eligibility }}</td>
+        <td>
+          <select [(ngModel)]="item.action" (change)="onActionChange(item)">
+            <option value="approved">Approved</option>
+            <option value="pending">Pending</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </td>
+        <td>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"(click)="fetchClaimDetails(item.claimId)">View Details</button>
+        </td>
+        <td>
+          <div class="submit">
+            <div class="btn-group">
+              <button class="btn" onclick="saveTable()">Save</button>
+            
+      
+            </div>
+          </div></td>
+      </tr>
+    </tbody>
+  </table>
+ 
+</div>
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title" id="staticBackdropLabel" style="font-family:serif; font-weight: 900;"> DETAILS</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="font-size: 16px;font-family:serif">
+        <p>Date Of Birth: {{ claimDetails.dateOfBirth }}</p>
+        <p>Gender: {{ claimDetails.gender }}</p>
+        <p>Date Of Service: {{ claimDetails.dateOfService }}</p>
+        <p>Claim Type: {{ claimDetails.claimType }}</p>
+        <p>Provider Name: {{ claimDetails.providerName }}</p>
+        <p>Date Of Service: {{ claimDetails.dateOfService }}</p>
+        <p>CPT Code: {{ claimDetails.cptCode }}</p>
+        <p>ICD Code: {{ claimDetails.icdCode }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+

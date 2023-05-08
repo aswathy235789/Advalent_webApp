@@ -1,0 +1,276 @@
+<app-header></app-header>
+
+<br><br><br>
+
+<section class="h-50 h-custom gradient-custom-2">
+  <form [formGroup]="claimsubmission" onsubmit="return check()" novalidate>
+    <div class="container py-5 h-50">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12">
+          <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+            <div class="card-body p-0">
+              <div class="row g-0">
+                <div class="col-lg-6">
+                  <div class="p-5">
+                    <h2 class="fw-normal mb-6" style="color: #322597;"><b>Provider Information</b></h2>
+  
+  
+                    <div class="row">
+                      <div class="col-md-10 mb-4 pb-2">
+  
+                        <div class="form-outline position-relative">
+                          <label class="form-label form-tooltip" for="form3Examplev2">Provider Name</label>
+                          <input type="text" id="form3Examplev2" class="form-control form-control-lg"
+                                 [required]="true" formControlName="providerName"  data-toggle="tooltip" data-placement="top"
+                                 [attr.title]="claimsubmission.get('providerName')?.errors?.['required'] ? 'Provider Name is required.' : null"
+                                 (input)="claimsubmission.get('providerName')?.markAsDirty()"
+                                 [ngClass]="{'is-invalid': claimsubmission.get('providerName')?.invalid && (claimsubmission.get('providerName')?.dirty || claimsubmission.get('providerName')?.touched)}" />
+                          <div class="position-absolute top-100 start-0 translate-middle-y">
+                            <small *ngIf="claimsubmission.get('providerName')?.invalid && (claimsubmission.get('providerName')?.dirty || claimsubmission.get('providerName')?.touched)"
+                                   class="text-danger"></small>
+                          </div>
+                        </div>
+                        
+                        
+                        <style>
+                          .is-invalid {
+                            border-color: red !important;
+                          }
+                        </style>
+                        
+                        
+                        
+  
+                      </div>
+              
+                    </div><br>
+                    
+                    <div class="row">
+                        <div class="col-md-10 mb-4 pb-2 mb-md-0 pb-md-1">
+                      
+                          <div class="form-outline position-relative">
+                            <label class="form-label" for="form3Examplev5">Provider Type</label>
+                            <select formControlName="providers"  data-toggle="tooltip" data-placement="top"
+                            [attr.title]="claimsubmission.get('providerType')?.errors?.['required'] ? 'Provider Type is required.' : null" class="form-control form-control-lg" [required]="true" formControlName="providerType" required
+                              (input)="claimsubmission.get('providerType')?.markAsDirty()" [ngClass]="{'is-invalid': claimsubmission.get('providerType')?.invalid && (claimsubmission.get('providerType')?.dirty || claimsubmission.get('providerType')?.touched)}">
+                              <option value="">Select Provider Type</option>
+                              <option *ngFor="let provider of providers" [value]="provider.id">{{ provider.name }}</option>
+                            </select>
+                            <div class="position-absolute top-100 start-0 translate-middle-y">
+                              <small *ngIf="claimsubmission.get('providerType')?.invalid && (claimsubmission.get('providerType')?.dirty || claimsubmission.get('providerType')?.touched)"
+                                class="text-danger"></small>
+                            </div>
+                          </div>
+                          <style>
+                            .is-invalid {
+                              border-color: red !important;
+                            }
+                          </style>
+                          
+                      
+                        </div>
+                      </div><br>
+                      <br>
+
+                    <div class="row">
+                        <div class="col-md-10 mb-4 pb-2 mb-md-0 pb-md-1">
+                          <div class="form-outline">
+                            <label class="form-label" for="form3Examplev5">Address </label>
+                            <textarea type="text" id="form3Examplev5" class="form-control form-control-lg"
+                              [ngClass]="{'is-invalid': claimsubmission.get('address')?.invalid && (claimsubmission.get('address')?.dirty || claimsubmission.get('address')?.touched)}"
+                              [required]="true" formControlName="address"  data-toggle="tooltip" data-placement="top"
+                              [attr.title]="claimsubmission.get('address')?.errors?.['required'] ? 'Address is required.' : null"></textarea>
+                            <div *ngIf="claimsubmission.get('address')?.invalid && (claimsubmission.get('address')?.dirty || claimsubmission.get('address')?.touched)">
+                              <small *ngIf="claimsubmission.get('address')?.errors?.['required']" class="form-text text-danger"></small>
+                            </div>
+                          </div>
+                          
+    
+                        </div>
+                      </div><br><br>
+
+                      <div class="row">
+                        <div class="col-md-10 mb-4 pb-2">
+                          <div class="form-outline position-relative">
+                            <label class="form-label" for="form3Examplea3">Phone Number</label>
+                            <input type="tel" id="form3Examplea3" class="form-control form-control-lg" 
+                            [required]="true" formControlName="phoneNumber"
+                              [ngClass]="{'is-invalid': claimsubmission.get('phoneNumber')?.invalid && (claimsubmission.get('phoneNumber')?.dirty || claimsubmission.get('phoneNumber')?.touched)}" 
+                             pattern="[0-9]{10}" data-toggle="tooltip" data-placement="top"
+                              [attr.title]="claimsubmission.get('phoneNumber')?.errors?.['required'] ? 'Phone Number is required.' : (claimsubmission.get('phoneNumber')?.errors?.['pattern'] ? 'Phone number must have 10 digits' : null)">
+                            <div class="position-absolute top-100 start-0 translate-middle-y">
+                              <small *ngIf="claimsubmission.get('phoneNumber')?.invalid && (claimsubmission.get('phoneNumber')?.dirty || claimsubmission.get('phoneNumber')?.touched)"
+                                class="text-danger"></small>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+  
+                  </div>
+                </div>
+                <div class="col-lg-6 bg-indigo text-white">
+                  <div class="p-5">
+                    <h2 class="fw-normal mb-5"><b>Claim Information</b></h2>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4 pb-2">
+    
+                          <div class="form-outline form-white">
+                            <label class="form-label" for="form3Examplea3">Type of Claim</label>
+                            <select id="form3Examplea3" class="form-control form-control-lg"
+                                    [required]="true" formControlName="typeOfClaim"
+                                    [class.is-invalid]="claimsubmission.get('typeOfClaim')?.invalid &&
+                                                       (claimsubmission.get('typeOfClaim')?.dirty ||
+                                                        claimsubmission.get('typeOfClaim')?.touched)"
+                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                    [title]="claimsubmission.get('typeOfClaim')?.errors?.['required'] ?
+                                             'Type of claim is required' : ''">
+                              <option value="">Select type of claim</option>
+                              <option value="vision">Vision insurance claim</option>
+                              <option value="dental">Dental insurance claim</option>
+                              <option value="Prescription drug">Prescription drug claim (RX)</option>
+                            </select>
+                            <div *ngIf="claimsubmission.get('typeOfClaim')?.invalid &&
+                                        (claimsubmission.get('typeOfClaim')?.dirty ||
+                                         claimsubmission.get('typeOfClaim')?.touched)"
+                                 class="text-danger">
+                              <div *ngIf="claimsubmission.get('typeOfClaim')?.errors?.['required']"></div>
+                            </div>
+                          </div>
+                          
+                          
+                        </div>
+                        <div class="col-md-6 mb-4 pb-2">
+                          <div class="form-outline">
+                            <label class="form-label" for="form3Examplev3">Date of Service</label>
+                            <input type="date" id="form3Examplev3" class="form-control form-control-lg"
+                              [ngClass]="{'is-invalid': claimsubmission.get('dateOfService')?.invalid && (claimsubmission.get('dateOfService')?.dirty || claimsubmission.get('dateOfService')?.touched)}"
+                              [required]="true" formControlName="dateOfService"
+                              data-toggle="tooltip" data-placement="top"
+                              [attr.title]="claimsubmission.get('dateOfService')?.errors?.['required'] ? 'Date of service is required.' : null">
+                            <div *ngIf="claimsubmission.get('dateOfService')?.invalid && (claimsubmission.get('dateOfService')?.dirty || claimsubmission.get('dateOfService')?.touched)" class="text-danger">
+                              <div *ngIf="claimsubmission.get('dateOfService')?.errors?.['required']"></div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        
+                      </div>
+                    
+  
+                      <div class="mb-6 pb-2">
+                        <div class="form-outline form-white">
+                          <label class="form-label" for="form3Examplea3">ICD Code</label>
+                          <ng-select
+                            [items]="icdCodes"
+                            [searchFn]="search_ICD_Fn"
+                            [bindLabel]="'code'"
+                            [bindValue]="'code'"
+                            [multiple]="false"
+                            [addTag]="false"
+                            (scroll)="true"
+                            formControlName="icd"
+                            placeholder="Search ICD codes"
+                            
+                            >
+                            
+                            <ng-template ng-option-tmp let-item="item">
+                              <div>{{ item.code }} - {{ item.description }}</div>
+                            </ng-template>
+                            
+                          </ng-select>
+                       
+                          
+                        </div>
+                        
+                        
+                        
+                      </div>
+                      
+                      <div class="mb-6 pb-2">
+                        <div class="form-outline form-white">
+                          <label class="form-label" for="form3Examplea4">CPT Code</label>
+                          <ng-select class="cpt_select"
+                            [items]="cptCodes"
+                            [searchFn]="search_CPT_Fn"
+                            [bindLabel]="'code'"
+                            [bindValue]="'code'"
+                            [multiple]="true"
+                            [addTag]="false"
+                            (scroll)="true"
+                            placeholder="Search CPT codes"
+                            formControlName="cpt" 
+                            
+                          >
+                            <ng-template ng-option-tmp let-item="item">
+                              <div>{{ item.code }} - {{ item.description }}</div>
+                            </ng-template>
+                          </ng-select>
+                          <!-- <div *ngIf="claimsubmission.get('cpt')?.invalid && (claimsubmission.get('cpt')?.dirty || claimsubmission.get('cpt')?.touched)" class="text-danger">
+                            <small *ngIf="claimsubmission.get('cpt')?.errors?.['required']">CPT Code is required.</small>
+                          </div> -->
+                        </div>
+                        
+                        
+                      </div>
+
+                      <div class="row">                                       
+                        
+                        <div class="col-md-6  pb-2">
+    
+                          <div class="form-outline">
+                            <label class="form-label form-tooltip" for="form3Examplev3" title="Please enter a valid amount.">Amount Charged</label>
+                            <input type="number" id="form3Examplev3" class="form-control form-control-lg"
+                              [ngClass]="{'is-invalid': claimsubmission.get('amountCharged')?.invalid && (claimsubmission.get('amountCharged')?.dirty || claimsubmission.get('amountCharged')?.touched)}"
+                              [required]="true" [min]="0" step="0.01" formControlName="amountCharged"  data-toggle="tooltip" data-placement="top"
+                              [attr.title]="claimsubmission.get('amountCharged')?.errors?.['required'] ? 'Amount Charged is required.' : (claimsubmission.get('amountCharged')?.errors? 'Amount Charged cannot be negative' : null)">
+                            <div *ngIf="claimsubmission.get('amountCharged')?.invalid && (claimsubmission.get('amountCharged')?.dirty || claimsubmission.get('amountCharged')?.touched)" class="text-danger">
+                              <div *ngIf="claimsubmission.get('amountCharged')?.errors?.['required']"></div>
+                              <div *ngIf="claimsubmission.get('amountCharged')?.errors?.['min']"></div>
+                            </div>
+                          </div>
+                          
+    
+                        </div>
+                      </div>
+                      
+    
+  <!-- <br> -->
+  <div class="form-check d-flex justify-content-start mb-4 pb-3">
+    <input class="form-check-input me-3" type="checkbox" id="form2Example3c" formControlName="declaration" required/>
+    <label class="form-check-label" for="form2Example3c">
+      I declare that the information provided in this claim submission form is true & correct to the best of my knowledge
+    </label>
+    <div *ngIf="claimsubmission.get('declaration')?.invalid && (claimsubmission.get('declaration')?.dirty || claimsubmission.get('declaration')?.touched)" class="text-danger">
+      <div *ngIf="claimsubmission.get('declaration')?.errors?.['required']">Please declare that the information provided is true and correct.</div>
+    </div>
+  </div>
+  
+  
+  <button type="button" class="btn btn-light btn-lg" 
+  data-mdb-ripple-color="dark" (click)="submitForm()">Submit</button><br>
+  
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br><br><br>
+  </form>
+
+</section>
+<footer
+style="bottom: 0; left: 0; width: 100%; font-size: 11px;  background: linear-gradient(to bottom, #0077b6, #004368); color: #f5f5f5; padding: 5px;">
+
+<div style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap;">
+
+  <p style="margin: 0;">&copy; 2023 advinsurance.com. All rights reserved.</p>
+        </div>
+ </footer>
+  
+  
