@@ -79,3 +79,15 @@
     font-weight: bold;
     color: #1b4f72;
   }
+
+  .custom-alert {
+    width: 50%; 
+    margin: 0 auto; 
+    border-radius: 5px; 
+    border: 1px solid #dc3545; 
+    background-color: #f8d7da; 
+    color: #721c24; 
+    padding: 10px; 
+    text-align: center;
+  }
+  

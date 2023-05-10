@@ -19,6 +19,7 @@ export class ClaimStatusComponent  {
   errorMessage!: string;
   
   claimForm!: FormGroup;
+  showerror!: boolean;
 
   ngOnInit() {
     this.claimForm = new FormGroup({
@@ -37,8 +38,14 @@ export class ClaimStatusComponent  {
   onSubmit() {
     this.claimsService.getClaimById(this.getClaimNumber())
       .subscribe(
-        claim => this.claim = claim,
-        error => this.errorMessage = error
+        claim => {
+          this.claim = claim,
+          this.showerror=false;},
+        error => {
+          this.errorMessage = error
+          this.showerror=true;
+        }
+          
       );
   }
 

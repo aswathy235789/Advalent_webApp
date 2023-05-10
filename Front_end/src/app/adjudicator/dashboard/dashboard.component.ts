@@ -13,6 +13,9 @@ export class DashboardComponent implements OnInit {
   dashboardData: any = {};
   claimDetails: any = {};
   claimid: any = {};
+  status='';
+  AlertBoX:boolean=false;
+  errorAlert:boolean=false;
 
 
   constructor(private http: HttpClient,private authService: AuthServiceService) { }
@@ -59,19 +62,34 @@ export class DashboardComponent implements OnInit {
   }
   onActionChange(item: any) {
     console.log('New action:', item.action);
-    return item.action;
+    this.status=item.action;
+    // return item.action;
     // item.dirty = true; // set dirty flag
   }
     
-    saveStatus(claimId: Number, status:String){
-      const url = `${this.claimsUrl}update-action/${claimId}`; 
-      const body = { status: status }; 
-      this.http.put(url, body).subscribe(
-        (response) => { 
-          console.log('Claim status updated successfully:', response); 
-    }, (error) => { 
-      console.error('Error updating claim status:', error); });
- }
+  saveStatus(claimId: number) {
+    const url = `${this.claimsUrl}update-action/${claimId}`;
+    const body = this.status; 
+    const headers = { 'Content-Type': 'text/plain' }; // set the content type to text/plain
+    this.http.put(url, body, { headers }).subscribe(
+      (response) => {
+        this.AlertBoX=true;
+        console.log('Claim status updated successfully:', response);
+      },
+      (error) => {
+        
+        this.errorAlert=true;
+        console.error('Error updating claim status:', error);
+      }
+    );
+  }
+
+  closeAlert() {
+    this.AlertBoX = false;
+    this.errorAlert=false;
+   
+  }
+  
   logout() {
     this.showAlertBoX = true;
      // Call logout method of AuthService
