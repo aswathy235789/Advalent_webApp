@@ -10,16 +10,7 @@
     align-items: center;
   }
   
-  /* .alert-box {
-    background-color: #fff;
-    padding: 1rem;
-    border-radius: 5px;
-    width: 60%;
-    height: 30%;
-    text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    text-align: center;
-  }  */
+
   .alert-box {
     display: flex;
     flex-direction: column;
@@ -46,3 +37,11 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
     transform: translateY(5px);
   }
+
+  
+
+
+  .alert-box button.close:hover {
+    opacity: 1;
+  }
+  

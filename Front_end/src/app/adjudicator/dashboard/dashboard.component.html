@@ -66,9 +66,21 @@
         <td>
           <div class="submit">
             <div class="btn-group">
-              <button class="btn" onclick="saveStatus(item.claimId, onActionChange(item))">Save</button>            
+              <button class="btn" (click)="saveStatus(item.claimId)">Save</button>            
       
             </div>
+
+
+            <div *ngIf="AlertBoX" class="alert">
+        
+              <app-alert-box message="Data saved successfully !!" (closeAlert)="closeAlert()"></app-alert-box>
+            </div>
+
+            <div *ngIf="errorAlert" class="alert">
+        
+              <app-alert-box message="Error!!" (closeAlert)="closeAlert()"></app-alert-box>
+            </div>
+
           </div></td>
       </tr>
     </tbody>

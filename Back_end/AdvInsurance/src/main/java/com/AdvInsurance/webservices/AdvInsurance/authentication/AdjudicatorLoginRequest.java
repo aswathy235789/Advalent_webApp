@@ -1,6 +1,6 @@
-package com.AdvInsurance.webservices.AdvInsurance.login_auth;
+package com.AdvInsurance.webservices.AdvInsurance.login.auth;
 
-public class Adjudicator_LoginRequest {
+public class AdjudicatorLoginRequest {
     private String username;
     private String password;
     public String getUsername() {

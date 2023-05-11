@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/app/environments/environment';
 import { HeaderComponent } from '../../header/header.component';
 
 @Component({
@@ -9,10 +10,14 @@ import { HeaderComponent } from '../../header/header.component';
 })
 export class ClaimHistoryComponent implements OnInit {
       rows: any[] = [];
+    showAlert:boolean=false;
+  message!: string;
+  statusMessage!: string;
       constructor(private http: HttpClient) {}
     
       ngOnInit() {
-        this.http.get<any[]>('url').subscribe(
+        const id = localStorage.getItem('memberId');
+        this.http.get<any[]>(`${environment.baseUrl}/claims/history/${id}`).subscribe(
           response => {
             this.rows = response;
           },
@@ -21,6 +26,15 @@ export class ClaimHistoryComponent implements OnInit {
           }
         );
       }
+    showStatus(status: string) {
+      this.statusMessage = status;
+      this.showAlert = true;
+    }
+    
+    closeAlertBox()
+    {
+      this.showAlert=false;
+    }
     
     }
 
