@@ -5,7 +5,7 @@ import { LoginComponent } from './users/user-login/login/login.component';
 import { RegisterComponent } from './users/user-registrations/register/register.component'
 
 import { ClaimSubmissionComponent } from './users/user-account/claims/claim-submission/claim-submission.component';
-import { ClaimStatusComponent } from './users/user-account/claims/claim-status/claim-status.component';
+// import { ClaimStatusComponent } from './users/user-account/claims/claim-status/claim-status.component';
 import { ClaimHistoryComponent } from './users/user-account/claims/claim-history/claim-history.component';
 import { DashboardComponent } from './adjudicator/dashboard/dashboard.component';
 
@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'claimSubmission', component: ClaimSubmissionComponent},
   { path: 'claimHistory', component: ClaimHistoryComponent},
-  { path: 'claimStatus', component: ClaimStatusComponent},
+  // { path: 'claimStatus', component: ClaimStatusComponent},
 
   { path: 'DashBoard', component: DashboardComponent},
 ];

@@ -26,10 +26,10 @@ export class DashboardComponent implements OnInit {
   }
 
   fetchDashboardData() {
-    const url = 'http://localhost:8080/api/adjudicator/Dashboard';
+    const url = `${environment.baseUrl}/adjudicator/dashboard`;
     this.http.get(url).subscribe((data: any) => {
       this.dashboardData = data;
-      // console.log(this.dashboardData);
+    
     }, error => {
       console.error(error);
     });
@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
   private claimsUrl =`${environment.baseUrl}/adjudicator/`;
   
   fetchClaimDetails(claimId: Number) {
-    const url = `${this.claimsUrl}view/${claimId}`;
+    const url = `${this.claimsUrl}view-details/${claimId}`;
     this.http.get(url).subscribe((data: any) => {
       this.claimDetails = data;
       // console.log(this.claimDetails);
@@ -63,8 +63,7 @@ export class DashboardComponent implements OnInit {
   onActionChange(item: any) {
     console.log('New action:', item.action);
     this.status=item.action;
-    // return item.action;
-    // item.dirty = true; // set dirty flag
+  
   }
     
   saveStatus(claimId: number) {
@@ -92,7 +91,7 @@ export class DashboardComponent implements OnInit {
   
   logout() {
     this.showAlertBoX = true;
-     // Call logout method of AuthService
+    
   }
   closeAlertBox() {
     this.showAlertBoX = false;

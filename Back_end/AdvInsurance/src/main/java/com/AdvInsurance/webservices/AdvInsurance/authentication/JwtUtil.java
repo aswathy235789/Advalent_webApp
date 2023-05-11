@@ -1,4 +1,4 @@
-package com.AdvInsurance.webservices.AdvInsurance.login_auth;
+package com.AdvInsurance.webservices.AdvInsurance.login.auth;
 
 import io.jsonwebtoken.*;
 

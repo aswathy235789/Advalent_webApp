@@ -1,4 +1,4 @@
-<!-- <app-header></app-header><br><br><br> -->
+<app-header></app-header><br><br><br>
 
 <!DOCTYPE html>
 <html>
@@ -6,25 +6,25 @@
     <!-- <title>Health Insurance Claim History</title> -->
 
   </head>
-  <body>
+  <!-- <body> -->
 <br>
     <!-- <h1>Health Insurance Claim History</h1> -->
     <!-- start --><br>
-    <div class="container">
+    <!-- <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-8">
           <form class="form-inline my-2 my-lg-0">
             <div class="input-group">
               <div class="input-group-append">
               <input class="form-control"  style="width:500px;"type="search" placeholder="Search" aria-label="Search">
-              <!-- <button class="btn btn-outline-secondary btn-lg" type="submit"><i class="fas fa-search"></i></button> -->
+              <button class="btn btn-outline-secondary btn-lg" type="submit"><i class="fas fa-search"></i></button> 
                 <button class="btn btn-outline-primary btn-lg" style="height: 33px; width: 150px;margin-top: auto;" type="submit">Search</button>
               </div>
             </div>
           </form><br>
         </div>
       </div>
-    </div>
+    </div> -->
     
 
 
@@ -40,15 +40,24 @@
         </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let row of rows">
-      <td>{{ row[0] }}</td>
-      <td>{{ row[1] }}</td>
-      <td>{{ row[2] }}</td>
-      <td>{{ row[3] }}</td>
-      <td>{{ row[4] }}</td>
-      </tr>
+        <tr *ngFor="let row of rows">
+          <td>{{ row[0] }}</td>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[2] }}</td>
+          <td>{{ row[3] }}</td>
+          <td>
+            <button type="button" (click)="showStatus(row[4])" class="btn btn-primary">
+              Check Status
+            </button>
+          </td>
+        </tr>
       </tbody>
-      </table>
+    </table>
+    
+    <div *ngIf="showAlert">
+      <app-alert-box message="Claim status: {{statusMessage}}" (closeAlert)="closeAlertBox()"></app-alert-box>
+    </div>
+    
 
-  </body>
+  <!-- </body> -->
 </html>

@@ -15,7 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ClaimHistoryComponent } from './users/user-account/claims/claim-history/claim-history.component';
 import { ClaimSubmissionComponent } from './users/user-account/claims/claim-submission/claim-submission.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { ClaimStatusComponent } from './users/user-account/claims/claim-status/claim-status.component';
+// import { ClaimStatusComponent } from './users/user-account/claims/claim-status/claim-status.component';
 
 import { DashboardComponent } from './adjudicator/dashboard/dashboard.component';
 
@@ -34,7 +34,7 @@ import { DashboardComponent } from './adjudicator/dashboard/dashboard.component'
 
     AlertBoxComponent,
     ClaimHistoryComponent,
-    ClaimStatusComponent,
+    // ClaimStatusComponent,
 
     DashboardComponent
 

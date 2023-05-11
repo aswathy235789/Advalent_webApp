@@ -1,15 +1,12 @@
 package com.AdvInsurance.webservices.AdvInsurance.RestController;
 import com.AdvInsurance.webservices.AdvInsurance.configuration.DroolsConfig;
-import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimDto;
-import com.AdvInsurance.webservices.AdvInsurance.entity_classes.*;
-import com.AdvInsurance.webservices.AdvInsurance.login_auth.Adjudicator_LoginRequest;
-import com.AdvInsurance.webservices.AdvInsurance.login_auth.JwtUtil;
-import com.AdvInsurance.webservices.AdvInsurance.login_auth.LoginRequest;
+import com.AdvInsurance.webservices.AdvInsurance.entity.*;
+import com.AdvInsurance.webservices.AdvInsurance.login.auth.JwtUtil;
+import com.AdvInsurance.webservices.AdvInsurance.login.auth.LoginRequest;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.*;
 import com.AdvInsurance.webservices.AdvInsurance.services.claimsService;
 import com.AdvInsurance.webservices.AdvInsurance.services.memberService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -21,7 +18,7 @@ import java.util.*;
 //@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api")
-public class memberController {
+public class MemberController {
 
     private final StateRepository stateRepository;
     private final CityRepository cityRepository;
@@ -62,7 +59,7 @@ public class memberController {
     private ProvidersRepository providersRepository;
 
       @Autowired
-    public memberController(memberService memberService, StateRepository stateRepository, CityRepository cityRepository, claimsService claimsService, JwtUtil jwtUtil) {
+    public MemberController(memberService memberService, StateRepository stateRepository, CityRepository cityRepository, claimsService claimsService, JwtUtil jwtUtil) {
         this.memberService = memberService;
         this.stateRepository = stateRepository;
         this.cityRepository = cityRepository;
@@ -74,11 +71,11 @@ public class memberController {
 
     // Register a member
                             @PostMapping("/register")
-                            public ResponseEntity<member> register(@RequestBody member newMember) {
+                            public ResponseEntity<Member> register(@RequestBody Member newMember) {
                                 try {
                                    //
 
-                                    member savedMember = memberService.saveRegistration(newMember);
+                                    Member savedMember = memberService.saveRegistration(newMember);
 
 
                                     return new ResponseEntity<>(savedMember, HttpStatus.CREATED);
@@ -90,9 +87,9 @@ public class memberController {
 
     // Get registrations by first name
     @GetMapping("/registrations/{firstName}")
-    public ResponseEntity<List<member>> getRegistrationsByFirstName(@PathVariable String firstName) {
+    public ResponseEntity<List<Member>> getRegistrationsByFirstName(@PathVariable String firstName) {
         try {
-            List<member> registrations = memberService.findByFirstName(firstName);
+            List<Member> registrations = memberService.findByFirstName(firstName);
 
             if (registrations.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -100,7 +97,9 @@ public class memberController {
                 return new ResponseEntity<>(registrations, HttpStatus.OK);
             }
         } catch (Exception e) {
+
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+
         }
     }
 
@@ -129,7 +128,7 @@ public class memberController {
         if (isValidUser(email, password)) {
 
 
-            member logged_user=memberRepository.findByEmail(email);
+            Member logged_user=memberRepository.findByEmail(email);
             String token = JwtUtil.generateToken(email); // Generate JWT token
             String role = logged_user.getRole();
             Long memberId = logged_user.getId();
@@ -152,11 +151,11 @@ public class memberController {
     @PostMapping("/{memberId}/diseases")
     public ResponseEntity<?> addDiseasesToMember(@PathVariable Long memberId, @RequestBody List<String> diseases) {
         // Find the member with the given ID
-        Optional<member> optionalMember = memberRepository.findById(memberId);
+        Optional<Member> optionalMember = memberRepository.findById(memberId);
         if (!optionalMember.isPresent()) {
             return ResponseEntity.notFound().build();
         }
-        member member = optionalMember.get();
+        Member member = optionalMember.get();
 
         // Create and save MemberDisease entities for each new disease
         List<MemberDisease> newMemberDiseases = new ArrayList<>();
@@ -191,7 +190,7 @@ public class memberController {
 
     private boolean isValidEmail(String email) {
 
-            member member = memberRepository.findByEmail(email);
+            Member member = memberRepository.findByEmail(email);
             if (member != null) {
                 return true; // Email exists in database
             }
@@ -203,7 +202,7 @@ public class memberController {
         boolean isEmailValid = false;
         boolean isPasswordValid = false;
         BCryptPasswordEncoder bcrypt=new BCryptPasswordEncoder();
-        member member = memberRepository.findByEmail(email);
+        Member member = memberRepository.findByEmail(email);
         if(member != null)
         {
             if(bcrypt.matches(password,member.getPassword()))
@@ -233,27 +232,7 @@ public class memberController {
     }
 
 
-    @PostMapping("/adjudicator/login")
-    public ResponseEntity<?> adjudicator_login(@RequestBody Adjudicator_LoginRequest authenticationRequest) {
-        String username = authenticationRequest.getUsername();
-        String password = authenticationRequest.getPassword();
 
-        adjudicator adjudicator = adjudicatorRepository.findByUsername(username); // Check that the username is exists or not
-        if (adjudicator != null) { // If username exists
-
-            if (adjudicator.getPassword().equals(password)) { // If password matches
-
-               // Generate JWT token (Login Success)
-                String token = JwtUtil.generate_Adjudicator_Token(username);
-                return ResponseEntity.ok(token);
-
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Incorrect password.");
-            }
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Username not found.");
-        }
-    }
 
     @PostMapping("/claims/submission")
     public ResponseEntity<?> claimSubmission(@RequestBody Claims claims) {
@@ -292,26 +271,6 @@ public class memberController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error fetching claims for memberId " + memberId, e);
         }
     }
-
-    @GetMapping("/adjudicator/Dashboard")
-    public List<ClaimDto> getAllClaims() {
-                return claimsService.getAllClaims();
-            }
-    @GetMapping("/adjudicator/view/{id}")
-    public Map<String, Object> getClaimDetails(@PathVariable("id") Long id) throws ChangeSetPersister.NotFoundException {
-        return claimsService.getClaimDetails(id);
-    }
-
-@PutMapping("/adjudicator/update-action/{id}")
-public ResponseEntity<?> updateClaimStatus(@PathVariable Long id, @RequestBody String status) {
-         Claims claim = claimsService.getClaimById(id);
-         if (claim == null) {
-             return ResponseEntity.notFound().build();
-         }
-         claim.setStatus(status);
-        Claims updatedClaim = claimsService.save(claim);
-         return ResponseEntity.ok(updatedClaim);
-        }
 
         }
 
