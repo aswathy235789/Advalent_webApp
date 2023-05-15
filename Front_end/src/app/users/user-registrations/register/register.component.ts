@@ -141,16 +141,6 @@ export class RegisterComponent {
     
   }
   
-  // validateDate(control: FormControl) {
-  //   const selectedDate = new Date(control.value);
-  //   const currentDate = new Date();
-  //   if (selectedDate > currentDate) {
-  //     return { futureDate: true };
-  //   }
-  //   return null;
-  // }
-
-
 
 
 
@@ -234,14 +224,7 @@ export class RegisterComponent {
   );
 console.log('Registration form submitted:-success ');
 
-                    // end
-                   
-                    
-       
-                    
-         // alert("Registration success!");
-                    
-                      //this.route.navigateByUrl('/login');
+              
 
                            }
                   else {
