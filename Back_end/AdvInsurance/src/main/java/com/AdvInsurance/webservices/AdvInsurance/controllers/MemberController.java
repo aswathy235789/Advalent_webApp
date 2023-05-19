@@ -1,11 +1,11 @@
-package com.AdvInsurance.webservices.AdvInsurance.RestController;
+package com.AdvInsurance.webservices.AdvInsurance.controllers;
 import com.AdvInsurance.webservices.AdvInsurance.configuration.DroolsConfig;
 import com.AdvInsurance.webservices.AdvInsurance.entity.*;
-import com.AdvInsurance.webservices.AdvInsurance.login.auth.JwtUtil;
-import com.AdvInsurance.webservices.AdvInsurance.login.auth.LoginRequest;
+import com.AdvInsurance.webservices.AdvInsurance.authentication.JwtUtil;
+import com.AdvInsurance.webservices.AdvInsurance.authentication.LoginRequest;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.*;
-import com.AdvInsurance.webservices.AdvInsurance.services.claimsService;
-import com.AdvInsurance.webservices.AdvInsurance.services.memberService;
+import com.AdvInsurance.webservices.AdvInsurance.services.ClaimsService;
+import com.AdvInsurance.webservices.AdvInsurance.services.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,9 +31,9 @@ public class MemberController {
     private ClaimsRepository claimsRepository;
 
     @Autowired
-    private memberService memberService;
+    private MemberService memberService;
     @Autowired
-    private  claimsService claimsService;
+    private ClaimsService claimsService;
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -41,7 +41,7 @@ public class MemberController {
     private DroolsConfig droolsConfig;
 
     @Autowired
-    private memberRepository memberRepository;
+    private MemberRepository memberRepository;
     @Autowired
     private MemberDiseaseRepository memberDiseaseRepository;
 
@@ -53,13 +53,13 @@ public class MemberController {
     private CptRepository Cpt_codeRepository;
 
     @Autowired
-    private adjudicatorRepository adjudicatorRepository;
+    private AdjudicatorRepository adjudicatorRepository;
 
     @Autowired
     private ProvidersRepository providersRepository;
 
       @Autowired
-    public MemberController(memberService memberService, StateRepository stateRepository, CityRepository cityRepository, claimsService claimsService, JwtUtil jwtUtil) {
+    public MemberController(MemberService memberService, StateRepository stateRepository, CityRepository cityRepository, ClaimsService claimsService, JwtUtil jwtUtil) {
         this.memberService = memberService;
         this.stateRepository = stateRepository;
         this.cityRepository = cityRepository;
@@ -80,6 +80,7 @@ public class MemberController {
 
                                     return new ResponseEntity<>(savedMember, HttpStatus.CREATED);
                                 } catch (Exception e) {
+                                    e.printStackTrace();
                                     return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
                                 }
                             }
@@ -194,8 +195,7 @@ public class MemberController {
             if (member != null) {
                 return true; // Email exists in database
             }
-       // }
-        return false; // Email does not exist in database or is not valid
+               return false; // Email does not exist in database or is not valid
     }
 
     private boolean isValidUser(String email, String password) {
@@ -248,20 +248,20 @@ public class MemberController {
 
 
 
-    @GetMapping("/claims/status/{id}")
-    public ResponseEntity<?> getClaimStatus(@PathVariable("id") Long id) {
-        try {
-            Claims claim = claimsService.getClaimById(id);
-            if (claim != null) {
-
-                return new ResponseEntity<>(claim, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>("Claim not found", HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @GetMapping("/claims/status/{id}")
+//    public ResponseEntity<?> getClaimStatus(@PathVariable("id") Long id) {
+//        try {
+//            Claims claim = claimsService.getClaimById(id);
+//            if (claim != null) {
+//
+//                return new ResponseEntity<>(claim, HttpStatus.OK);
+//            } else {
+//                return new ResponseEntity<>("Claim not found", HttpStatus.NOT_FOUND);
+//            }
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
     @GetMapping("/claims/history/{memberId}")
     public List<Object[]> getClaimsByMemberId(@PathVariable Long memberId) {

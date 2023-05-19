@@ -1,4 +1,4 @@
-package com.AdvInsurance.webservices.AdvInsurance.entity_classes;
+package com.AdvInsurance.webservices.AdvInsurance.entity;
 
 
 import jakarta.persistence.Entity;
@@ -14,7 +14,7 @@ public class MedicalHistory {
 
     @ManyToOne
     @JoinColumn(name = "member_id")
-    private com.AdvInsurance.webservices.AdvInsurance.entity_classes.member member;
+    private Member member;
 
     @ManyToOne
     @JoinColumn(name = "member_disease_id")
@@ -28,11 +28,11 @@ public class MedicalHistory {
         this.id = id;
     }
 
-    public com.AdvInsurance.webservices.AdvInsurance.entity_classes.member getMember() {
+    public Member getMember() {
         return member;
     }
 
-    public void setMember(com.AdvInsurance.webservices.AdvInsurance.entity_classes.member member) {
+    public void setMember(Member member) {
         this.member = member;
     }
 

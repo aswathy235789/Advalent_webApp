@@ -1,14 +1,13 @@
-package com.AdvInsurance.webservices.AdvInsurance.entity_classes;
+package com.AdvInsurance.webservices.AdvInsurance.entity;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.ColumnTransformer;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "member")
 
-public class member {
+public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -53,21 +52,6 @@ public class member {
     }
 
 
-
-
-
-
-
-//    @ManyToOne
-//    @JoinColumn(name = "state_id")
-//    private State state;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "city_id")
-//    private City city;
-
-//    @Column(name = "govt_id_type")
-//    private String governmentId;
 
     @Column(name = "govt_id_number")
     private String idNumber;

@@ -1,11 +1,8 @@
-package com.AdvInsurance.webservices.AdvInsurance.entity_classes;
+package com.AdvInsurance.webservices.AdvInsurance.entity;
 
 import jakarta.persistence.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name="claims")

@@ -1,6 +1,6 @@
-import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Claims;
-import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Cpt_Codes;
-import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Icd_Codes;
+import com.AdvInsurance.webservices.AdvInsurance.entity.Claims;
+import com.AdvInsurance.webservices.AdvInsurance.entity.Cpt_Codes;
+import com.AdvInsurance.webservices.AdvInsurance.entity.Icd_Codes;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;

@@ -1,10 +1,9 @@
-package com.AdvInsurance.webservices.AdvInsurance.entity_classes;
+package com.AdvInsurance.webservices.AdvInsurance.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import org.apache.poi.hpsf.Decimal;
 
 @Entity
 public class Cpt_Codes {

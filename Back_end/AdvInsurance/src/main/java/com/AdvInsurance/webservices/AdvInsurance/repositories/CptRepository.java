@@ -1,7 +1,6 @@
 package com.AdvInsurance.webservices.AdvInsurance.repositories;
 
-import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Cpt_Codes;
-import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Icd_Codes;
+import com.AdvInsurance.webservices.AdvInsurance.entity.Cpt_Codes;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

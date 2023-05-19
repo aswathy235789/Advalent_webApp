@@ -1,4 +1,4 @@
-package com.AdvInsurance.webservices.AdvInsurance.entity_classes;
+package com.AdvInsurance.webservices.AdvInsurance.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "adjudicator")
-public class adjudicator {
+public class Adjudicator {
     @Id
     private String username;
     private String password;

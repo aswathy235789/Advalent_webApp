@@ -1,6 +1,6 @@
 package com.AdvInsurance.webservices.AdvInsurance.repositories;
 
-import com.AdvInsurance.webservices.AdvInsurance.entity_classes.MemberDisease;
+import com.AdvInsurance.webservices.AdvInsurance.entity.MemberDisease;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

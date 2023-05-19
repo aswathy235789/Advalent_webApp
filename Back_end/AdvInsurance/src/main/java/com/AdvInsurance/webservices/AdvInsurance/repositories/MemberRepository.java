@@ -1,30 +1,30 @@
 package com.AdvInsurance.webservices.AdvInsurance.repositories;
 
 
-import com.AdvInsurance.webservices.AdvInsurance.entity_classes.member;
+import com.AdvInsurance.webservices.AdvInsurance.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 @Repository
-public interface memberRepository  extends JpaRepository<member, Long> {
+public interface MemberRepository extends JpaRepository<Member, Long> {
 
 
 
 
-    List<member> findByFirstName(String firstName);
+    List<Member> findByFirstName(String firstName);
 
 
    
 
-    Optional<member> findByIdNumber(String idNumber);
+    Optional<Member> findByIdNumber(String idNumber);
 
-    member save(member member);
+    Member save(Member member);
 
-   Optional<member> findById(Long id);
+   Optional<Member> findById(Long id);
 
-    member findByEmail(String email);
+    Member findByEmail(String email);
 
-    member findMemberById(Long id);
+    Member findMemberById(Long id);
 }

@@ -1,10 +1,10 @@
 package com.AdvInsurance.webservices.AdvInsurance.services;
 import com.AdvInsurance.webservices.AdvInsurance.configuration.DroolsConfig;
 import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimDto;
-import com.AdvInsurance.webservices.AdvInsurance.entity_classes.Claims;
-import com.AdvInsurance.webservices.AdvInsurance.entity_classes.member;
+import com.AdvInsurance.webservices.AdvInsurance.entity.Claims;
+import com.AdvInsurance.webservices.AdvInsurance.entity.Member;
 import com.AdvInsurance.webservices.AdvInsurance.repositories.ClaimsRepository;
-import com.AdvInsurance.webservices.AdvInsurance.repositories.memberRepository;
+import com.AdvInsurance.webservices.AdvInsurance.repositories.MemberRepository;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 @Service
 
-public class claimsService {
+public class ClaimsService {
     @Autowired
     private ClaimsRepository claimsRepository;
     @Autowired
@@ -26,21 +26,25 @@ public class claimsService {
     @Autowired
     private DroolsConfig droolsConfig;
     @Autowired
-    private memberRepository memberRepository;
+    private MemberRepository memberRepository;
 
-    // @Autowired
-    // private memberRepository memberRepository;
 
     public Claims saveClaimSubmission(Claims claims) throws IOException {
+        try {
+            KieSession kieSession = droolsConfig.getKieSession();
+            kieSession.insert(claims);
+            kieSession.fireAllRules();               //Set Eligibility
 
-        KieSession kieSession = droolsConfig.getKieSession();
-        kieSession.insert(claims);
-        kieSession.fireAllRules();               //Set Eligibility
+            Claims savedClaim= claimsRepository.save(claims);
 
-        Claims savedClaim= claimsRepository.save(claims);
+            return savedClaim;
+        } catch (IOException e) {
 
-        return savedClaim;
+            System.err.println("Error occurred : " + e.getMessage());
+            throw e;
+        }
     }
+
 
 
     public Claims getClaimById(Long id) {
@@ -79,7 +83,7 @@ public class claimsService {
 
 
 
-//Fn for adjudicator view details
+
     public Map<String, Object> getClaimDetails(Long id) throws ChangeSetPersister.NotFoundException {
         Claims claim = claimsRepository.findById(id).orElseThrow(ChangeSetPersister.NotFoundException::new);
         LocalDate dateOfService = claim.getDate_of_service();
@@ -87,7 +91,7 @@ public class claimsService {
         String cptCode = claim.getCpt_code();
         String icdCode = claim.getIcd_code();
         String providerName = claim.getProvider_name();
-        member member = memberRepository.findMemberById(claim.getMember_id());
+        Member member = memberRepository.findMemberById(claim.getMember_id());
         Long memberId = member.getId();
         String gender = member.getGender();
         LocalDate dateOfBirth = member.getDateOfBirth();

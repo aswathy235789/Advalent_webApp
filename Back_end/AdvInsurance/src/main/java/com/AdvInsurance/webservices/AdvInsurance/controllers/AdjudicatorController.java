@@ -1,13 +1,13 @@
-package com.AdvInsurance.webservices.AdvInsurance.RestController;
+package com.AdvInsurance.webservices.AdvInsurance.controllers;
 
 
 import com.AdvInsurance.webservices.AdvInsurance.dto.ClaimDto;
 import com.AdvInsurance.webservices.AdvInsurance.entity.Claims;
 import com.AdvInsurance.webservices.AdvInsurance.entity.Adjudicator;
-import com.AdvInsurance.webservices.AdvInsurance.login.auth.AdjudicatorLoginRequest;
-import com.AdvInsurance.webservices.AdvInsurance.login.auth.JwtUtil;
-import com.AdvInsurance.webservices.AdvInsurance.repositories.adjudicatorRepository;
-import com.AdvInsurance.webservices.AdvInsurance.services.claimsService;
+import com.AdvInsurance.webservices.AdvInsurance.authentication.AdjudicatorLoginRequest;
+import com.AdvInsurance.webservices.AdvInsurance.authentication.JwtUtil;
+import com.AdvInsurance.webservices.AdvInsurance.repositories.AdjudicatorRepository;
+import com.AdvInsurance.webservices.AdvInsurance.services.ClaimsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
@@ -22,10 +22,10 @@ import java.util.Map;
 public class AdjudicatorController {
 
     @Autowired
-    private adjudicatorRepository adjudicatorRepository;
+    private AdjudicatorRepository adjudicatorRepository;
 
     @Autowired
-    private claimsService claimsService;
+    private ClaimsService claimsService;
 
     @PostMapping("/login")
     public ResponseEntity<?> adjudicator_login(@RequestBody AdjudicatorLoginRequest authenticationRequest) {
